@@ -50,8 +50,15 @@ public class CommerceDAO {
 
             listeCommerces.add(new Commerce(id, nom, longitude, latitude, horaire, adresse, contact));
         }
-
         return listeCommerces;
     }
 
+    public Commerce chercherCommerceParId(int id_commerce){
+        if(listeCommerces.contains(new Commerce(id_commerce))){
+            return listeCommerces.get(listeCommerces.indexOf(new Commerce((id_commerce))));
+        }
+        else{
+            return null;
+        }
+    }
 }

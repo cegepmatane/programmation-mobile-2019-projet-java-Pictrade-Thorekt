@@ -21,6 +21,10 @@ public class Commerce {
         this.contact = contact;
     }
 
+    public Commerce(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
