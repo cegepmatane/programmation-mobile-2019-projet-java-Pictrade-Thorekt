@@ -11,6 +11,6 @@ public class Recherche extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vue_recherche);
+        setContentView(R.layout.vue_recherche_commerce);
     }
 }
