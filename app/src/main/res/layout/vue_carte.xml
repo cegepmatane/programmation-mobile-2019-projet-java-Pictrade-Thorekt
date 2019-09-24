@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     tools:context=".vue.Carte"
-    android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    map:mapType="normal"/>
