@@ -9,7 +9,7 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class CommerceDAO {
     private static CommerceDAO instance = null;
-    protected BaseDeDonnees accesseurBaseDeDonnees;
+    protected BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
 
     protected List<Commerce> listeCommerces;
 
@@ -21,13 +21,13 @@ public class CommerceDAO {
     }
 
     public CommerceDAO(){
-        accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
+        accesseurBaseDeDonneesServeur = BaseDeDonneesServeur.getInstance();
         listeCommerces = new ArrayList<>();
     }
 
     public List<Commerce> ListerCommerce(){
         String LISTER_COMMERCE = "SELECT id, nom, longitude, latitude, horaire, adresse, contact FROM commerce";
-        Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_COMMERCE,
+        Cursor curseur = accesseurBaseDeDonneesServeur.getReadableDatabase().rawQuery(LISTER_COMMERCE,
                 null);
         this.listeCommerces.clear();
 

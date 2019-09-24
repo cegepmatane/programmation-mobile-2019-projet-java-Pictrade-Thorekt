@@ -4,24 +4,24 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BaseDeDonnees extends SQLiteOpenHelper {
+public class BaseDeDonneesServeur extends SQLiteOpenHelper {
 
-    private static BaseDeDonnees instance = null;
+    private static BaseDeDonneesServeur instance = null;
 
-    public static BaseDeDonnees getInstance(Context contexte) {
-        instance = new BaseDeDonnees(contexte);
+    public static BaseDeDonneesServeur getInstance(Context contexte) {
+        instance = new BaseDeDonneesServeur(contexte);
         return instance;
     }
 
-    public static BaseDeDonnees getInstance() {
+    public static BaseDeDonneesServeur getInstance() {
         return instance;
     }
 
-    /*public BaseDeDonnees(Context contexte) {
+    /*public BaseDeDonneesServeur(Context contexte) {
 
     }
 
-    public BaseDeDonnees(Context contexte, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public BaseDeDonneesServeur(Context contexte, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
     }*/
 
