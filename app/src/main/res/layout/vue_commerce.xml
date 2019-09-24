@@ -6,4 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".vue.Commerce">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="30dp"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="187dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="234dp"
+        android:layout_height="61dp"
+        android:text="Envoyer a un ami"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <EditText
+        android:id="@+id/nom_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nom commerce"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="362dp" />
+
+    <EditText
+        android:id="@+id/adresse_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:text="Adresse commerce"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="438dp" />
+
+    <EditText
+        android:id="@+id/horaire_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="514dp" />
+
+    <EditText
+        android:id="@+id/telephone_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:text="Numero de telephone"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="670dp" />
+
+    <CheckBox
+        android:id="@+id/favoris_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favoris"
+        tools:layout_editor_absoluteX="317dp"
+        tools:layout_editor_absoluteY="126dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
