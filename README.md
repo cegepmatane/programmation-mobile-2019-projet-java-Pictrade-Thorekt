@@ -7,4 +7,4 @@ PORTAL Lucas,
 CARRIÈRES Adrian-Paul,
 
 
-#github du serveur: https://github.com/Thorekt/PicTradeServeur/settings
+#github du serveur: https://github.com/Thorekt/PicTradeServeur
