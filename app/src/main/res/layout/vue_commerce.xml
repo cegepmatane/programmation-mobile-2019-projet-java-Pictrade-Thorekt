@@ -10,72 +10,114 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars[0]" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="29dp"
         android:background="?android:attr/listDivider"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="187dp" />
+        app:layout_constraintBottom_toTopOf="@+id/nom_commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="234dp"
         android:layout_height="61dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
         android:text="Envoyer a un ami"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintBottom_toTopOf="@+id/favoris_commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 
     <EditText
         android:id="@+id/nom_commerce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="179dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Nom commerce"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="362dp" />
+        app:layout_constraintBottom_toTopOf="@+id/adresse_commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <EditText
         android:id="@+id/adresse_commerce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="182dp"
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="Adresse commerce"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="438dp" />
+        app:layout_constraintBottom_toTopOf="@+id/horaire_commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_commerce" />
 
     <EditText
         android:id="@+id/horaire_commerce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="182dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="514dp" />
+        android:text="Horaire commerce"
+        app:layout_constraintBottom_toTopOf="@+id/telephone_commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adresse_commerce" />
 
     <EditText
         android:id="@+id/telephone_commerce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="182dp"
         android:ems="10"
         android:inputType="phone"
         android:text="Numero de telephone"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="670dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horaire_commerce" />
 
     <CheckBox
         android:id="@+id/favoris_commerce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="29dp"
         android:text="Favoris"
-        tools:layout_editor_absoluteX="317dp"
-        tools:layout_editor_absoluteY="126dp" />
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
