@@ -1,5 +1,6 @@
 package ca.qc.cgmatane.pictrade.modele;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Commerce {
@@ -100,5 +101,13 @@ public class Commerce {
                 ", adresse='" + adresse + '\'' +
                 ", contact='" + contact + '\'' +
                 '}';
+    }
+
+    public HashMap<String, String> obtenirCommercePourAdapteur(){
+        HashMap<String, String> commercePourAdapteur = new HashMap<String, String>();
+        commercePourAdapteur.put("nom", this.nom);
+        commercePourAdapteur.put("adresse", this.adresse);
+        commercePourAdapteur.put("id", "" + this.id);
+        return commercePourAdapteur;
     }
 }

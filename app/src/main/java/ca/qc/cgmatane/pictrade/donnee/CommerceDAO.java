@@ -3,6 +3,7 @@ package ca.qc.cgmatane.pictrade.donnee;
 import android.database.Cursor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.modele.Commerce;
@@ -25,7 +26,7 @@ public class CommerceDAO {
         listeCommerces = new ArrayList<>();
     }
 
-    public List<Commerce> ListerCommerce(){//TODO : a modifier , les requette sont en php coté serveur
+    public List<Commerce> listerCommerce(){//TODO : a modifier , les requette sont en php coté serveur
         String LISTER_COMMERCE = "SELECT id, nom, longitude, latitude, horaire, adresse, contact FROM commerce";
         Cursor curseur = accesseurBaseDeDonneesServeur.getReadableDatabase().rawQuery(LISTER_COMMERCE,
                 null);
@@ -51,6 +52,17 @@ public class CommerceDAO {
             listeCommerces.add(new Commerce(id, nom, longitude, latitude, horaire, adresse, contact));
         }
         return listeCommerces;
+    }
+
+    public List<HashMap<String, String>> recupererListeCommercePourAdapteur() {
+        List<HashMap<String, String>> listeFilmPourAdapteur = new ArrayList<HashMap<String, String>>();
+
+        listerCommerce();
+
+        for (Commerce commerce : listeCommerces) {
+            listeFilmPourAdapteur.add(commerce.obtenirCommercePourAdapteur());
+        }
+        return listeFilmPourAdapteur;
     }
 
     public Commerce chercherCommerceParId(int id_commerce){
