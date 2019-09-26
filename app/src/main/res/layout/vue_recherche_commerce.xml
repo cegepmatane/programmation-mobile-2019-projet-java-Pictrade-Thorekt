@@ -7,6 +7,7 @@
     tools:context=".vue.Recherche">
 
     <ListView
+        android:id="@+id/vue_liste_commerce"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
