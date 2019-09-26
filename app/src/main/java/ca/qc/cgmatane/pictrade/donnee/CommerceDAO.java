@@ -25,7 +25,7 @@ public class CommerceDAO {
         listeCommerces = new ArrayList<>();
     }
 
-    public List<Commerce> ListerCommerce(){
+    public List<Commerce> ListerCommerce(){//TODO : a modifier , les requette sont en php coté serveur
         String LISTER_COMMERCE = "SELECT id, nom, longitude, latitude, horaire, adresse, contact FROM commerce";
         Cursor curseur = accesseurBaseDeDonneesServeur.getReadableDatabase().rawQuery(LISTER_COMMERCE,
                 null);
