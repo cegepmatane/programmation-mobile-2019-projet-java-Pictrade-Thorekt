@@ -29,7 +29,7 @@ public class Recherche extends AppCompatActivity {
 
        vueListeCommerces = (ListView) findViewById(R.id.vue_liste_commerce);
 
-        //listeCommercePourAdaptateur = accesseurCommerce.recupererListeFilmPourAdapteur();
+        listeCommercePourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
 
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
