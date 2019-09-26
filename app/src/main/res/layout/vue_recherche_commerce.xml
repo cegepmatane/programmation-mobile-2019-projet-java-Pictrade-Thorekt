@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".vue.Recherche">
 
+    <EditText
+        android:id="@+id/vue_recherche_commerce_chercher_commerce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Rechercher un commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vue_liste_commerce"
+        app:layout_constraintTop_toTopOf="@+id/vue_liste_commerce" />
+
     <ListView
         android:id="@+id/vue_liste_commerce"
         android:layout_width="match_parent"
@@ -13,5 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>
