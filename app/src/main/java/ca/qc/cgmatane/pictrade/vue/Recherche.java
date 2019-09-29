@@ -12,7 +12,7 @@ import java.util.List;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
-public class Recherche extends AppCompatActivity {
+public class Recherche extends AppCompatActivity implements VueRecherche {
     protected CommerceDAO accesseurCommerce ;
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;

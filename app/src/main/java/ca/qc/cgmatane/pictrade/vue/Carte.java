@@ -18,7 +18,7 @@ import android.util.Log;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnPoiClickListener {
+        GoogleMap.OnPoiClickListener, VueCarte {
 
     private GoogleMap mMap;
     private CommerceDAO accesseurCommerceDAO;
