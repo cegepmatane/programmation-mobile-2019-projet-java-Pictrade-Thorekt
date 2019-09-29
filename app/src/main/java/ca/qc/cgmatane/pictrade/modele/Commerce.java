@@ -12,6 +12,9 @@ public class Commerce {
     public String adresse;
     public String contact;
 
+    public Commerce() {
+    }
+
     public Commerce(int id, String nom, float longitude, float latitude, String horaire, String adresse, String contact) {
         this.id = id;
         this.nom = nom;
