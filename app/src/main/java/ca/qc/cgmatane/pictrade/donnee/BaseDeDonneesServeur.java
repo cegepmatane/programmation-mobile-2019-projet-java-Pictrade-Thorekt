@@ -32,7 +32,7 @@ public class BaseDeDonneesServeur {
         this.serveurUrl = "http://51.91.96.142/";
     }
 
-    public Xml recupererXML(String page) throws IOException {
+    public InputStream recupererXML(String page) throws IOException {
         InputStream in = null;
         URL url = new URL(serveurUrl + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

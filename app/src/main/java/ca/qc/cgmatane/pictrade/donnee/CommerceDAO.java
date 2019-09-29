@@ -38,10 +38,9 @@ public class CommerceDAO {
     }
 
     public List<Commerce> listerCommerce() {
-        Xml xml= null;
+        InputStream xml;
         try {
             xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
-            Log.d("XML ",  xml.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
