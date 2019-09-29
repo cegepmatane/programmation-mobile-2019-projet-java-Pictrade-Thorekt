@@ -7,8 +7,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BaseDeDonneesServeur {
@@ -23,7 +25,6 @@ public class BaseDeDonneesServeur {
     }
 
 
-
     private static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -31,20 +32,32 @@ public class BaseDeDonneesServeur {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public InputStream recupererXML(String page,Context context){
+    public InputStream recupererXML(String page, Context context) {
 
         isNetworkAvailable(context);
 
-        URL url = new URL("http://51.91.96.142/");
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        URL url = null;
         try {
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            return (in);
-        } finally {
-            urlConnection.disconnect();
+            url = new URL("http://51.91.96.142/");
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream in = null;
+                try {
+                    in = new BufferedInputStream(urlConnection.getInputStream());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    urlConnection.disconnect();
+                    return (in);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
     }
-
-
-
 }
