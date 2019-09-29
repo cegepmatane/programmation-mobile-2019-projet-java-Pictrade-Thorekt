@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.fragment.app.FragmentActivity;
+
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,10 +12,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ca.qc.cgmatane.pictrade.R;
+import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private CommerceDAO accesseurCommerceDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +46,15 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback {
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        accesseurCommerceDAO = CommerceDAO.getInstance();
+        new Thread(){
+            public void run(){
+
+                accesseurCommerceDAO.listerCommerce();
+            }
+
+        }.start();
     }
 }

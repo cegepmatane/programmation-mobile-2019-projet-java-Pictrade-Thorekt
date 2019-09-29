@@ -3,11 +3,17 @@ package ca.qc.cgmatane.pictrade.donnee;
 import android.database.Cursor;
 import android.os.Debug;
 import android.util.Log;
+import android.util.Xml;
 
+import org.xml.sax.*;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.xml.parsers.SAXParserFactory;
 
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
@@ -31,9 +37,14 @@ public class CommerceDAO {
         listeCommerces = new ArrayList<>();
     }
 
-    public List<Commerce> listerCommerce(){
-        InputStream XML = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
-        Log.d("XML = ", XML.toString());
+    public List<Commerce> listerCommerce() {
+        Xml xml= null;
+        try {
+            xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
+            Log.d("XML ",  xml.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return listeCommerces;
     }
@@ -57,4 +68,6 @@ public class CommerceDAO {
             return null;
         }
     }
+
+
 }
