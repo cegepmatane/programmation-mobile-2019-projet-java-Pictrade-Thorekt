@@ -24,21 +24,11 @@ public class BaseDeDonneesServeur {
         return instance;
     }
 
-
-    private static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    public InputStream recupererXML(String page, Context context) {
-
-        isNetworkAvailable(context);
+    public InputStream recupererXML(String page) {
 
         URL url = null;
         try {
-            url = new URL("http://51.91.96.142/");
+            url = new URL("http://51.91.96.142/"+page+".php");
             try {
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = null;
