@@ -16,6 +16,7 @@ public class CommerceHandlerXML extends DefaultHandler {
     private StringBuilder donnee = null;
     private Commerce commerce = null;
 
+    boolean aPlaceID;
     boolean aNom;
     boolean aLongitude;
     boolean aLatitude;
@@ -43,6 +44,8 @@ public class CommerceHandlerXML extends DefaultHandler {
             // initialize list
             if (listeCommerce == null)
                 listeCommerce = new ArrayList<>();
+        } else if (qName.equalsIgnoreCase("placeID")) {
+            aPlaceID = true;
         } else if (qName.equalsIgnoreCase("nom")) {
             aNom = true;
         } else if (qName.equalsIgnoreCase("longitude")) {
@@ -62,7 +65,10 @@ public class CommerceHandlerXML extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (aNom) {
+        if (aPlaceID) {
+            commerce.setPlaceID(donnee.toString());
+            aPlaceID = false;
+        } else if (aNom) {
             commerce.setNom(donnee.toString());
             aNom = false;
         } else if (aLongitude) {

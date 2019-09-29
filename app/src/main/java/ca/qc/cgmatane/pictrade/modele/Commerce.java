@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Commerce {
     public int id;
+    public String placeID;
     public String nom;
     public float longitude;
     public float latitude;
@@ -15,8 +16,9 @@ public class Commerce {
     public Commerce() {
     }
 
-    public Commerce(int id, String nom, float longitude, float latitude, String horaire, String adresse, String contact) {
+    public Commerce(int id, String placeID, String nom, float longitude, float latitude, String horaire, String adresse, String contact) {
         this.id = id;
+        this.placeID = placeID;
         this.nom = nom;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -25,7 +27,7 @@ public class Commerce {
         this.contact = contact;
     }
 
-    public Commerce(int id){
+    public Commerce(int id) {
         this.id = id;
     }
 
@@ -35,6 +37,14 @@ public class Commerce {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPlaceID() {
+        return placeID;
+    }
+
+    public void setPlaceID(String placeID) {
+        this.placeID = placeID;
     }
 
     public String getNom() {
@@ -106,7 +116,7 @@ public class Commerce {
                 '}';
     }
 
-    public HashMap<String, String> obtenirCommercePourAdapteur(){
+    public HashMap<String, String> obtenirCommercePourAdapteur() {
         HashMap<String, String> commercePourAdapteur = new HashMap<String, String>();
         commercePourAdapteur.put("nom", this.nom);
         commercePourAdapteur.put("adresse", this.adresse);
