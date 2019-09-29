@@ -23,6 +23,10 @@ public class CommerceHandlerXML extends DefaultHandler {
     boolean aAdresse;
     boolean AContact;
 
+    public CommerceHandlerXML() {
+        super();
+    }
+
     public List<Commerce> getListeCommerce() {
         return listeCommerce;
     }

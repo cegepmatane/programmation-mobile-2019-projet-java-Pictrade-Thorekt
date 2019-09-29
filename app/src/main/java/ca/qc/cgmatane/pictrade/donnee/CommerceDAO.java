@@ -9,10 +9,13 @@ import org.xml.sax.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import ca.qc.cgmatane.pictrade.modele.Commerce;
@@ -21,9 +24,11 @@ public class CommerceDAO {
     private static final String LISTER_COMMERCE = "lister_commerce";
 
     private static CommerceDAO instance = null;
-    protected BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
+    private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
 
     protected List<Commerce> listeCommerces;
+
+    private CommerceHandlerXML commerceHandlerXML;
 
     public static CommerceDAO getInstance() {
         if (instance == null) {
@@ -32,19 +37,25 @@ public class CommerceDAO {
         return instance;
     }
 
-    public CommerceDAO(){
+    private CommerceDAO(){
         accesseurBaseDeDonneesServeur = BaseDeDonneesServeur.getInstance();
         listeCommerces = new ArrayList<>();
+        commerceHandlerXML = new CommerceHandlerXML();
     }
 
     public List<Commerce> listerCommerce() {
-        InputStream xml;
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
-            xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
-        } catch (IOException e) {
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
+            Log.d("listerCommerce ", xml);
+            saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
+            listeCommerces=commerceHandlerXML.getListeCommerce();
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
 
+        Log.d("listerCommerce ", listeCommerces.toString());
         return listeCommerces;
     }
 
@@ -56,6 +67,7 @@ public class CommerceDAO {
         for (Commerce commerce : listeCommerces) {
             listeFilmPourAdapteur.add(commerce.obtenirCommercePourAdapteur());
         }
+
         return listeFilmPourAdapteur;
     }
 
