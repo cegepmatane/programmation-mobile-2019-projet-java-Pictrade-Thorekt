@@ -49,15 +49,6 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
 
-        
-        accesseurCommerceDAO = CommerceDAO.getInstance();
-        new Thread() {
-            public void run() {
-
-                accesseurCommerceDAO.listerCommerce();
-            }
-
-        }.start();
 
 
     }
