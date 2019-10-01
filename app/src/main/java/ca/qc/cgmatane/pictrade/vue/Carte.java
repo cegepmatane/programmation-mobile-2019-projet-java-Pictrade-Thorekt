@@ -49,12 +49,7 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-
+        
         accesseurCommerceDAO = CommerceDAO.getInstance();
         new Thread() {
             public void run() {
