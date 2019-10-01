@@ -3,6 +3,8 @@ package ca.qc.cgmatane.pictrade.controleur;
 import android.content.Context;
 
 public class ControleurCommerce implements Controleur {
+
+
     @Override
     public void onCreate(Context applicationContext) {
 
