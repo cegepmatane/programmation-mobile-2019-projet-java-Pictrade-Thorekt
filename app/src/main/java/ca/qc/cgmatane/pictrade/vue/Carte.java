@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.fragment.app.FragmentActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -9,12 +11,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
+import android.util.Log;
+import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
-public class Carte extends FragmentActivity implements OnMapReadyCallback {
+public class Carte extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnPoiClickListener, VueCarte {
 
     private GoogleMap mMap;
+    private CommerceDAO accesseurCommerceDAO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +47,32 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnPoiClickListener(this);
+
         // Add a marker in Sydney and move the camera
-        LatLng matane = new LatLng(48.8445, -67.5306);
-        mMap.addMarker(new MarkerOptions().position(matane).title("Marker in matane"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        accesseurCommerceDAO = CommerceDAO.getInstance();
+        new Thread() {
+            public void run() {
+
+                accesseurCommerceDAO.listerCommerce();
+            }
+
+        }.start();
+
+
+    }
+
+    @Override
+    public void onPoiClick(PointOfInterest poi) {
+        Log.d("Clicked: ",
+                poi.name + "\nPlace ID:" + poi.placeId +
+                        "\nLatitude:" + poi.latLng.latitude +
+                        " Longitude:" + poi.latLng.longitude);
+
     }
 }

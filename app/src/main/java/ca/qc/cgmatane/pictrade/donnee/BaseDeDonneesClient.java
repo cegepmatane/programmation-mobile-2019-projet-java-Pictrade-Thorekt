@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BaseDeDonneesClient extends SQLiteOpenHelper {
+public class BaseDeDonneesClient /*extends SQLiteOpenHelper*/ {/*
 
     private static BaseDeDonneesClient instance = null;
 
@@ -23,7 +23,7 @@ public class BaseDeDonneesClient extends SQLiteOpenHelper {
 
     public BaseDeDonneesServeur(Context contexte, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
-    }*/
+    }*//*
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -38,6 +38,6 @@ public class BaseDeDonneesClient extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 
-    }
+    }*/
 
 }
