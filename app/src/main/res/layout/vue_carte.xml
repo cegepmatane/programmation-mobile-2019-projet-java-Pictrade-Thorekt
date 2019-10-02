@@ -7,4 +7,15 @@
     android:id="@+id/map"
     tools:context=".vue.Carte"
     android:name="com.google.android.gms.maps.SupportMapFragment"
-    map:mapType="normal"/>
+    map:mapType="normal">
+
+    <Button
+        android:id ="@+id/push_button"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:text="- - -"
+        android:background="@drawable/cercle_bouton"
+        android:padding="80px"
+        />
+
+</fragment>
