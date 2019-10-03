@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
@@ -29,7 +30,8 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
     private CommerceDAO accesseurCommerceDAO;
     protected Button bouton_menu;
     protected View test;
-    protected Intent intentionRechercherCommerce;
+    protected Intent intentionCommerce;
+    protected ControleurCarte controleurCarte = new ControleurCarte(this);
 
 
     @Override
@@ -40,8 +42,9 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 //        intentionRechercherCommerce = new Intent(Commerce.this,
-//                Recherche.class);
+////                Recherche.class);
 //
 //        test.findViewById(R.id.vue_recherche_commerce_chercher_commerce);
 //        bouton_menu.setOnClickListener(new AdapterView.OnClickListener(){
@@ -76,6 +79,8 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
                 poi.name + "\nPlace ID:" + poi.placeId +
                         "\nLatitude:" + poi.latLng.latitude +
                         " Longitude:" + poi.latLng.longitude);
-
+    intentionCommerce = new Intent(Carte.this, Commerce.class);
+    intentionCommerce.putExtra("poi",poi);
+    startActivity(intentionCommerce);
     }
 }
