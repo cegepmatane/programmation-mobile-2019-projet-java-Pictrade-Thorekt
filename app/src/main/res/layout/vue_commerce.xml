@@ -7,34 +7,34 @@
     tools:context=".vue.Commerce">
 
     <TextView
-        android:id="@+id/adresse_commerce"
+        android:id="@+id/vue_afficher_adresse_commerce"
         android:layout_width="260dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="Adresse commerce"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nom_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_nom_commerce" />
 
     <TextView
-        android:id="@+id/telephone_commerce"
+        android:id="@+id/vue_afficher_telephone_commerce"
         android:layout_width="260dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="Telephione commerce"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adresse_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_adresse_commerce" />
 
     <TextView
-        android:id="@+id/horaire_commerce"
+        android:id="@+id/vue_afficher_horaire_commerce"
         android:layout_width="267dp"
         android:layout_height="197dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="Horaires commerce"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/telephone_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_telephone_commerce" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/nom_commerce"
+        android:id="@+id/vue_afficher_nom_commerce"
         android:layout_width="260dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"

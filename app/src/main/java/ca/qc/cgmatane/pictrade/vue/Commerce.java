@@ -5,32 +5,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Commerce extends AppCompatActivity implements VueCommerce {
     protected CommerceDAO accesseurCommerce;
+    private Commerce commerce;
+    private TextView vueAfficherNomCommerce;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_commerce);
+
+        Bundle parametres = this.getIntent().getExtras();
+        PointOfInterest poi = (PointOfInterest) parametres.get("poi");
+
+        this.accesseurCommerce= CommerceDAO.getInstance();
+
+        vueAfficherNomCommerce= (TextView) findViewById(R.id.vue_afficher_nom_commerce);
+
+        vueAfficherNomCommerce.setText(poi.name);
+
+
+
+
     }
 
-    protected void informationCommerces() {
-        accesseurCommerce = CommerceDAO.getInstance();
-
-       //vueCommerces = (ListView) findViewById(R.id.vue_liste_commerce);
-
-        //listeDetailPourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
-
-        //SimpleAdapter adapteurVueDetailCommerce = new SimpleAdapter(this,
-        //        listeDetailPourAdaptateur,
-        //        android.R.layout.two_line_list_item,
-        //        new int[]{android.R.id.text1, android.R.id.text2});
-
-        //adapteurVueDetailCommerce.setAdapter(adapteurVueDetailCommerce);
-    }
 }
 
