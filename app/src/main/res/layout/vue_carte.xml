@@ -10,12 +10,10 @@
     map:mapType="normal">
 
     <Button
-        android:id ="@+id/push_button"
+        android:id="@+id/bouton_acces_recherche"
         android:layout_width="82dp"
         android:layout_height="82dp"
-        android:text="- - -"
         android:background="@drawable/cercle_bouton"
-        android:padding="80px"
-        />
+        android:padding="80dp" />
 
 </fragment>

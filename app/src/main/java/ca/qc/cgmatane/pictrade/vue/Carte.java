@@ -16,13 +16,20 @@ import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnPoiClickListener, VueCarte {
-
+    static final public int ACTIVITE_RECHERCHER_COMMERCE = 1;
     private GoogleMap mMap;
     private CommerceDAO accesseurCommerceDAO;
+    protected Button bouton_menu;
+    protected View test;
+    protected Intent intentionRechercherCommerce;
 
 
     @Override
@@ -33,7 +40,16 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
+//        intentionRechercherCommerce = new Intent(Commerce.this,
+//                Recherche.class);
+//
+//        test.findViewById(R.id.vue_recherche_commerce_chercher_commerce);
+//        bouton_menu.setOnClickListener(new AdapterView.OnClickListener(){
+//                                           @Override
+//                                           public void onClick(View view) {
+//                                                startActivity(intentionRechercherCommerce,ACTIVITE_RECHERCHER_COMMERCE);
+//                                           }
+                                       }
 
 
     /**
