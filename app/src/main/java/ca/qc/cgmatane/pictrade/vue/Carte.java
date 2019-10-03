@@ -15,21 +15,21 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
+import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnPoiClickListener, VueCarte {
-    static final public int ACTIVITE_RECHERCHER_COMMERCE = 1;
     private GoogleMap mMap;
     private CommerceDAO accesseurCommerceDAO;
     protected Button bouton_menu;
-    protected View test;
     protected Intent intentionCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
 
@@ -43,16 +43,18 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        intentionRechercherCommerce = new Intent(Commerce.this,
-////                Recherche.class);
-//
-//        test.findViewById(R.id.vue_recherche_commerce_chercher_commerce);
-//        bouton_menu.setOnClickListener(new AdapterView.OnClickListener(){
-//                                           @Override
-//                                           public void onClick(View view) {
-//                                                startActivity(intentionRechercherCommerce,ACTIVITE_RECHERCHER_COMMERCE);
-//                                           }
-                                       }
+//        intentionRechercherCommerce = new Intent(Carte.this,
+//                Recherche.class);
+
+        bouton_menu.findViewById(R.id.bouton_acces_recherche);
+        bouton_menu.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+
+//                controleurCarte.actionMenuRechercheCommerce();
+//                startActivity(intentionRechercherCommerce, ACTIVITE_RECHERCHER_COMMERCE);
+            }
+        });
+    }
 
 
     /**
@@ -70,7 +72,6 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         mMap.setOnPoiClickListener(this);
 
 
-
     }
 
     @Override
@@ -79,8 +80,14 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
                 poi.name + "\nPlace ID:" + poi.placeId +
                         "\nLatitude:" + poi.latLng.latitude +
                         " Longitude:" + poi.latLng.longitude);
-    intentionCommerce = new Intent(Carte.this, Commerce.class);
-    intentionCommerce.putExtra("poi",poi);
-    startActivity(intentionCommerce);
+        intentionCommerce = new Intent(Carte.this, Commerce.class);
+        intentionCommerce.putExtra("poi", poi);
+        startActivity(intentionCommerce);
     }
+
+//    @Override
+//    public void naviguerRechercheCommerce() {
+//        Intent intentionRechercheCommerce = new Intent(this, Recherche.class);
+//        //startActivityForResult(intentionRechercheCommerce, ControleurRecherche);
+//    }
 }
