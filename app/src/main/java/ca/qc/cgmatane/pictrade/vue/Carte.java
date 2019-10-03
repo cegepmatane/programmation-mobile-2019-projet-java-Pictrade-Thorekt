@@ -46,14 +46,14 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
 //        intentionRechercherCommerce = new Intent(Carte.this,
 //                Recherche.class);
 
-        bouton_menu.findViewById(R.id.bouton_acces_recherche);
-        bouton_menu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
+//        bouton_menu.findViewById(R.id.bouton_acces_recherche);
+//        bouton_menu.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View arg0) {
 
 //                controleurCarte.actionMenuRechercheCommerce();
 //                startActivity(intentionRechercherCommerce, ACTIVITE_RECHERCHER_COMMERCE);
-            }
-        });
+//            }
+//        });
     }
 
 
