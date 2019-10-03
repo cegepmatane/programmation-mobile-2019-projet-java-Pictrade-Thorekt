@@ -6,6 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".vue.Commerce">
 
+    <TextView
+        android:id="@+id/adresse_commerce"
+        android:layout_width="260dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Adresse commerce"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_commerce" />
+
+    <TextView
+        android:id="@+id/telephone_commerce"
+        android:layout_width="260dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Telephione commerce"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adresse_commerce" />
+
+    <TextView
+        android:id="@+id/horaire_commerce"
+        android:layout_width="267dp"
+        android:layout_height="197dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Horaires commerce"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telephone_commerce" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="143dp"
@@ -35,55 +65,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/nom_commerce"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Nom commerce"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boutton_galerie" />
-
-    <EditText
-        android:id="@+id/adresse_commerce"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        android:text="Adresse commerce"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nom_commerce" />
-
-    <EditText
-        android:id="@+id/horaire_commerce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="Horaire commerce"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adresse_commerce" />
-
-    <EditText
-        android:id="@+id/telephone_commerce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:text="Numero de telephone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horaire_commerce" />
-
     <CheckBox
         android:id="@+id/favoris_commerce"
         android:layout_width="87dp"
@@ -105,5 +86,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/nom_commerce"
+        android:layout_width="260dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Nom commerce"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boutton_galerie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
