@@ -5,24 +5,17 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
 
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
-import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
@@ -80,7 +73,7 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
                 poi.name + "\nPlace ID:" + poi.placeId +
                         "\nLatitude:" + poi.latLng.latitude +
                         " Longitude:" + poi.latLng.longitude);
-        intentionCommerce = new Intent(Carte.this, Commerce.class);
+        intentionCommerce = new Intent(Carte.this, AfficherCommerce.class);
         intentionCommerce.putExtra("poi", poi);
         startActivity(intentionCommerce);
     }

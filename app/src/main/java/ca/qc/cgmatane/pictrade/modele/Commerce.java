@@ -105,7 +105,7 @@ public class Commerce {
 
     @Override
     public String toString() {
-        return "Commerce{" +
+        return "AfficherCommerce{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", longitude=" + longitude +

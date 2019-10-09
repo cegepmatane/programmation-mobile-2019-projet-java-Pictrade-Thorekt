@@ -2,7 +2,7 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 
-public class ControleurCommerce implements Controleur {
+public class ControleurAfficherCommerce implements Controleur {
 
 
     @Override

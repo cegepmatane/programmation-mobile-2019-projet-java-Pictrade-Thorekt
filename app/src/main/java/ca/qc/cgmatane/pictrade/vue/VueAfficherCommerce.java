@@ -1,4 +1,4 @@
 package ca.qc.cgmatane.pictrade.vue;
 
-public interface VueCommerce {
+public interface VueAfficherCommerce {
 }

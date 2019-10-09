@@ -9,6 +9,7 @@ public class ControleurCarte implements Controleur {
     private VueCarte vue;
 
     public ControleurCarte(VueCarte vue) {
+
         this.vue = vue;
     }
 
