@@ -2,6 +2,8 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 
+import com.google.android.gms.maps.model.PointOfInterest;
+
 import ca.qc.cgmatane.pictrade.vue.VueCarte;
 
 public class ControleurCarte implements Controleur {
@@ -36,5 +38,9 @@ public class ControleurCarte implements Controleur {
     @Override
     public void onActivityResult(int activite) {
 
+    }
+
+    public void actionNaviguerAfficherCommerce(PointOfInterest pointDInteret){
+        vue.naviguerAfficherCommerce(pointDInteret);
     }
 }

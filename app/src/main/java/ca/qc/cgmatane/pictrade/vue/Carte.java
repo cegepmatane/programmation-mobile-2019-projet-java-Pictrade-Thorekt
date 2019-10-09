@@ -47,6 +47,8 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
 //                startActivity(intentionRechercherCommerce, ACTIVITE_RECHERCHER_COMMERCE);
 //            }
 //        });
+
+        controleurCarte.onCreate(getApplicationContext());
     }
 
 
@@ -68,17 +70,19 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
     }
 
     @Override
-    public void onPoiClick(PointOfInterest poi) {
-        Log.d("Clicked: ",
-                poi.name + "\nPlace ID:" + poi.placeId +
-                        "\nLatitude:" + poi.latLng.latitude +
-                        " Longitude:" + poi.latLng.longitude);
+    public void onPoiClick(PointOfInterest pointDInteret) {
+        controleurCarte.actionNaviguerAfficherCommerce(pointDInteret);
+    }
+
+
+    @Override
+    public void naviguerAfficherCommerce(PointOfInterest pointDInteret) {
         intentionCommerce = new Intent(Carte.this, AfficherCommerce.class);
-        intentionCommerce.putExtra("poi", poi);
+        intentionCommerce.putExtra("poi", pointDInteret);
         startActivity(intentionCommerce);
     }
 
-//    @Override
+    //    @Override
 //    public void naviguerRechercheCommerce() {
 //        Intent intentionRechercheCommerce = new Intent(this, Recherche.class);
 //        //startActivityForResult(intentionRechercheCommerce, ControleurRecherche);
