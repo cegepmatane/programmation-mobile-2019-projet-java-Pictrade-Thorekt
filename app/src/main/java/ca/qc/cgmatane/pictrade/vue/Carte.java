@@ -78,7 +78,7 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void naviguerAfficherCommerce(PointOfInterest pointDInteret) {
         intentionCommerce = new Intent(Carte.this, AfficherCommerce.class);
-        intentionCommerce.putExtra("poi", pointDInteret);
+        intentionCommerce.putExtra("pointDInteret", pointDInteret);
         startActivity(intentionCommerce);
     }
 

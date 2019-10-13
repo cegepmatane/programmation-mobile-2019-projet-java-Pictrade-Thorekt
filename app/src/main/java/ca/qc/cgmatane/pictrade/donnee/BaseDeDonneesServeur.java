@@ -66,7 +66,7 @@ public class BaseDeDonneesServeur {
         }
     }
 
-    public String recupererXML(String page, HashMap<String,String> parammetresPost) throws IOException {
+    public String recupererXML(String page, HashMap<String,String> parametresPost) throws IOException {
         URL url = new URL(SERVEUR_URL + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
@@ -76,7 +76,7 @@ public class BaseDeDonneesServeur {
         OutputStream os = urlConnection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getPostDataString(parammetresPost));
+        writer.write(getPostDataString(parametresPost));
 
         writer.flush();
         writer.close();

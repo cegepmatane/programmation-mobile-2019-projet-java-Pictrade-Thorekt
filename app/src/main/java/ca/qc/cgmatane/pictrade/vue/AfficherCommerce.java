@@ -18,20 +18,23 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
 
+    private Bundle parametres;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_afficher_commerce);
 
-        Bundle parametres = this.getIntent().getExtras();
-        PointOfInterest poi = (PointOfInterest) parametres.get("poi");
-
-
-        vueAfficherNomCommerce= (TextView) findViewById(R.id.vue_afficher_nom_commerce);
-
+        parametres = this.getIntent().getExtras();
 
         controleurAfficherCommerce.onCreate(getApplicationContext());
+    }
+
+
+    @Override
+    public Bundle getParametres() {
+        return parametres;
     }
 }
 

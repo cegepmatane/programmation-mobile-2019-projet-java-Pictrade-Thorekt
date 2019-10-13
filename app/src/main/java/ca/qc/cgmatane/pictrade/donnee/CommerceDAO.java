@@ -46,34 +46,12 @@ public class CommerceDAO {
         commerceHandlerXML = new CommerceHandlerXML();
     }
 
-    public Commerce recupererCommerce(int id){
-        HashMap<String,String> parammetresPost = new HashMap<>();
-        parammetresPost.put("id", id+"");
+    public Commerce recupererCommerce( HashMap<String,String> parametresPost ){
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parammetresPost);
-            saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
-            listeCommerces=commerceHandlerXML.getListeCommerce();
-        } catch (IOException | SAXException | ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Commerce recupererCommerce(PointOfInterest pointDInteret){
-        HashMap<String,String> parammetresPost = new HashMap<>();
-        parammetresPost.put("placeID",pointDInteret.placeId);
-        parammetresPost.put("nom",pointDInteret.name);
-        parammetresPost.put("longitude",pointDInteret.latLng.longitude+"");
-        parammetresPost.put("latitude",pointDInteret.latLng.longitude+"");
-
-
-        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-        try {
-            SAXParser saxParser = saxParserFactory.newSAXParser();
-            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parammetresPost);
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parametresPost);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
         } catch (IOException | SAXException | ParserConfigurationException e) {
