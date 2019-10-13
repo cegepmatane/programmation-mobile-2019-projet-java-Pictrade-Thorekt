@@ -47,17 +47,18 @@ public class CommerceDAO {
     }
 
     public Commerce recupererCommerce( HashMap<String,String> parametresPost ){
-
+        Commerce commerce= new Commerce();
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parametresPost);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
-            listeCommerces=commerceHandlerXML.getListeCommerce();
+            commerce = commerceHandlerXML.getCommerce();
+
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-        return null;
+        return commerce;
     }
 
     public List<Commerce> listerCommerce() { //a faire dans une asynctask

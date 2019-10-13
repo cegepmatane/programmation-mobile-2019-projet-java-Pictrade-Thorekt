@@ -28,6 +28,11 @@ public class CommerceHandlerXML extends DefaultHandler {
         super();
     }
 
+
+    public Commerce getCommerce() {
+        return commerce;
+    }
+
     public List<Commerce> getListeCommerce() {
         return listeCommerce;
     }
