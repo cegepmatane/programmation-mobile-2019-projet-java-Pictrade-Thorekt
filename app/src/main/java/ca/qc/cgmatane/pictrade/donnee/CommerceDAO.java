@@ -5,6 +5,8 @@ import android.os.Debug;
 import android.util.Log;
 import android.util.Xml;
 
+import com.google.android.gms.maps.model.PointOfInterest;
+
 import org.xml.sax.*;
 
 import java.io.IOException;
@@ -43,19 +45,24 @@ public class CommerceDAO {
         commerceHandlerXML = new CommerceHandlerXML();
     }
 
-    public List<Commerce> listerCommerce() {
+    public Commerce recupererCommerce(int id){
+        return null;
+    }
+
+    public Commerce recupererCommerce(PointOfInterest pointDInteret){
+        return null;
+    }
+
+    public List<Commerce> listerCommerce() { //a faire dans une asynctask
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
-            Log.d("listerCommerce ", xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-
-        Log.d("listerCommerce ", listeCommerces.toString());
         return listeCommerces;
     }
 

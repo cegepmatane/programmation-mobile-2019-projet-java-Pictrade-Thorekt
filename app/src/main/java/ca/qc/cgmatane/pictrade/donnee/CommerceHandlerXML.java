@@ -16,13 +16,13 @@ public class CommerceHandlerXML extends DefaultHandler {
     private StringBuilder donnee = null;
     private Commerce commerce = null;
 
-    boolean aPlaceID;
-    boolean aNom;
-    boolean aLongitude;
-    boolean aLatitude;
-    boolean aHoraire;
-    boolean aAdresse;
-    boolean AContact;
+    boolean isPlaceID;
+    boolean isNom;
+    boolean isLongitude;
+    boolean isLatitude;
+    boolean isHoraire;
+    boolean isAdresse;
+    boolean isContact;
 
     public CommerceHandlerXML() {
         super();
@@ -45,19 +45,19 @@ public class CommerceHandlerXML extends DefaultHandler {
             if (listeCommerce == null)
                 listeCommerce = new ArrayList<>();
         } else if (qName.equalsIgnoreCase("placeID")) {
-            aPlaceID = true;
+            isPlaceID = true;
         } else if (qName.equalsIgnoreCase("nom")) {
-            aNom = true;
+            isNom = true;
         } else if (qName.equalsIgnoreCase("longitude")) {
-            aLongitude = true;
+            isLongitude = true;
         } else if (qName.equalsIgnoreCase("latitude")) {
-            aLatitude = true;
+            isLatitude = true;
         } else if (qName.equalsIgnoreCase("horaire")) {
-            aHoraire = true;
+            isHoraire = true;
         } else if (qName.equalsIgnoreCase("adresse")) {
-            aAdresse = true;
+            isAdresse = true;
         } else if (qName.equalsIgnoreCase("contact")) {
-            AContact = true;
+            isContact = true;
         }
 
         donnee = new StringBuilder();
@@ -65,27 +65,27 @@ public class CommerceHandlerXML extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (aPlaceID) {
+        if (isPlaceID) {
             commerce.setPlaceID(donnee.toString());
-            aPlaceID = false;
-        } else if (aNom) {
+            isPlaceID = false;
+        } else if (isNom) {
             commerce.setNom(donnee.toString());
-            aNom = false;
-        } else if (aLongitude) {
+            isNom = false;
+        } else if (isLongitude) {
             commerce.setLongitude(Float.valueOf(donnee.toString()));
-            aLongitude = false;
-        } else if (aLatitude) {
+            isLongitude = false;
+        } else if (isLatitude) {
             commerce.setLatitude(Float.valueOf(donnee.toString()));
-            aLatitude = false;
-        } else if (aHoraire) {
+            isLatitude = false;
+        } else if (isHoraire) {
             commerce.setHoraire(donnee.toString());
-            aHoraire = false;
-        } else if (aAdresse) {
+            isHoraire = false;
+        } else if (isAdresse) {
             commerce.setAdresse(donnee.toString());
-            aAdresse = false;
-        } else if (AContact) {
+            isAdresse = false;
+        } else if (isContact) {
             commerce.setContact(donnee.toString());
-            AContact = false;
+            isContact = false;
         }
         if (qName.equalsIgnoreCase("commerce")) {
             listeCommerce.add(commerce);
