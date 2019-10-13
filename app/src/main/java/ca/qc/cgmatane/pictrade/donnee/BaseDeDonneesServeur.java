@@ -7,12 +7,19 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class BaseDeDonneesServeur {
@@ -32,13 +39,12 @@ public class BaseDeDonneesServeur {
 
     }
 
+
     public String recupererXML(String page) throws IOException {
         URL url = new URL(SERVEUR_URL + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
         urlConnection.setDoInput(true);
-
-
 
         int responseCode = urlConnection.getResponseCode();
         System.out.println("Response Code :: " + responseCode);
@@ -60,6 +66,57 @@ public class BaseDeDonneesServeur {
         }
     }
 
+    public String recupererXML(String page, HashMap<String,String> parammetresPost) throws IOException {
+        URL url = new URL(SERVEUR_URL + page + ".php");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("POST");
+        urlConnection.setDoInput(true);
+        urlConnection.setDoOutput(true);
 
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(parammetresPost));
 
+        writer.flush();
+        writer.close();
+        os.close();
+
+        int responseCode = urlConnection.getResponseCode();
+        System.out.println("Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            urlConnection.disconnect();
+            return response.toString();
+        } else {
+            urlConnection.disconnect();
+            return "";
+        }
+    }
+
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        //source : https://stackoverflow.com/questions/9767952/how-to-add-parameters-to-httpurlconnection-using-post-using-namevaluepair
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
 }

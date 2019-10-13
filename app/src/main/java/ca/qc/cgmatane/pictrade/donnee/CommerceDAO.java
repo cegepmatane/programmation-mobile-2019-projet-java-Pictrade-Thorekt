@@ -24,6 +24,7 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class CommerceDAO {
     private static final String LISTER_COMMERCE = "lister_commerce";
+    private static final String RECUPERER_COMMERCE = "recuperer_commerce";
 
     private static CommerceDAO instance = null;
     private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
@@ -46,10 +47,38 @@ public class CommerceDAO {
     }
 
     public Commerce recupererCommerce(int id){
+        HashMap<String,String> parammetresPost = new HashMap<>();
+        parammetresPost.put("id", id+"");
+
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        try {
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parammetresPost);
+            saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
+            listeCommerces=commerceHandlerXML.getListeCommerce();
+        } catch (IOException | SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     public Commerce recupererCommerce(PointOfInterest pointDInteret){
+        HashMap<String,String> parammetresPost = new HashMap<>();
+        parammetresPost.put("placeID",pointDInteret.placeId);
+        parammetresPost.put("nom",pointDInteret.name);
+        parammetresPost.put("longitude",pointDInteret.latLng.longitude+"");
+        parammetresPost.put("latitude",pointDInteret.latLng.longitude+"");
+
+
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        try {
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parammetresPost);
+            saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
+            listeCommerces=commerceHandlerXML.getListeCommerce();
+        } catch (IOException | SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
