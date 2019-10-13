@@ -44,10 +44,12 @@ public class BaseDeDonneesServeur {
         URL url = new URL(SERVEUR_URL + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
+        urlConnection.setReadTimeout(15000);
+        urlConnection.setConnectTimeout(15000);
         urlConnection.setDoInput(true);
 
         int responseCode = urlConnection.getResponseCode();
-        System.out.println("Response Code :: " + responseCode);
+        Log.d("recupererXML: ", responseCode+"");
         if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream()));
@@ -70,6 +72,8 @@ public class BaseDeDonneesServeur {
         URL url = new URL(SERVEUR_URL + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
+        urlConnection.setReadTimeout(15000);
+        urlConnection.setConnectTimeout(15000);
         urlConnection.setDoInput(true);
         urlConnection.setDoOutput(true);
 
@@ -83,7 +87,7 @@ public class BaseDeDonneesServeur {
         os.close();
 
         int responseCode = urlConnection.getResponseCode();
-        System.out.println("Response Code :: " + responseCode);
+        Log.d("recupererXML: ", responseCode+"");
         if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream()));

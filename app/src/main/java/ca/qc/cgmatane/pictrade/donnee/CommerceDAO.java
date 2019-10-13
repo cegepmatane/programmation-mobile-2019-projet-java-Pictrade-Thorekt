@@ -52,8 +52,12 @@ public class CommerceDAO {
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parametresPost);
+
+            Log.d("recupererCommerce: ", xml);
+
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             commerce = commerceHandlerXML.getCommerce();
+
 
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();

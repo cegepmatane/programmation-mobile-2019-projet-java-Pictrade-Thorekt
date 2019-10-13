@@ -1,5 +1,7 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
+import android.util.Log;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -93,6 +95,7 @@ public class CommerceHandlerXML extends DefaultHandler {
             isContact = false;
         }
         if (qName.equalsIgnoreCase("commerce")) {
+            Log.d("endElement: ", commerce.toString());
             listeCommerce.add(commerce);
         }
     }
