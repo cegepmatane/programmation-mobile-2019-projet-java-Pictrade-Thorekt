@@ -1,8 +1,14 @@
 package ca.qc.cgmatane.pictrade.vue;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -23,8 +29,14 @@ import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
-public class Carte extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnPoiClickListener, VueCarte {
+public class Carte extends FragmentActivity
+        implements
+        OnMapReadyCallback,
+        GoogleMap.OnPoiClickListener,
+        VueCarte,
+        GoogleMap.OnMyLocationClickListener,
+        GoogleMap.OnMyLocationButtonClickListener {
+    private static final int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     protected FloatingActionMenu bouton_menu;
     protected FloatingActionButton bouton_menu_recherche;
@@ -41,9 +53,10 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        intentionRechercherCommerce = new Intent(Carte.this,
-//                Recherche.class);
+        //appel par le controlleur pour demander l'autorisation de géolocalisation
+        controleurCarte.actionPermissionGeolocalisation();
 
+        // intanciation du bouton du menu et appel au controleur pour afficher la page recherche
         bouton_menu = (FloatingActionMenu) findViewById(R.id.bouton_menu);
         bouton_menu_recherche= (FloatingActionButton) findViewById(R.id.bouton_recherche);
         bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +83,7 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
+        mMap.setOnMyLocationButtonClickListener(this);
 
 
     }
@@ -92,4 +106,65 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         Intent intentionRechercheCommerce = new Intent(this, Recherche.class);
         startActivity(intentionRechercheCommerce);
     }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+
+    }
+
+    public void permissionLocalisation(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d("Test de Permission", "Permission acceptée ");
+            Toast.makeText(this, "Permission acceptée", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            // Show rationale and request permission.
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_LOCATION_REQUEST_CODE);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_LOCATION_REQUEST_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
 }
+

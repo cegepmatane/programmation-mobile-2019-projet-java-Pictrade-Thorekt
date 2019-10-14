@@ -50,4 +50,7 @@ public class ControleurCarte implements Controleur {
     public void actionNaviguerAfficherCommerce(PointOfInterest pointDInteret) {
         vue.naviguerAfficherCommerce(pointDInteret);
     }
+    public void actionPermissionGeolocalisation(){
+        vue.permissionLocalisation();
+    }
 }
