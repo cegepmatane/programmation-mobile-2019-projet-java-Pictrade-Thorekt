@@ -8,93 +8,73 @@
 
     <TextView
         android:id="@+id/vue_afficher_adresse_commerce"
-        android:layout_width="260dp"
-        android:layout_height="49dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:text="Adresse commerce"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vue_afficher_nom_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_telephone_commerce"
-        android:layout_width="260dp"
-        android:layout_height="49dp"
+        android:id="@+id/vue_afficher_contact_commerce"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:text="Telephione commerce"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vue_afficher_adresse_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_horaire_commerce"
-        android:layout_width="267dp"
-        android:layout_height="197dp"
+        android:id="@+id/vue_afficher_horaire_ouverture_commerce"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:text="Horaires commerce"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_telephone_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_contact_commerce" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="143dp"
-        android:layout_height="143dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+    <TextView
+        android:id="@+id/vue_afficher_horaire_fermeture_commerce"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="Horaires commerce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[0]" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="227dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:text="Envoyer a un ami"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_horaire_ouverture_commerce" />
 
     <CheckBox
         android:id="@+id/favoris_commerce"
         android:layout_width="87dp"
         android:layout_height="18dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:text="Favoris"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/boutton_galerie"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:text="Galerie"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Favoris"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_horaire_fermeture_commerce" />
 
     <TextView
         android:id="@+id/vue_afficher_nom_commerce"
-        android:layout_width="260dp"
-        android:layout_height="49dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:text="Nom commerce"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boutton_galerie" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
