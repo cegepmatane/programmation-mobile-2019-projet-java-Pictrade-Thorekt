@@ -27,6 +27,7 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 public class CommerceDAO {
     private static final String LISTER_COMMERCE = "lister_commerce";
     private static final String RECUPERER_COMMERCE = "recuperer_commerce";
+    private static final String MODIFIER_COMMERCE = "modifier_commerce";
 
     private static CommerceDAO instance = null;
     private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
@@ -65,6 +66,18 @@ public class CommerceDAO {
             e.printStackTrace();
         }
         return commerce;
+    }
+
+    public String modifierCommerce( HashMap<String,String> parametresPost ){
+
+        String resultat = null;
+        try {
+            resultat = accesseurBaseDeDonneesServeur.recupererXML(MODIFIER_COMMERCE,parametresPost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return resultat;
     }
 
     public List<Commerce> listerCommerce() { //a faire dans une asynctask
