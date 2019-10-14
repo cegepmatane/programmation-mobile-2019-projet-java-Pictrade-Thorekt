@@ -13,7 +13,11 @@ import com.google.android.gms.maps.model.PointOfInterest;
 import ca.qc.cgmatane.pictrade.R;
 
 import android.util.Log;
-import android.widget.Button;
+import android.view.View;
+import android.widget.Toast;
+
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
@@ -21,7 +25,8 @@ import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnPoiClickListener, VueCarte {
     private GoogleMap mMap;
-    protected Button bouton_menu;
+    protected FloatingActionMenu bouton_menu;
+    protected FloatingActionButton bouton_menu_recherche;
     protected Intent intentionCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
 
@@ -38,14 +43,14 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
 //        intentionRechercherCommerce = new Intent(Carte.this,
 //                Recherche.class);
 
-//        bouton_menu.findViewById(R.id.bouton_acces_recherche);
-//        bouton_menu.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View arg0) {
-
+        bouton_menu = (FloatingActionMenu) findViewById(R.id.bouton_menu);
+        bouton_menu_recherche= (FloatingActionButton) findViewById(R.id.bouton_recherche);
+        bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
 //                controleurCarte.actionMenuRechercheCommerce();
-//                startActivity(intentionRechercherCommerce, ACTIVITE_RECHERCHER_COMMERCE);
-//            }
-//        });
+            }
+        });
 
         controleurCarte.onCreate(getApplicationContext());
     }

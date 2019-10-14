@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 
 import com.google.android.gms.maps.model.PointOfInterest;
 
@@ -9,6 +11,7 @@ import ca.qc.cgmatane.pictrade.vue.VueCarte;
 public class ControleurCarte implements Controleur {
 
     private VueCarte vue;
+    private Intent intentionNaviguerRecherche;
 
     public ControleurCarte(VueCarte vue) {
 
@@ -40,7 +43,11 @@ public class ControleurCarte implements Controleur {
 
     }
 
-    public void actionNaviguerAfficherCommerce(PointOfInterest pointDInteret){
+//    public void actionNaviguerAfficherRecherche(View vue) {
+//        vue.naviguerRecherche(vue);
+//    }
+
+    public void actionNaviguerAfficherCommerce(PointOfInterest pointDInteret) {
         vue.naviguerAfficherCommerce(pointDInteret);
     }
 }
