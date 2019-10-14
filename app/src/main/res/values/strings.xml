@@ -3,4 +3,5 @@
     <string name="title_activity_maps">Pictrade</string>
     <string name="lister_les_commerces">Lister les commerces</string>
     <string name="nom_commerce">Nom du commerce</string>
+    <string name="menu_rechercher">Rechercher</string>
 </resources>
