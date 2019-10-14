@@ -62,6 +62,7 @@ public class ControleurRecherche implements Controleur {
             super.onPostExecute(listeCommerceRecuperer);
             listeCommerce = listeCommerceRecuperer;
             vue.setListeCommerce(listeCommerce);
+            vue.setListeCommercePourAdapteur(accesseurCommerce.recupererListeCommercePourAdapteur());
             vue.afficherLesCommerces();
         }
     }

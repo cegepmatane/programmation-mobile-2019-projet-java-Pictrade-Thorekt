@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import ca.qc.cgmatane.pictrade.Trieurs.TriParNom;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class CommerceDAO {
@@ -75,19 +77,20 @@ public class CommerceDAO {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
+        Collections.sort(listeCommerces, new TriParNom());
         return listeCommerces;
     }
 
     public List<HashMap<String, String>> recupererListeCommercePourAdapteur() {
-        List<HashMap<String, String>> listeFilmPourAdapteur = new ArrayList<HashMap<String, String>>();
+        List<HashMap<String, String>> listeCommercePourAdapteur = new ArrayList<HashMap<String, String>>();
 
         listerCommerce();
 
         for (Commerce commerce : listeCommerces) {
-            listeFilmPourAdapteur.add(commerce.obtenirCommercePourAdapteur());
+            listeCommercePourAdapteur.add(commerce.obtenirCommercePourAdapteur());
         }
 
-        return listeFilmPourAdapteur;
+        return listeCommercePourAdapteur;
     }
 
     public Commerce chercherCommerceParId(int id_commerce){

@@ -7,10 +7,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.R;
+import ca.qc.cgmatane.pictrade.Trieurs.TriParNom;
 import ca.qc.cgmatane.pictrade.controleur.Controleur;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
@@ -34,10 +37,12 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
 
     @Override
     public void afficherLesCommerces() {
+        listerTousLesCommerces();
+        listerLesCommercesFavoris();
+    }
+
+    public void listerTousLesCommerces(){
         vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
-
-        listeCommercePourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
-
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
@@ -45,6 +50,9 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
                 new int[]{android.R.id.text1, android.R.id.text2});
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
+    }
+
+    public void listerLesCommercesFavoris(){
 
     }
 
@@ -59,6 +67,10 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         this.listeCommerce = listeCommerce;
     }
 
+    @Override
+    public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur) {
+        this.listeCommercePourAdaptateur = listeCommercePourAdaptateur;
+    }
 
     // TODO : Faire ces méthodes correctement
 
