@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class Recherche extends AppCompatActivity implements VueRecherche {
+public class Recherche extends AppCompatActivity implements VueRecherche, SearchView.OnQueryTextListener {
     private  List<Commerce> listeCommerce;
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
@@ -57,5 +58,21 @@ public class Recherche extends AppCompatActivity implements VueRecherche {
     @Override
     public void setListeCommerce(List<Commerce> listeCommerce) {
         this.listeCommerce=listeCommerce;
+    }
+
+
+    // TODO : Faire ces méthodes correctement
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        //adapter.filter(text);
+        return false;
     }
 }
