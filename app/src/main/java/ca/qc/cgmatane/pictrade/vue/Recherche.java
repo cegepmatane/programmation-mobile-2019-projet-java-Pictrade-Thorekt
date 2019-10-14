@@ -27,7 +27,7 @@ public class Recherche extends AppCompatActivity implements VueRecherche {
     protected void afficherLesCommerces() {
         accesseurCommerce = CommerceDAO.getInstance();
 
-       vueListeCommerces = (ListView) findViewById(R.id.vue_liste_commerce);
+       vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
 
         listeCommercePourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
 

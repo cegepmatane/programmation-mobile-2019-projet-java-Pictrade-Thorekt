@@ -6,25 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".vue.Recherche">
 
-    <EditText
-        android:id="@+id/vue_recherche_commerce_chercher_commerce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Rechercher un commerce"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vue_liste_commerce"
-        app:layout_constraintTop_toTopOf="@+id/vue_liste_commerce" />
-
     <ListView
-        android:id="@+id/vue_liste_commerce"
-        android:layout_width="430dp"
-        android:layout_height="731dp"
+        android:id="@+id/vue_recherche_liste_commerce"
+        android:layout_width="203dp"
+        android:layout_height="647dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toEndOf="@+id/vue_recherche_liste_favoris"
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ListView
+        android:id="@+id/vue_recherche_liste_favoris"
+        android:layout_width="206dp"
+        android:layout_height="646dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher" />
+
+    <SearchView
+        android:id="@+id/vue_recherche_rechercher"
+        android:layout_width="409dp"
+        android:layout_height="83dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
