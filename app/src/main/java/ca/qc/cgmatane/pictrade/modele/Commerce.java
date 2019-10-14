@@ -3,7 +3,7 @@ package ca.qc.cgmatane.pictrade.modele;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Commerce {
+public class Commerce{
     public int id;
     public String placeID;
     public String nom;

@@ -38,7 +38,7 @@ public class ControleurAfficherCommerce implements Controleur {
             int id = (Integer) parametres.get("id");
             parametresPost.put("id",id+"");
         }
-        AsyncTask<HashMap<String,String>,String,Commerce>  recupererCommerce= new RecupererCommerce();
+        AsyncTask <HashMap<String,String>,String,Commerce>  recupererCommerce= new RecupererCommerce();
         recupererCommerce.execute(parametresPost);
 
 

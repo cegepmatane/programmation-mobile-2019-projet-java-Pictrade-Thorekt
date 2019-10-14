@@ -17,10 +17,10 @@ import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements VueRecherche, SearchView.OnQueryTextListener {
-    private  List<Commerce> listeCommerce;
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
+    private List<Commerce> listeCommerce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,9 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
 
     @Override
     public void afficherLesCommerces() {
+        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
 
-       vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
-
-     //   listeCommercePourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
+        listeCommercePourAdaptateur = accesseurCommerce.recupererListeCommercePourAdapteur();
 
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
@@ -57,7 +56,7 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
 
     @Override
     public void setListeCommerce(List<Commerce> listeCommerce) {
-        this.listeCommerce=listeCommerce;
+        this.listeCommerce = listeCommerce;
     }
 
 

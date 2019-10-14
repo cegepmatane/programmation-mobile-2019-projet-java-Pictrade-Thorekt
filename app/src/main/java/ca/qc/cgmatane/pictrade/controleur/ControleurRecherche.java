@@ -21,6 +21,7 @@ public class ControleurRecherche implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
+        RecupererListeCommerce listeCommerce = new RecupererListeCommerce();
     }
 
     @Override
