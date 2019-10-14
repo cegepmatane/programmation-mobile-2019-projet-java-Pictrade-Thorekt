@@ -4,4 +4,5 @@ import com.google.android.gms.maps.model.PointOfInterest;
 
 public interface VueCarte {
     void naviguerAfficherCommerce(PointOfInterest pointDInteret);
+    void naviguerRecherche();
 }

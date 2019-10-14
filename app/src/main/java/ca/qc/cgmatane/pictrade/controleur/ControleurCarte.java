@@ -11,7 +11,7 @@ import ca.qc.cgmatane.pictrade.vue.VueCarte;
 public class ControleurCarte implements Controleur {
 
     private VueCarte vue;
-    private Intent intentionNaviguerRecherche;
+    static final public int ACTIVITE_RECHERCHE = 1;
 
     public ControleurCarte(VueCarte vue) {
 
@@ -43,9 +43,9 @@ public class ControleurCarte implements Controleur {
 
     }
 
-//    public void actionNaviguerAfficherRecherche(View vue) {
-//        vue.naviguerRecherche(vue);
-//    }
+    public void actionNaviguerMenuRechercheCommerce() {
+        vue.naviguerRecherche();
+    }
 
     public void actionNaviguerAfficherCommerce(PointOfInterest pointDInteret) {
         vue.naviguerAfficherCommerce(pointDInteret);

@@ -20,6 +20,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
+import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
@@ -48,7 +49,7 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
         bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
-//                controleurCarte.actionMenuRechercheCommerce();
+                controleurCarte.actionNaviguerMenuRechercheCommerce();
             }
         });
 
@@ -87,8 +88,8 @@ public class Carte extends FragmentActivity implements OnMapReadyCallback,
     }
 
     //    @Override
-//    public void naviguerRechercheCommerce() {
-//        Intent intentionRechercheCommerce = new Intent(this, Recherche.class);
-//        //startActivityForResult(intentionRechercheCommerce, ControleurRecherche);
-//    }
+    public void naviguerRecherche() {
+        Intent intentionRechercheCommerce = new Intent(this, Recherche.class);
+        startActivity(intentionRechercheCommerce);
+    }
 }
