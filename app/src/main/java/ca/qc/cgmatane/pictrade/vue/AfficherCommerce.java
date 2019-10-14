@@ -64,7 +64,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         TextView vueAfficherHoraireFermetureCommerce =
                 (TextView) findViewById(R.id.vue_afficher_horaire_fermeture_commerce);
 
-
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
         vueAfficherAdresseCommerce.setText(commerce.getAdresse());
