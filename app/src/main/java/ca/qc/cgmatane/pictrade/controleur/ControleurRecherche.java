@@ -24,6 +24,10 @@ public class ControleurRecherche implements Controleur {
         RecupererListeCommerce listeCommerce = new RecupererListeCommerce();
     }
 
+    public void suggererRecherche(String requete){
+
+    }
+
     @Override
     public void onPause() {
 
