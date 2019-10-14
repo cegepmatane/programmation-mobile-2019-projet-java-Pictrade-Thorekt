@@ -21,7 +21,6 @@ import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 public class Carte extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnPoiClickListener, VueCarte {
     private GoogleMap mMap;
-    private CommerceDAO accesseurCommerceDAO;
     protected Button bouton_menu;
     protected Intent intentionCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
