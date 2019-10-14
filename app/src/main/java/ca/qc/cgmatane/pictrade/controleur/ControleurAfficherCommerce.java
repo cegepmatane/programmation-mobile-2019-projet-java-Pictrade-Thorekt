@@ -38,7 +38,7 @@ public class ControleurAfficherCommerce implements Controleur {
             int id = (Integer) parametres.get("id");
             parametresPost.put("id",id+"");
         }
-        AsyncTask<HashMap<String,String>,String,String>  recupererCommerce= new RecupererCommerce();
+        AsyncTask<HashMap<String,String>,String,Commerce>  recupererCommerce= new RecupererCommerce();
         recupererCommerce.execute(parametresPost);
 
 
@@ -66,30 +66,28 @@ public class ControleurAfficherCommerce implements Controleur {
 
 
 
-    private class RecupererCommerce extends AsyncTask<HashMap<String,String>,String,String> {
-        Commerce commerceRecuperer;
+    private class RecupererCommerce extends AsyncTask<HashMap<String,String>,String,Commerce> {
+
 
         @Override
-        protected String doInBackground(HashMap<String, String>... hashMaps) {
-            commerceRecuperer =  accesseurCommerce.recupererCommerce(hashMaps[0]);
-           return null;
+        protected Commerce doInBackground(HashMap<String, String>... hashMaps) {
+            Commerce commerce =  accesseurCommerce.recupererCommerce(hashMaps[0]);
+           return commerce;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            vue.commerceEnAttente();
         }
 
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Commerce commerceRecuperer) {
             commerce = commerceRecuperer;
-            Log.d("onPostExecute: ", commerce.toString());
-            super.onPostExecute(s);
+            vue.setCommerce(commerce);
+            vue.afficherCommerce();
+            super.onPostExecute(commerceRecuperer);
         }
     }
 }
