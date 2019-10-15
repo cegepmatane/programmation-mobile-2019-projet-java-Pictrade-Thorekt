@@ -7,16 +7,11 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.R;
-import ca.qc.cgmatane.pictrade.Trieurs.TriParNom;
-import ca.qc.cgmatane.pictrade.controleur.Controleur;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
-import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements VueRecherche, SearchView.OnQueryTextListener {
@@ -31,17 +26,15 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         setContentView(R.layout.vue_recherche_commerce);
 
         controleurRecherche.onCreate(getApplicationContext());
-
-        afficherLesCommerces();
     }
 
     @Override
     public void afficherLesCommerces() {
-        listerTousLesCommerces();
-        listerLesCommercesFavoris();
+        afficherListeCommerces();
+        afficherListeCommercesFavoris();
     }
 
-    public void listerTousLesCommerces(){
+    public void afficherListeCommerces(){
         vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
@@ -52,7 +45,7 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
     }
 
-    public void listerLesCommercesFavoris(){
+    public void afficherListeCommercesFavoris(){
 
     }
 
