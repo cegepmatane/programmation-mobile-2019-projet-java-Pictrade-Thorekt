@@ -98,6 +98,7 @@ public class CommerceDAO {
     }
 
     public List<HashMap<String, String>> recupererListeCommercePourAdapteur() {
+        listeCommerces.clear();
         List<HashMap<String, String>> listeCommercePourAdapteur = new ArrayList<HashMap<String, String>>();
 
         listerCommerce();
