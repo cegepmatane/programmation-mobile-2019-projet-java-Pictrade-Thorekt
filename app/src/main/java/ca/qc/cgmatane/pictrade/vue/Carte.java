@@ -8,12 +8,18 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
@@ -84,7 +90,19 @@ public class Carte extends FragmentActivity
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
-
+        mMap.setOnMyLocationClickListener(this);
+        mMap.setMyLocationEnabled(true);
+        // Add a marker in Sydney and move the camera
+        LatLng matane = new LatLng(48.8526, -67.518);
+        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
+        mMap.setPadding(0, 0, 300, 0);
+        Circle cercle = mMap.addCircle(new CircleOptions()
+                .center(matane)
+                .radius(500.0)
+                .strokeColor(Color.BLACK)
+                .strokeWidth(1)
+                .fillColor(0x4500ff00));
 
     }
 
