@@ -28,6 +28,10 @@ public class ControleurRecherche implements Controleur {
 
     }
 
+    public void effectuerUneRecherche(String requete){
+
+    }
+
     @Override
     public void onPause() {
 
