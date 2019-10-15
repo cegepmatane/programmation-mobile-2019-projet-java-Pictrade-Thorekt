@@ -3,6 +3,7 @@ package ca.qc.cgmatane.pictrade.controleur;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
@@ -21,7 +22,7 @@ public class ControleurRecherche implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
-        AsyncTask<String, String, List<Commerce>> recupererListeCommerce = new RecupererListeCommerce();
+        AsyncTask<String, String, List<HashMap<String,String>>> recupererListeCommerce = new RecupererListeCommerce();
         recupererListeCommerce.execute();
 
     }
@@ -54,11 +55,11 @@ public class ControleurRecherche implements Controleur {
 
     }
 
-    private class RecupererListeCommerce extends AsyncTask<String, String, List<Commerce>> {
+    private class RecupererListeCommerce extends AsyncTask<String, String, List<HashMap<String,String>>> {
 
         @Override
-        protected List<Commerce> doInBackground(String... strings) {
-            List<Commerce> listeCommerce = accesseurCommerce.listerCommerce();
+        protected List<HashMap<String,String>> doInBackground(String... strings) {
+            List<HashMap<String,String>> listeCommerce = accesseurCommerce.recupererListeCommercePourAdapteur();
 
             vue.setListeCommercePourAdapteur(accesseurCommerce.recupererListeCommercePourAdapteur()); ///fix temporaire
             return listeCommerce;
@@ -70,9 +71,9 @@ public class ControleurRecherche implements Controleur {
         }
 
         @Override
-        protected void onPostExecute(List<Commerce> listeCommerceRecuperer) {
+        protected void onPostExecute(List<HashMap<String,String>> listeCommerceRecuperer) {
             super.onPostExecute(listeCommerceRecuperer);
-            listeCommerce = listeCommerceRecuperer;
+            vue.setListeCommercePourAdapteur(listeCommerceRecuperer);
             vue.setListeCommerce(listeCommerce);
             vue.afficherLesCommerces();
         }
