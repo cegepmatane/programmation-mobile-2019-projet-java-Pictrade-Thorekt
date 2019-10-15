@@ -81,10 +81,13 @@ public class CommerceDAO {
     }
 
     public List<Commerce> listerCommerce() { //a faire dans une asynctask
+
+        Log.d("listerCommerce: ", "in");
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
+            Log.d("listerCommerce: ", xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
         } catch (IOException | SAXException | ParserConfigurationException e) {
@@ -95,6 +98,7 @@ public class CommerceDAO {
     }
 
     public List<HashMap<String, String>> recupererListeCommercePourAdapteur() {
+        listeCommerces.clear();
         List<HashMap<String, String>> listeCommercePourAdapteur = new ArrayList<HashMap<String, String>>();
 
         listerCommerce();

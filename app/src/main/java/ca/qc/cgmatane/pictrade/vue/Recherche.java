@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
@@ -49,10 +50,11 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
-                new String[]{"Nom", "Adresse"},
+                new String[]{"nom", "adresse"},
                 new int[]{android.R.id.text1, android.R.id.text2});
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
+        Log.d("tet",""+adapteurVueListeCommerce);
     }
 
     public void afficherListeCommercesFavoris(){
@@ -72,7 +74,7 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
 
     @Override
     public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur) {
-        this.listeCommercePourAdaptateur = listeCommercePourAdaptateur;
+        this.listeCommercePourAdaptateur = listeCommercePourAdapteur;
     }
 
     // TODO : Faire ces méthodes correctement

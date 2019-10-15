@@ -44,8 +44,6 @@ public class BaseDeDonneesServeur {
         URL url = new URL(SERVEUR_URL + page + ".php");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(15000);
-        urlConnection.setConnectTimeout(15000);
         urlConnection.setDoInput(true);
 
         int responseCode = urlConnection.getResponseCode();
