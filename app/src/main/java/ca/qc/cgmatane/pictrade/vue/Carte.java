@@ -97,12 +97,12 @@ public class Carte extends FragmentActivity
         mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
         mMap.setPadding(0, 0, 300, 0);
-        Circle cercle = mMap.addCircle(new CircleOptions()
-                .center(matane)
-                .radius(500.0)
-                .strokeColor(Color.BLACK)
-                .strokeWidth(1)
-                .fillColor(0x4500ff00));
+//        Circle cercle = mMap.addCircle(new CircleOptions()
+//                .center(matane)
+//                .radius(2000.0)
+//                .strokeColor(Color.BLACK)
+//                .strokeWidth(1)
+//                .fillColor(0x4500ff00));
 
     }
 
