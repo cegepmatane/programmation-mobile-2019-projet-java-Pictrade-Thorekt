@@ -21,7 +21,9 @@ public class ControleurRecherche implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
-        RecupererListeCommerce listeCommerce = new RecupererListeCommerce();
+        AsyncTask<String, String, List<Commerce>> recupererListeCommerce = new RecupererListeCommerce();
+        recupererListeCommerce.execute();
+
     }
 
     public void suggererRecherche(String requete){
@@ -57,6 +59,8 @@ public class ControleurRecherche implements Controleur {
         @Override
         protected List<Commerce> doInBackground(String... strings) {
             List<Commerce> listeCommerce = accesseurCommerce.listerCommerce();
+
+            vue.setListeCommercePourAdapteur(accesseurCommerce.recupererListeCommercePourAdapteur()); ///fix temporaire
             return listeCommerce;
         }
 
@@ -70,7 +74,6 @@ public class ControleurRecherche implements Controleur {
             super.onPostExecute(listeCommerceRecuperer);
             listeCommerce = listeCommerceRecuperer;
             vue.setListeCommerce(listeCommerce);
-            vue.setListeCommercePourAdapteur(accesseurCommerce.recupererListeCommercePourAdapteur());
             vue.afficherLesCommerces();
         }
     }
