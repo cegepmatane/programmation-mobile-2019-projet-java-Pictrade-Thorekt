@@ -2,6 +2,9 @@ package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -12,6 +15,7 @@ import java.util.List;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
+import ca.qc.cgmatane.pictrade.helper.SearchableActivity;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements VueRecherche, SearchView.OnQueryTextListener {
@@ -24,6 +28,12 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_recherche_commerce);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);;
+        // Assumes current activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         controleurRecherche.onCreate(getApplicationContext());
     }
@@ -78,5 +88,9 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         String text = newText;
         //adapter.filter(text);
         return false;
+    }
+
+    public void chercher(Intent intentionRecherche) {
+        startActivity(intentionRecherche);
     }
 }

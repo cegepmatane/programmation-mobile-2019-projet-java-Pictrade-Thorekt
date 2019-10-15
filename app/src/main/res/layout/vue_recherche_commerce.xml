@@ -34,5 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:iconifiedByDefault="false" />
+        android:iconifiedByDefault="false"
+        android:queryHint="Chercher un commerce (par son nom)"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
