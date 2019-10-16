@@ -22,14 +22,14 @@ public class CommerceHandlerXML extends DefaultHandler implements Dictionnaire{
 
 
 
-    boolean isPlaceID;
-    boolean isNom;
-    boolean isLongitude;
-    boolean isLatitude;
-    boolean isHoraireOuverture;
-    boolean isHoraireFermeture;
-    boolean isAdresse;
-    boolean isContact;
+    private boolean isPlaceID;
+    private boolean isNom;
+    private boolean isLongitude;
+    private boolean isLatitude;
+    private boolean isHoraireOuverture;
+    private boolean isHoraireFermeture;
+    private boolean isAdresse;
+    private boolean isContact;
 
     public CommerceHandlerXML() {
         super();

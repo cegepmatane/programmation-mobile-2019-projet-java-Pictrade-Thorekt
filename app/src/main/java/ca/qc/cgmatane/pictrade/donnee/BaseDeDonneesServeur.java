@@ -22,10 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class BaseDeDonneesServeur {
-
-    private static final String SERVEUR_URL = "http://51.91.96.142/";
-
+public class BaseDeDonneesServeur implements Dictionnaire{
     private static BaseDeDonneesServeur instance = null;
 
     public static BaseDeDonneesServeur getInstance() {
@@ -47,7 +44,6 @@ public class BaseDeDonneesServeur {
         urlConnection.setDoInput(true);
 
         int responseCode = urlConnection.getResponseCode();
-        Log.d("recupererXML: ", responseCode+"");
         if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream()));
@@ -85,7 +81,6 @@ public class BaseDeDonneesServeur {
         os.close();
 
         int responseCode = urlConnection.getResponseCode();
-        Log.d("recupererXML: ", responseCode+"");
         if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream()));

@@ -10,10 +10,11 @@ import com.google.android.gms.maps.model.PointOfInterest;
 import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 import ca.qc.cgmatane.pictrade.vue.VueAfficherCommerce;
 
-public class ControleurAfficherCommerce implements Controleur {
+public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
     private Commerce commerce;
@@ -34,13 +35,13 @@ public class ControleurAfficherCommerce implements Controleur {
 
         PointOfInterest pointDInteret = (PointOfInterest) parametres.get("pointDInteret");
         if (pointDInteret != null){
-            parametresPost.put("placeID",pointDInteret.placeId);
-            parametresPost.put("nom",pointDInteret.name);
-            parametresPost.put("longitude",pointDInteret.latLng.longitude+"");
-            parametresPost.put("latitude",pointDInteret.latLng.longitude+"");
+            parametresPost.put(CLE_PLACEID_COMMERCE,pointDInteret.placeId);
+            parametresPost.put(CLE_NOM_COMMERCE,pointDInteret.name);
+            parametresPost.put(CLE_LONGITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
+            parametresPost.put(CLE_LATITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
         }else{
             int id = (Integer) parametres.get("id");
-            parametresPost.put("id",id+"");
+            parametresPost.put(CLE_ID_COMMERCE,id+"");
         }
 
         lancerTacheRecupererCommerce();

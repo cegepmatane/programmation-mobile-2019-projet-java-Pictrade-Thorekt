@@ -47,12 +47,8 @@ public class CommerceDAO implements Dictionnaire {
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_RECUPERER_COMMERCE,parametresPost);
-
-            Log.d("recupererCommerce: ", xml);
-
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             commerce = commerceHandlerXML.getCommerce();
-
 
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
@@ -72,14 +68,11 @@ public class CommerceDAO implements Dictionnaire {
         return resultat;
     }
 
-    public List<Commerce> listerCommerce() { //a faire dans une asynctask
-
-        Log.d("listerCommerce: ", "in");
+    public List<Commerce> listerCommerce() {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_LISTER_COMMERCE);
-            Log.d("listerCommerce: ", xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
         } catch (IOException | SAXException | ParserConfigurationException e) {
