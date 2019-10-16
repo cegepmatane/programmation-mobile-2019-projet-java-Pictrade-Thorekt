@@ -30,6 +30,15 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private Bundle parametres;
 
     private ProgressBar vueAfficherCommerceEnAttente;
+    private TextView vueAfficherNomCommerce;
+    private TextView vueAfficherContactCommerce;
+    private TextView vueAfficherAdresseCommerce;
+    private TextView vueAfficherHoraireOuvertureCommerce;
+    private TextView vueAfficherHoraireFermetureCommerce;
+    private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
+    private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+
+
 
 
     @Override
@@ -62,22 +71,20 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void commerceEnAttente() {
 
         vueAfficherCommerceEnAttente.setVisibility(View.VISIBLE);
+        vueAfficherCommerceEnAttente.setTranslationZ(1);
     }
 
     @Override
     public void afficherCommerce() {
         vueAfficherCommerceEnAttente.setVisibility(View.INVISIBLE);
 
-        TextView vueAfficherNomCommerce;
         vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom);
-        TextView vueAfficherContactCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_contact);
-        TextView vueAfficherAdresseCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
-        TextView vueAfficherHoraireOuvertureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
-        TextView vueAfficherHoraireFermetureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
+        vueAfficherContactCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_contact);
+        vueAfficherAdresseCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
+
+        vueAfficherHoraireOuvertureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
+
+        vueAfficherHoraireFermetureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
 
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
@@ -89,8 +96,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             vueAfficherHoraireFermetureCommerce.setText(commerce.getHoraireFermeture().toString());
         }
 
-        Button vueAfficherCommerceActionNaviguerModifierCommerce =
-                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
+        vueAfficherCommerceActionNaviguerModifierCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
 
         vueAfficherCommerceActionNaviguerModifierCommerce.setOnClickListener(
                 new View.OnClickListener() {
@@ -101,8 +107,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                 }
         );
 
-        Button vueAfficherCommerceActionNaviguerPartagerCommerce =
-                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_partager_commerce);
+        vueAfficherCommerceActionNaviguerPartagerCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_partager_commerce);
 
         vueAfficherCommerceActionNaviguerPartagerCommerce.setOnClickListener(
                 new View.OnClickListener() {
