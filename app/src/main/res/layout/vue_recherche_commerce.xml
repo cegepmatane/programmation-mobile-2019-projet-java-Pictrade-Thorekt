@@ -7,28 +7,28 @@
     tools:context=".vue.Recherche">
 
     <ListView
-        android:id="@+id/vue_recherche_liste_commerce"
+        android:id="@+id/vue_recherche_commerce_liste_commerce"
         android:layout_width="203dp"
         android:layout_height="647dp"
         android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toEndOf="@+id/vue_recherche_liste_favoris"
-        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher"
+        app:layout_constraintStart_toEndOf="@+id/vue_recherche_commerce_liste_favoris"
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_commerce_rechercher"
         app:layout_constraintVertical_bias="1.0" />
 
     <ListView
-        android:id="@+id/vue_recherche_liste_favoris"
+        android:id="@+id/vue_recherche_commerce_liste_favoris"
         android:layout_width="206dp"
         android:layout_height="646dp"
         android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_commerce_rechercher" />
 
     <SearchView
-        android:id="@+id/vue_recherche_rechercher"
+        android:id="@+id/vue_recherche_commerce_rechercher"
         android:layout_width="409dp"
         android:layout_height="83dp"
         app:layout_constraintEnd_toEndOf="parent"

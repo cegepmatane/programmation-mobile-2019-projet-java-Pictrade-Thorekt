@@ -6,7 +6,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
@@ -17,7 +16,6 @@ import java.util.List;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
-import ca.qc.cgmatane.pictrade.helper.SearchableActivity;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements
@@ -35,7 +33,7 @@ public class Recherche extends AppCompatActivity implements
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);;
+        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_commerce_rechercher);;
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
@@ -49,7 +47,7 @@ public class Recherche extends AppCompatActivity implements
     }
 
     public void afficherListeCommerces(){
-        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
+        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_commerce_liste_commerce);
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
