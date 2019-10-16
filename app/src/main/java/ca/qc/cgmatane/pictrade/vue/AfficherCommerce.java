@@ -145,21 +145,22 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             //swipe droite ou gauche
             if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
                 if (diffX > 0) {
-                    onSwipeRight();
+                    onSwipeDroite();
                 } else {
-                    onSwipeLeft();
+                    onSwipeGauche();
                 }
             }
         }
         return true;
     }
 
-    private void onSwipeLeft() {
-        Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+    private void onSwipeGauche() {
+        Toast.makeText(this, "Swip à gauche", Toast.LENGTH_SHORT).show();
         controleurAfficherCommerce.actionNaviguerModifierCommerce();
     }
 
-    private void onSwipeRight() {
+    private void onSwipeDroite() {
+        Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
 
     }
 }
