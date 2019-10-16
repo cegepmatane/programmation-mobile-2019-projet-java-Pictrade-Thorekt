@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.IDNA;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -43,7 +44,7 @@ public class Carte extends FragmentActivity implements
     protected FloatingActionButton bouton_menu_recherche;
     protected Intent intentionAfficherCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
-
+    private boolean etatPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +83,16 @@ public class Carte extends FragmentActivity implements
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        if(this.etatPermission== false) {
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-        mMap.setMyLocationEnabled(true);
+
+            mMap.setMyLocationEnabled(true);
+        }else{
+            Toast.makeText(this, "permission refusée", Toast.LENGTH_SHORT).show();
+        }
         // Add a marker in Sydney and move the camera
 //        LatLng matane = new LatLng(48.8526, -67.518);
 //        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
@@ -168,6 +174,7 @@ public class Carte extends FragmentActivity implements
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
+                    this.etatPermission = false;
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.

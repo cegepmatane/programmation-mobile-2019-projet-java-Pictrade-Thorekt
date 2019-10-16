@@ -10,5 +10,5 @@ public interface VueRecherche  {
     public void afficherLesCommerces();
     public void setListeCommerce(List<Commerce> listeCommerce);
     public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur);
-    public void naviguerAfficherCommerce(String idCommerce);
+    public void naviguerAfficherCommerce(int idCommerce);
 }
