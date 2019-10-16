@@ -15,9 +15,10 @@ import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce {
+public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire {
     private Commerce commerce;
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
@@ -99,7 +100,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     @Override
     public void naviguerModifierCommerce(Commerce commerce) {
         intentionModifierCommerce = new Intent(AfficherCommerce.this, ModifierCommerce.class);
-        intentionModifierCommerce.putExtra("commerce", commerce.obtenirCommerceHashMap());
+        intentionModifierCommerce.putExtra(CLE_COMMERCE, commerce.obtenirCommerceHashMap());
         startActivity(intentionModifierCommerce);
     }
 }

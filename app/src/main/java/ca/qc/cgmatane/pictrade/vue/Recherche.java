@@ -16,10 +16,13 @@ import java.util.List;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 import ca.qc.cgmatane.pictrade.helper.SearchableActivity;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class Recherche extends AppCompatActivity implements VueRecherche, SearchView.OnQueryTextListener {
+public class Recherche extends AppCompatActivity implements
+        VueRecherche, SearchView.OnQueryTextListener, Dictionnaire {
+
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
@@ -50,11 +53,10 @@ public class Recherche extends AppCompatActivity implements VueRecherche, Search
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
-                new String[]{"nom", "adresse"},
+                new String[]{CLE_NOM_COMMERCE, CLE_ADRESSE_COMMERCE},
                 new int[]{android.R.id.text1, android.R.id.text2});
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
-        Log.d("tet",""+adapteurVueListeCommerce);
     }
 
     public void afficherListeCommercesFavoris(){

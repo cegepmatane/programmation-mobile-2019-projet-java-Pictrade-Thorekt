@@ -14,6 +14,7 @@ public interface Dictionnaire {
     String CLE_CONTACT_COMMERCE = "contact";
     String CLE_HORAIRE_OUVERTURE_COMMERCE = "horaire_ouverture";
     String CLE_HORAIRE_FERMETURE_COMMERCE = "horaire_fermeture";
+    String POINT_D_INTERET = "pointDInteret";
     String SERVEUR_URL = "http://51.91.96.142/";
 
 }

@@ -11,8 +11,9 @@ import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurModifierCommerce;
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 
-public class ModifierCommerce extends AppCompatActivity implements VueModifierCommerce {
+public class ModifierCommerce extends AppCompatActivity implements VueModifierCommerce, Dictionnaire {
     private ControleurModifierCommerce controleurModifierCommerce
             = new ControleurModifierCommerce(this);
     private HashMap<String,String> commerceHashMap;
@@ -28,7 +29,7 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
         setContentView(R.layout.vue_modifier_commerce);
 
         Bundle parametres = this.getIntent().getExtras();
-        commerceHashMap = (HashMap<String,String>) parametres.get("commerce");
+        commerceHashMap = (HashMap<String,String>) parametres.get(CLE_COMMERCE);
         controleurModifierCommerce.onCreate(this);
 
 
@@ -41,10 +42,10 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
         vueModifierCommerceChampsHoraireOuverture = (EditText) findViewById(R.id.vue_modifier_commerce_champs_horaire_ouverture);
         vueModifierCommerceChampsHoraireFermeture = (EditText) findViewById(R.id.vue_modifier_commerce_champs_horaire_fermeture);
 
-        vueModifierCommerceChampsAdresse.setText(commerceHashMap.get("adresse"));
-        vueModifierCommerceChampsContact.setText(commerceHashMap.get("contact"));
-        vueModifierCommerceChampsHoraireOuverture.setText(commerceHashMap.get("horaireOuverture"));
-        vueModifierCommerceChampsHoraireFermeture.setText(commerceHashMap.get("horaireFermeture"));
+        vueModifierCommerceChampsAdresse.setText(commerceHashMap.get(CLE_ADRESSE_COMMERCE));
+        vueModifierCommerceChampsContact.setText(commerceHashMap.get(CLE_CONTACT_COMMERCE));
+        vueModifierCommerceChampsHoraireOuverture.setText(commerceHashMap.get(CLE_HORAIRE_OUVERTURE_COMMERCE));
+        vueModifierCommerceChampsHoraireFermeture.setText(commerceHashMap.get(CLE_HORAIRE_FERMETURE_COMMERCE));
 
         Button vueModifierCommerceValiderModification =
                 (Button) findViewById(R.id.vue_modifier_commerce_action_valider_modification);
@@ -65,11 +66,16 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
         });
     }
 
+    @Override
+    public void naviguerCommerce() {
+
+    }
+
     private void enregisterModification(){
-        commerceHashMap.put("adresse",vueModifierCommerceChampsAdresse.getText().toString());
-        commerceHashMap.put("contact",vueModifierCommerceChampsContact.getText().toString());
-        commerceHashMap.put("horaireOuverture",vueModifierCommerceChampsHoraireOuverture.getText().toString());
-        commerceHashMap.put("horaireFermeture",vueModifierCommerceChampsHoraireFermeture.getText().toString());
+        commerceHashMap.put(CLE_ADRESSE_COMMERCE,vueModifierCommerceChampsAdresse.getText().toString());
+        commerceHashMap.put(CLE_CONTACT_COMMERCE,vueModifierCommerceChampsContact.getText().toString());
+        commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE,vueModifierCommerceChampsHoraireOuverture.getText().toString());
+        commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE,vueModifierCommerceChampsHoraireFermeture.getText().toString());
         controleurModifierCommerce.validerModification();
     }
 

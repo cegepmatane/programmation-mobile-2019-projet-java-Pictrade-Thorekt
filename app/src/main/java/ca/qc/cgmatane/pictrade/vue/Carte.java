@@ -29,14 +29,17 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 
-public class Carte extends FragmentActivity
-        implements
+public class Carte extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleMap.OnPoiClickListener,
         VueCarte,
         GoogleMap.OnMyLocationClickListener,
-        GoogleMap.OnMyLocationButtonClickListener {
+        GoogleMap.OnMyLocationButtonClickListener,
+        Dictionnaire {
+
+
     private static final int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     protected FloatingActionMenu bouton_menu;
@@ -59,7 +62,7 @@ public class Carte extends FragmentActivity
 
         // intanciation du bouton du menu et appel au controleur pour afficher la page recherche
         bouton_menu = (FloatingActionMenu) findViewById(R.id.bouton_menu);
-        bouton_menu_recherche= (FloatingActionButton) findViewById(R.id.bouton_recherche);
+        bouton_menu_recherche = (FloatingActionButton) findViewById(R.id.bouton_recherche);
         bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
@@ -88,10 +91,10 @@ public class Carte extends FragmentActivity
         mMap.setOnMyLocationClickListener(this);
         mMap.setMyLocationEnabled(true);
         // Add a marker in Sydney and move the camera
-        LatLng matane = new LatLng(48.8526, -67.518);
-        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
-        mMap.setPadding(0, 0, 300, 0);
+//        LatLng matane = new LatLng(48.8526, -67.518);
+//        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
+//        mMap.setPadding(0, 0, 300, 0);
 //        Circle cercle = mMap.addCircle(new CircleOptions()
 //                .center(matane)
 //                .radius(2000.0)
@@ -110,7 +113,7 @@ public class Carte extends FragmentActivity
     @Override
     public void naviguerAfficherCommerce(PointOfInterest pointDInteret) {
         intentionAfficherCommerce = new Intent(Carte.this, AfficherCommerce.class);
-        intentionAfficherCommerce.putExtra("pointDInteret", pointDInteret);
+        intentionAfficherCommerce.putExtra(POINT_D_INTERET, pointDInteret);
         startActivity(intentionAfficherCommerce);
     }
 
@@ -130,7 +133,7 @@ public class Carte extends FragmentActivity
 
     }
 
-    public void permissionLocalisation(){
+    public void permissionLocalisation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             Log.d("Test de Permission", "Permission acceptée ");

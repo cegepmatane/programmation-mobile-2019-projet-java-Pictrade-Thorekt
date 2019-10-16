@@ -33,14 +33,14 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         Bundle parametres = vue.getParametres();
         parametresPost = new HashMap<>();
 
-        PointOfInterest pointDInteret = (PointOfInterest) parametres.get("pointDInteret");
+        PointOfInterest pointDInteret = (PointOfInterest) parametres.get(POINT_D_INTERET);
         if (pointDInteret != null){
             parametresPost.put(CLE_PLACEID_COMMERCE,pointDInteret.placeId);
             parametresPost.put(CLE_NOM_COMMERCE,pointDInteret.name);
             parametresPost.put(CLE_LONGITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
             parametresPost.put(CLE_LATITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
         }else{
-            int id = (Integer) parametres.get("id");
+            int id = (Integer) parametres.get(CLE_ID_COMMERCE);
             parametresPost.put(CLE_ID_COMMERCE,id+"");
         }
 
