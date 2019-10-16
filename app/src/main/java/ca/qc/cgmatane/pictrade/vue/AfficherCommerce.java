@@ -6,12 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
-import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
@@ -36,7 +33,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
         parametres = this.getIntent().getExtras();
         vueAfficherCommerceEnAttente =
-                (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
+                (ProgressBar) findViewById(R.id.vue_afficher_commerce_chargement);
         controleurAfficherCommerce.onCreate(getApplicationContext());
 
 
@@ -64,15 +61,15 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void afficherCommerce() {
         vueAfficherCommerceEnAttente.setVisibility(View.INVISIBLE);
 
-        TextView vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_nom_commerce);
+        TextView vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom_commerce);
         TextView vueAfficherContactCommerce =
-                (TextView) findViewById(R.id.vue_afficher_contact_commerce);
+                (TextView) findViewById(R.id.vue_afficher_commerce_contact_commerce);
         TextView vueAfficherAdresseCommerce =
-                (TextView) findViewById(R.id.vue_afficher_adresse_commerce);
+                (TextView) findViewById(R.id.vue_afficher_commerce_adresse_commerce);
         TextView vueAfficherHoraireOuvertureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_horaire_ouverture_commerce);
+                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture_commerce);
         TextView vueAfficherHoraireFermetureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_horaire_fermeture_commerce);
+                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture_commerce);
 
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());

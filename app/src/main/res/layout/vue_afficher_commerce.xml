@@ -7,7 +7,7 @@
     tools:context=".vue.AfficherCommerce">
 
     <ProgressBar
-        android:id="@+id/vue_afficher_commerce_en_attente"
+        android:id="@+id/vue_afficher_commerce_chargement"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vue_afficher_adresse_commerce"
+        android:id="@+id/vue_afficher_commerce_adresse_commerce"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -26,10 +26,10 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_nom_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_nom_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_contact_commerce"
+        android:id="@+id/vue_afficher_commerce_contact_commerce"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -38,10 +38,10 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_adresse_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_adresse_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_horaire_ouverture_commerce"
+        android:id="@+id/vue_afficher_commerce_horaire_ouverture_commerce"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -50,10 +50,10 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_contact_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_contact_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_horaire_fermeture_commerce"
+        android:id="@+id/vue_afficher_commerce_horaire_fermeture_commerce"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_horaire_ouverture_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_horaire_ouverture_commerce" />
 
     <CheckBox
         android:id="@+id/favoris_commerce"
@@ -73,10 +73,10 @@
         android:layout_marginTop="32dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_horaire_fermeture_commerce" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_horaire_fermeture_commerce" />
 
     <TextView
-        android:id="@+id/vue_afficher_nom_commerce"
+        android:id="@+id/vue_afficher_commerce_nom_commerce"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
