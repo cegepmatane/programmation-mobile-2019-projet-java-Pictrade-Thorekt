@@ -20,8 +20,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
     private Commerce commerce;
-    private AsyncTask <HashMap<String,String>,String,Commerce>  recupererCommerce
-            = new RecupererCommerce();
 
     private HashMap<String,String> parametresPost;
 
@@ -51,7 +49,9 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     }
 
     private void lancerTacheRecupererCommerce(){
-        recupererCommerce.execute(parametresPost);
+         AsyncTask <HashMap<String,String>,String,Commerce>  recupererCommerce
+                = new RecupererCommerce();
+         recupererCommerce.execute(parametresPost);
     }
 
 
@@ -73,11 +73,9 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     @Override
     public void onActivityResult(int activite) {
-        switch(activite)
-        {
-            case ACTIVITE_MODIFIER_COMMERCE:
+        if (activite == ACTIVITE_MODIFIER_COMMERCE){
+                Log.d("Retour sur app: ", "ACTIVITE_MODIFIER_COMMERCE");
                 lancerTacheRecupererCommerce();
-                break;
         }
     }
 

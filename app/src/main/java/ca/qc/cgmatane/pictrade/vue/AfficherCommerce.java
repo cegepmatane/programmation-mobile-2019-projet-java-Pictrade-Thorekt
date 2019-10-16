@@ -94,11 +94,17 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         );
     }
 
+
+    protected void onActivityResult(int activite, int resultat, Intent donnees) {
+        super.onActivityResult(activite, resultat, donnees);
+        controleurAfficherCommerce.onActivityResult(activite);
+    }
+
     @Override
     public void naviguerModifierCommerce(Commerce commerce) {
         intentionModifierCommerce = new Intent(AfficherCommerce.this, ModifierCommerce.class);
         intentionModifierCommerce.putExtra(CLE_COMMERCE, commerce.obtenirCommerceHashMap());
-        startActivityForResult(intentionModifierCommerce,controleurAfficherCommerce.ACTIVITE_MODIFIER_COMMERCE);
+        startActivityForResult(intentionModifierCommerce,ControleurAfficherCommerce.ACTIVITE_MODIFIER_COMMERCE);
     }
 }
 
