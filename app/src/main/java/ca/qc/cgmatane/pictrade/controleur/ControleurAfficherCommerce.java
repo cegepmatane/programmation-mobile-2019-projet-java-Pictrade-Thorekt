@@ -85,6 +85,10 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         vue.naviguerModifierCommerce(commerce);
     }
 
+    public void actionNaviguerPartagerCommerce() {
+        vue.naviguerPartagerCommerce();
+    }
+
 
     private class RecupererCommerce extends AsyncTask<HashMap<String,String>,String,Commerce> {
 

@@ -25,9 +25,20 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             = new ControleurAfficherCommerce(this);
 
     protected Intent intentionModifierCommerce;
+    protected Intent intentionPartagerCommerceDebut;
+    protected Intent intentionPartagerCommerceFin;
     private Bundle parametres;
 
     private ProgressBar vueAfficherCommerceEnAttente;
+    private TextView vueAfficherNomCommerce;
+    private TextView vueAfficherContactCommerce;
+    private TextView vueAfficherAdresseCommerce;
+    private TextView vueAfficherHoraireOuvertureCommerce;
+    private TextView vueAfficherHoraireFermetureCommerce;
+    private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
+    private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+
+
 
 
     @Override
@@ -58,22 +69,22 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
     @Override
     public void commerceEnAttente() {
+
         vueAfficherCommerceEnAttente.setVisibility(View.VISIBLE);
+        vueAfficherCommerceEnAttente.setTranslationZ(1);
     }
 
     @Override
     public void afficherCommerce() {
         vueAfficherCommerceEnAttente.setVisibility(View.INVISIBLE);
 
-        TextView vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom);
-        TextView vueAfficherContactCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_contact);
-        TextView vueAfficherAdresseCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
-        TextView vueAfficherHoraireOuvertureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
-        TextView vueAfficherHoraireFermetureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
+        vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom);
+        vueAfficherContactCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_contact);
+        vueAfficherAdresseCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
+
+        vueAfficherHoraireOuvertureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
+
+        vueAfficherHoraireFermetureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
 
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
@@ -85,14 +96,24 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             vueAfficherHoraireFermetureCommerce.setText(commerce.getHoraireFermeture().toString());
         }
 
-        Button vueAfficherCommerceActionNaviguerModifierCommerce =
-                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
+        vueAfficherCommerceActionNaviguerModifierCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
 
         vueAfficherCommerceActionNaviguerModifierCommerce.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         controleurAfficherCommerce.actionNaviguerModifierCommerce();
+                    }
+                }
+        );
+
+        vueAfficherCommerceActionNaviguerPartagerCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_partager_commerce);
+
+        vueAfficherCommerceActionNaviguerPartagerCommerce.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        controleurAfficherCommerce.actionNaviguerPartagerCommerce();
                     }
                 }
         );
@@ -109,6 +130,18 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         intentionModifierCommerce = new Intent(AfficherCommerce.this, ModifierCommerce.class);
         intentionModifierCommerce.putExtra(CLE_COMMERCE, commerce.obtenirCommerceHashMap());
         startActivityForResult(intentionModifierCommerce,ControleurAfficherCommerce.ACTIVITE_MODIFIER_COMMERCE);
+    }
+
+    @Override
+    public void naviguerPartagerCommerce(){
+        intentionPartagerCommerceDebut = new Intent();
+        intentionPartagerCommerceDebut.setAction(Intent.ACTION_SEND);
+        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseil vivement : ");
+        intentionPartagerCommerceDebut.setType("text/plain");
+
+        intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);
+        startActivity(intentionPartagerCommerceFin);
+
     }
 
     @Override

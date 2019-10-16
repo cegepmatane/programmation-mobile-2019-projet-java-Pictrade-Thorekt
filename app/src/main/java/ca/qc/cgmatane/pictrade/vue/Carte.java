@@ -83,14 +83,15 @@ public class Carte extends FragmentActivity implements
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if(this.etatPermission== false) {
+
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
+
+        if (this.etatPermission) {
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-
             mMap.setMyLocationEnabled(true);
-        }else{
+        } else {
             Toast.makeText(this, "permission refusée", Toast.LENGTH_SHORT).show();
         }
         // Add a marker in Sydney and move the camera
@@ -174,8 +175,9 @@ public class Carte extends FragmentActivity implements
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                    this.etatPermission = false;
+                    this.etatPermission = true;
                 } else {
+                    this.etatPermission = false;
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
