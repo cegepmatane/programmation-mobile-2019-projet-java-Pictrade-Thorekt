@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true" />
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/bouton_menu"
+        android:id="@+id/vue_carte_bouton_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -31,7 +31,7 @@
         app:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/bouton_recherche"
+            android:id="@+id/vue_carte_bouton_recherche"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#E4A2A2"

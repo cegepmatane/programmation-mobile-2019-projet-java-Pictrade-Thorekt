@@ -11,12 +11,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
@@ -61,8 +58,8 @@ public class Carte extends FragmentActivity implements
         controleurCarte.actionPermissionGeolocalisation();
 
         // intanciation du bouton du menu et appel au controleur pour afficher la page recherche
-        bouton_menu = (FloatingActionMenu) findViewById(R.id.bouton_menu);
-        bouton_menu_recherche = (FloatingActionButton) findViewById(R.id.bouton_recherche);
+        bouton_menu = (FloatingActionMenu) findViewById(R.id.vue_carte_bouton_menu);
+        bouton_menu_recherche = (FloatingActionButton) findViewById(R.id.vue_carte_bouton_recherche);
         bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
