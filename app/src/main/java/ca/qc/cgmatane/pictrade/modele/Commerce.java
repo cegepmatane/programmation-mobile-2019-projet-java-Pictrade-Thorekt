@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Commerce {
+import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+
+public class Commerce implements Dictionnaire {
     public int id;
     public String placeID;
     public String nom;
@@ -120,46 +122,46 @@ public class Commerce {
 
     @Override
     public String toString() {
-        return "Commerce{" +
-                "id=" + id +
-                ", placeID='" + placeID + '\'' +
-                ", nom='" + nom + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", horaireOuverture=" + horaireOuverture +
-                ", horaireFermeture=" + horaireFermeture +
-                ", adresse='" + adresse + '\'' +
-                ", contact='" + contact + '\'' +
+        return CLE_COMMERCE+"{" +
+                CLE_ID_COMMERCE+"=" + id +
+                ", "+CLE_PLACEID_COMMERCE+"='" + placeID + '\'' +
+                ", "+CLE_NOM_COMMERCE+"='" + nom + '\'' +
+                ", "+CLE_LONGITUDE_COMMERCE+"='" + longitude +
+                ", "+CLE_LATITUDE_COMMERCE+"='" + latitude +
+                ", "+CLE_HORAIRE_OUVERTURE_COMMERCE+"='" + horaireOuverture +
+                ", "+CLE_HORAIRE_FERMETURE_COMMERCE+"='" + horaireFermeture +
+                ", "+CLE_ADRESSE_COMMERCE+"='" + adresse + '\'' +
+                ", "+CLE_CONTACT_COMMERCE+"='" + contact + '\'' +
                 '}';
     }
 
     public HashMap<String, String> obtenirCommercePourAdapteur() {
         HashMap<String, String> commercePourAdapteur = new HashMap<String, String>();
-        commercePourAdapteur.put("id", "" + this.id);
-        commercePourAdapteur.put("nom", this.nom);
-        commercePourAdapteur.put("adresse", this.adresse);
+        commercePourAdapteur.put(CLE_ID_COMMERCE, "" + this.id);
+        commercePourAdapteur.put(CLE_NOM_COMMERCE, this.nom);
+        commercePourAdapteur.put(CLE_ADRESSE_COMMERCE, this.adresse);
         return commercePourAdapteur;
     }
 
     public HashMap<String, String> obtenirCommerceHashMap() {
         HashMap<String, String> commerceHashMap = new HashMap<String, String>();
-        commerceHashMap.put("id", "" + this.id);
-        commerceHashMap.put("nom", this.nom);
-        commerceHashMap.put("placeID", this.placeID);
-        commerceHashMap.put("longitude", this.longitude + "");
-        commerceHashMap.put("latitude", this.latitude + "");
+        commerceHashMap.put(CLE_ID_COMMERCE, "" + this.id);
+        commerceHashMap.put(CLE_NOM_COMMERCE, this.nom);
+        commerceHashMap.put(CLE_PLACEID_COMMERCE, this.placeID);
+        commerceHashMap.put(CLE_LONGITUDE_COMMERCE, this.longitude + "");
+        commerceHashMap.put(CLE_LATITUDE_COMMERCE, this.latitude + "");
         if (horaireOuverture != null) {
-            commerceHashMap.put("horaireOuverture", this.horaireOuverture.toString());
+            commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE, this.horaireOuverture.toString());
         }else{
-            commerceHashMap.put("horaireOuverture", "");
+            commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE, "");
         }
         if (horaireFermeture != null) {
-            commerceHashMap.put("horaireFermeture", this.horaireFermeture.toString());
+            commerceHashMap.put(CLE_HORAIRE_FERMETURE_COMMERCE, this.horaireFermeture.toString());
         }else{
-            commerceHashMap.put("horaireFermeture", "");
+            commerceHashMap.put(CLE_HORAIRE_FERMETURE_COMMERCE, "");
         }
-        commerceHashMap.put("adresse", this.adresse);
-        commerceHashMap.put("contact", this.contact);
+        commerceHashMap.put(CLE_ADRESSE_COMMERCE, this.adresse);
+        commerceHashMap.put(CLE_CONTACT_COMMERCE, this.contact);
 
         return commerceHashMap;
     }
