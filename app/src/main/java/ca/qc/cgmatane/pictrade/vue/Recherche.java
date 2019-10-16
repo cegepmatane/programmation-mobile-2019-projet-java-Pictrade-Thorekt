@@ -37,7 +37,7 @@ public class Recherche extends AppCompatActivity implements
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_commerce_rechercher);;
+        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);;
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
@@ -68,14 +68,15 @@ public class Recherche extends AppCompatActivity implements
                                             View vue,
                                             int positionDansAdapteur,
                                             long positionItem) {
+
                         Log.d("Recherche", "onItemClick");
                         ListView vueRechercheListeCommerceOnClick = (ListView)vue.getParent();
 
                         HashMap<String,String> commerce =
                                 (HashMap<String, String>)
                                         vueRechercheListeCommerceOnClick.getItemAtPosition((int)positionItem);
-
-                        controleurRecherche.actionNaviguerAfficherCommerce(commerce.get(Commerce.CLE_ID_COMMERCE));
+Log.d("HashMap",""+commerce.toString());
+                        controleurRecherche.actionNaviguerAfficherCommerce(Integer.parseInt(commerce.get(Commerce.CLE_ID_COMMERCE)));
                     }
                 }
         );
@@ -102,13 +103,13 @@ public class Recherche extends AppCompatActivity implements
     }
 
     @Override
-    public void naviguerAfficherCommerce(String idCommerce) {
+    public void naviguerAfficherCommerce(int id) {
 
         intentionNaviguerAfficherCommerce = new Intent(
                 Recherche.this,
                 AfficherCommerce.class
         );
-        intentionNaviguerAfficherCommerce.putExtra(Commerce.CLE_ID_COMMERCE, idCommerce);
+        intentionNaviguerAfficherCommerce.putExtra(Commerce.CLE_ID_COMMERCE, id);
 
         startActivity(intentionNaviguerAfficherCommerce);
 

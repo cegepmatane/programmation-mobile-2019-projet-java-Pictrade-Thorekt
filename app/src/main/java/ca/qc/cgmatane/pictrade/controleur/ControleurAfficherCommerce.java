@@ -40,7 +40,9 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
             parametresPost.put(CLE_LONGITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
             parametresPost.put(CLE_LATITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
         }else{
+
             int id = (Integer) parametres.get(CLE_ID_COMMERCE);
+            Log.d("HashMap", id+"");
             parametresPost.put(CLE_ID_COMMERCE,id+"");
         }
 

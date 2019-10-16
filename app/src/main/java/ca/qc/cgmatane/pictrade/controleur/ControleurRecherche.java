@@ -28,8 +28,8 @@ public class ControleurRecherche implements Controleur {
 
     }
 
-    public void actionNaviguerAfficherCommerce(String idCommerce) {
-        vue.naviguerAfficherCommerce(idCommerce);
+    public void actionNaviguerAfficherCommerce(int id) {
+        vue.naviguerAfficherCommerce(id);
     }
 
     public void suggererRecherche(String requete) {
