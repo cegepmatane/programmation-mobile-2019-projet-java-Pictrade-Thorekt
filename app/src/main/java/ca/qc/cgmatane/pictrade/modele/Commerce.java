@@ -1,6 +1,10 @@
 package ca.qc.cgmatane.pictrade.modele;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -159,4 +163,18 @@ public class Commerce {
 
         return commerceHashMap;
     }
+
+    public static Time formaterTemps(String string){
+        DateFormat formatTemps = new SimpleDateFormat("hh:mm a");
+        Time temps;
+        Date date = null;
+        try {
+            date = formatTemps.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        temps = new Time(date != null ? date.getTime() : 0);
+        return temps;
+    }
+
 }

@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class CommerceHandlerXML extends DefaultHandler {
     private List<Commerce> listeCommerce = null;
     private StringBuilder donnee = null;
     private Commerce commerce = null;
+
+
 
     boolean isPlaceID;
     boolean isNom;
@@ -88,12 +91,12 @@ public class CommerceHandlerXML extends DefaultHandler {
         } else if (isLatitude) {
             commerce.setLatitude(Float.valueOf(donnee.toString()));
             isLatitude = false;
-      /*  } else if (isHoraireOuverture) {
-            commerce.setHoraireOuverture(new Time(donnee.toString()));
+        } else if (isHoraireOuverture) {
+            commerce.setHoraireOuverture(Commerce.formaterTemps(donnee.toString()));
             isHoraireOuverture = false;
         } else if (isHoraireFermeture) {
-            commerce.setHoraireOuverture(new Time(donnee.toString()));
-            isHoraireFermeture = false;*/
+            commerce.setHoraireOuverture(Commerce.formaterTemps(donnee.toString()));
+            isHoraireFermeture = false;
         } else if (isAdresse) {
             commerce.setAdresse(donnee.toString());
             isAdresse = false;

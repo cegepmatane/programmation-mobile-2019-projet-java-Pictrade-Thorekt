@@ -1,6 +1,9 @@
 package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
+import android.os.AsyncTask;
+
+import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
@@ -9,7 +12,6 @@ import ca.qc.cgmatane.pictrade.vue.VueModifierCommerce;
 public class ControleurModifierCommerce implements Controleur {
     private VueModifierCommerce vue;
     private CommerceDAO accesseurCommerce;
-    private Commerce commerce;
 
     public ControleurModifierCommerce(VueModifierCommerce vue) {
         this.vue = vue;
@@ -18,7 +20,7 @@ public class ControleurModifierCommerce implements Controleur {
 
     @Override
     public void onCreate(Context applicationContext) {
-
+        vue.preRemplirChamps();
     }
 
     @Override
@@ -39,5 +41,29 @@ public class ControleurModifierCommerce implements Controleur {
     @Override
     public void onActivityResult(int activite) {
 
+    }
+
+    public void validerModification() {
+        HashMap<String,String> commerce = vue.getCommerceHashMap();
+        AsyncTask<HashMap<String,String>,String,String> modifierCommerce = new ModifierCommerce();
+        modifierCommerce.execute(commerce);
+    }
+
+    public void annulerModification() {
+        vue.naviguerCommerce();
+    }
+
+    private class ModifierCommerce extends AsyncTask<HashMap<String,String>,String,String>{
+
+        @Override
+        protected String doInBackground(HashMap<String, String>... hashMaps) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            vue.naviguerCommerce();
+        }
     }
 }
