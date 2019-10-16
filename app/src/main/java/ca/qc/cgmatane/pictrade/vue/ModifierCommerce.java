@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import ca.qc.cgmatane.pictrade.R;
+import ca.qc.cgmatane.pictrade.controleur.ControleurModifierCommerce;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class ModifierCommerce extends AppCompatActivity implements VueModifierCommerce {
     private Commerce commerce;
+    private ControleurModifierCommerce controleurModifierCommerce
+            = new ControleurModifierCommerce(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,4 +9,6 @@ public interface VueAfficherCommerce {
     public void commerceEnAttente();
     public void afficherCommerce();
     public void setCommerce(Commerce commerce);
+
+    public void naviguerModifierCommerce(Commerce commerce);
 }

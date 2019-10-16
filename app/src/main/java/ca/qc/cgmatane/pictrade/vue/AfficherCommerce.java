@@ -2,11 +2,16 @@ package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+
+import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
@@ -17,6 +22,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
 
+    protected Intent intentionModifierCommerce;
     private Bundle parametres;
 
     private ProgressBar vueAfficherCommerceEnAttente;
@@ -31,6 +37,9 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         vueAfficherCommerceEnAttente =
                 (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
         controleurAfficherCommerce.onCreate(getApplicationContext());
+
+
+
     }
 
 
@@ -67,8 +76,31 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
         vueAfficherAdresseCommerce.setText(commerce.getAdresse());
-        vueAfficherHoraireOuvertureCommerce.setText(commerce.getHoraire());
-        vueAfficherHoraireFermetureCommerce.setText(commerce.getHoraire());
+        if (commerce.getHoraireOuverture() != null){
+            vueAfficherHoraireOuvertureCommerce.setText(commerce.getHoraireOuverture().toString());
+        }
+        if (commerce.getHoraireFermeture() != null){
+            vueAfficherHoraireFermetureCommerce.setText(commerce.getHoraireFermeture().toString());
+        }
+
+        Button vueAfficherCommerceActionNaviguerModifierCommerce =
+                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
+
+        vueAfficherCommerceActionNaviguerModifierCommerce.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        controleurAfficherCommerce.actionNaviguerModifierCommerce();
+                    }
+                }
+        );
+    }
+
+    @Override
+    public void naviguerModifierCommerce(Commerce commerce) {
+        intentionModifierCommerce = new Intent(AfficherCommerce.this, ModifierCommerce.class);
+        intentionModifierCommerce.putExtra("commerce", commerce.obtenirCommerceHashMap());
+        startActivity(intentionModifierCommerce);
     }
 }
 

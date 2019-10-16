@@ -1,28 +1,31 @@
 package ca.qc.cgmatane.pictrade.modele;
 
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Commerce{
+public class Commerce {
     public int id;
     public String placeID;
     public String nom;
     public float longitude;
     public float latitude;
-    public String horaire;
+    public Time horaireOuverture;
+    public Time horaireFermeture;
     public String adresse;
     public String contact;
 
     public Commerce() {
     }
 
-    public Commerce(int id, String placeID, String nom, float longitude, float latitude, String horaire, String adresse, String contact) {
+    public Commerce(int id, String placeID, String nom, float longitude, float latitude, Time horaireOuverture, Time horaireFermeture, String adresse, String contact) {
         this.id = id;
         this.placeID = placeID;
         this.nom = nom;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.horaire = horaire;
+        this.horaireOuverture = horaireOuverture;
+        this.horaireFermeture = horaireFermeture;
         this.adresse = adresse;
         this.contact = contact;
     }
@@ -71,12 +74,20 @@ public class Commerce{
         this.latitude = latitude;
     }
 
-    public String getHoraire() {
-        return horaire;
+    public Time getHoraireOuverture() {
+        return horaireOuverture;
     }
 
-    public void setHoraire(String horaire) {
-        this.horaire = horaire;
+    public void setHoraireOuverture(Time horaireOuverture) {
+        this.horaireOuverture = horaireOuverture;
+    }
+
+    public Time getHoraireFermeture() {
+        return horaireFermeture;
+    }
+
+    public void setHoraireFermeture(Time horaireFermeture) {
+        this.horaireFermeture = horaireFermeture;
     }
 
     public String getAdresse() {
@@ -105,12 +116,14 @@ public class Commerce{
 
     @Override
     public String toString() {
-        return "AfficherCommerce{" +
+        return "Commerce{" +
                 "id=" + id +
+                ", placeID='" + placeID + '\'' +
                 ", nom='" + nom + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", horaire='" + horaire + '\'' +
+                ", horaireOuverture=" + horaireOuverture +
+                ", horaireFermeture=" + horaireFermeture +
                 ", adresse='" + adresse + '\'' +
                 ", contact='" + contact + '\'' +
                 '}';
@@ -118,9 +131,32 @@ public class Commerce{
 
     public HashMap<String, String> obtenirCommercePourAdapteur() {
         HashMap<String, String> commercePourAdapteur = new HashMap<String, String>();
+        commercePourAdapteur.put("id", "" + this.id);
         commercePourAdapteur.put("nom", this.nom);
         commercePourAdapteur.put("adresse", this.adresse);
-        commercePourAdapteur.put("id", "" + this.id);
         return commercePourAdapteur;
+    }
+
+    public HashMap<String, String> obtenirCommerceHashMap() {
+        HashMap<String, String> commerceHashMap = new HashMap<String, String>();
+        commerceHashMap.put("id", "" + this.id);
+        commerceHashMap.put("nom", this.nom);
+        commerceHashMap.put("placeID", this.placeID);
+        commerceHashMap.put("longitude", this.longitude + "");
+        commerceHashMap.put("latitude", this.latitude + "");
+        if (horaireOuverture != null) {
+            commerceHashMap.put("horaireOuverture", this.horaireOuverture.toString());
+        }else{
+            commerceHashMap.put("horaireOuverture", "");
+        }
+        if (horaireFermeture != null) {
+            commerceHashMap.put("horaireFermeture", this.horaireFermeture.toString());
+        }else{
+            commerceHashMap.put("horaireFermeture", "");
+        }
+        commerceHashMap.put("adresse", this.adresse);
+        commerceHashMap.put("contact", this.contact);
+
+        return commerceHashMap;
     }
 }

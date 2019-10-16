@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -16,8 +15,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
@@ -32,8 +29,6 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
-import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
-import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 
 public class Carte extends FragmentActivity
         implements
@@ -46,7 +41,7 @@ public class Carte extends FragmentActivity
     private GoogleMap mMap;
     protected FloatingActionMenu bouton_menu;
     protected FloatingActionButton bouton_menu_recherche;
-    protected Intent intentionCommerce;
+    protected Intent intentionAfficherCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
 
 
@@ -114,9 +109,9 @@ public class Carte extends FragmentActivity
 
     @Override
     public void naviguerAfficherCommerce(PointOfInterest pointDInteret) {
-        intentionCommerce = new Intent(Carte.this, AfficherCommerce.class);
-        intentionCommerce.putExtra("pointDInteret", pointDInteret);
-        startActivity(intentionCommerce);
+        intentionAfficherCommerce = new Intent(Carte.this, AfficherCommerce.class);
+        intentionAfficherCommerce.putExtra("pointDInteret", pointDInteret);
+        startActivity(intentionAfficherCommerce);
     }
 
     //    @Override

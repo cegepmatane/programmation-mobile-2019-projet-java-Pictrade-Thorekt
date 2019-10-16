@@ -6,6 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class CommerceHandlerXML extends DefaultHandler {
     boolean isNom;
     boolean isLongitude;
     boolean isLatitude;
-    boolean isHoraire;
+    boolean isHoraireOuverture;
+    boolean isHoraireFermeture;
     boolean isAdresse;
     boolean isContact;
 
@@ -59,8 +61,10 @@ public class CommerceHandlerXML extends DefaultHandler {
             isLongitude = true;
         } else if (qName.equalsIgnoreCase("latitude")) {
             isLatitude = true;
-        } else if (qName.equalsIgnoreCase("horaire")) {
-            isHoraire = true;
+        } else if (qName.equalsIgnoreCase("horaire_ouverture")) {
+            isHoraireOuverture = true;
+        } else if (qName.equalsIgnoreCase("horaire_fermeture")) {
+            isHoraireFermeture = true;
         } else if (qName.equalsIgnoreCase("adresse")) {
             isAdresse = true;
         } else if (qName.equalsIgnoreCase("contact")) {
@@ -84,9 +88,12 @@ public class CommerceHandlerXML extends DefaultHandler {
         } else if (isLatitude) {
             commerce.setLatitude(Float.valueOf(donnee.toString()));
             isLatitude = false;
-        } else if (isHoraire) {
-            commerce.setHoraire(donnee.toString());
-            isHoraire = false;
+      /*  } else if (isHoraireOuverture) {
+            commerce.setHoraireOuverture(new Time(donnee.toString()));
+            isHoraireOuverture = false;
+        } else if (isHoraireFermeture) {
+            commerce.setHoraireOuverture(new Time(donnee.toString()));
+            isHoraireFermeture = false;*/
         } else if (isAdresse) {
             commerce.setAdresse(donnee.toString());
             isAdresse = false;

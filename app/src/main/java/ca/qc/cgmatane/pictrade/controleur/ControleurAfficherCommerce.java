@@ -17,6 +17,10 @@ public class ControleurAfficherCommerce implements Controleur {
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
     private Commerce commerce;
+    private AsyncTask <HashMap<String,String>,String,Commerce>  recupererCommerce
+            = new RecupererCommerce();
+
+    private HashMap<String,String> parametresPost;
 
     public ControleurAfficherCommerce(VueAfficherCommerce vue) {
         this.vue = vue;
@@ -26,7 +30,7 @@ public class ControleurAfficherCommerce implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         Bundle parametres = vue.getParametres();
-        HashMap<String,String> parametresPost = new HashMap<>();
+        parametresPost = new HashMap<>();
 
         PointOfInterest pointDInteret = (PointOfInterest) parametres.get("pointDInteret");
         if (pointDInteret != null){
@@ -38,11 +42,17 @@ public class ControleurAfficherCommerce implements Controleur {
             int id = (Integer) parametres.get("id");
             parametresPost.put("id",id+"");
         }
-        AsyncTask <HashMap<String,String>,String,Commerce>  recupererCommerce= new RecupererCommerce();
-        recupererCommerce.execute(parametresPost);
 
+        lancerTacheRecupererCommerce();
 
     }
+
+    private void lancerTacheRecupererCommerce(){
+        recupererCommerce.execute(parametresPost);
+        return;
+    }
+
+
 
     @Override
     public void onPause() {
@@ -51,7 +61,7 @@ public class ControleurAfficherCommerce implements Controleur {
 
     @Override
     public void onResume() {
-
+        lancerTacheRecupererCommerce();
     }
 
     @Override
@@ -64,6 +74,9 @@ public class ControleurAfficherCommerce implements Controleur {
 
     }
 
+    public void actionNaviguerModifierCommerce() {
+        vue.naviguerModifierCommerce(commerce);
+    }
 
 
     private class RecupererCommerce extends AsyncTask<HashMap<String,String>,String,Commerce> {
