@@ -6,6 +6,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
@@ -25,11 +28,12 @@ public class Recherche extends AppCompatActivity implements
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
     private List<Commerce> listeCommerce;
+    private Intent intentionNaviguerAfficherCommerce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vue_recherche_commerce);
+        setContentView(R.layout.vue_recherche);
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -47,7 +51,7 @@ public class Recherche extends AppCompatActivity implements
     }
 
     public void afficherListeCommerces(){
-        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_commerce_liste_commerce);
+        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
@@ -55,6 +59,26 @@ public class Recherche extends AppCompatActivity implements
                 new int[]{android.R.id.text1, android.R.id.text2});
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
+
+        vueListeCommerces.setOnItemClickListener(
+                new AdapterView.OnItemClickListener(){
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent,
+                                            View vue,
+                                            int positionDansAdapteur,
+                                            long positionItem) {
+                        Log.d("Recherche", "onItemClick");
+                        ListView vueRechercheListeCommerceOnClick = (ListView)vue.getParent();
+
+                        HashMap<String,String> commerce =
+                                (HashMap<String, String>)
+                                        vueRechercheListeCommerceOnClick.getItemAtPosition((int)positionItem);
+
+                        controleurRecherche.actionNaviguerAfficherCommerce(commerce.get(Commerce.CLE_ID_COMMERCE));
+                    }
+                }
+        );
     }
 
     public void afficherListeCommercesFavoris(){
@@ -75,6 +99,19 @@ public class Recherche extends AppCompatActivity implements
     @Override
     public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur) {
         this.listeCommercePourAdaptateur = listeCommercePourAdapteur;
+    }
+
+    @Override
+    public void naviguerAfficherCommerce(String idCommerce) {
+
+        intentionNaviguerAfficherCommerce = new Intent(
+                Recherche.this,
+                AfficherCommerce.class
+        );
+        intentionNaviguerAfficherCommerce.putExtra(Commerce.CLE_ID_COMMERCE, idCommerce);
+
+        startActivity(intentionNaviguerAfficherCommerce);
+
     }
 
     // TODO : Faire ces méthodes correctement

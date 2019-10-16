@@ -11,6 +11,7 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 import ca.qc.cgmatane.pictrade.vue.VueRecherche;
 
 public class ControleurRecherche implements Controleur {
+
     private List<Commerce> listeCommerce;
     private VueRecherche vue;
     private CommerceDAO accesseurCommerce;
@@ -22,16 +23,20 @@ public class ControleurRecherche implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
-        AsyncTask<String, String, List<HashMap<String,String>>> recupererListeCommerce = new RecupererListeCommerce();
+        AsyncTask<String, String, List<HashMap<String, String>>> recupererListeCommerce = new RecupererListeCommerce();
         recupererListeCommerce.execute();
 
     }
 
-    public void suggererRecherche(String requete){
+    public void actionNaviguerAfficherCommerce(String idCommerce) {
+        vue.naviguerAfficherCommerce(idCommerce);
+    }
+
+    public void suggererRecherche(String requete) {
 
     }
 
-    public void effectuerUneRecherche(String requete){
+    public void effectuerUneRecherche(String requete) {
 
     }
 
@@ -52,14 +57,13 @@ public class ControleurRecherche implements Controleur {
 
     @Override
     public void onActivityResult(int activite) {
-
     }
 
-    private class RecupererListeCommerce extends AsyncTask<String, String, List<HashMap<String,String>>> {
+    private class RecupererListeCommerce extends AsyncTask<String, String, List<HashMap<String, String>>> {
 
         @Override
-        protected List<HashMap<String,String>> doInBackground(String... strings) {
-            List<HashMap<String,String>> listeCommerce = accesseurCommerce.recupererListeCommercePourAdapteur();
+        protected List<HashMap<String, String>> doInBackground(String... strings) {
+            List<HashMap<String, String>> listeCommerce = accesseurCommerce.recupererListeCommercePourAdapteur();
 
             vue.setListeCommercePourAdapteur(accesseurCommerce.recupererListeCommercePourAdapteur()); ///fix temporaire
             return listeCommerce;
@@ -71,7 +75,7 @@ public class ControleurRecherche implements Controleur {
         }
 
         @Override
-        protected void onPostExecute(List<HashMap<String,String>> listeCommerceRecuperer) {
+        protected void onPostExecute(List<HashMap<String, String>> listeCommerceRecuperer) {
             super.onPostExecute(listeCommerceRecuperer);
             vue.setListeCommercePourAdapteur(listeCommerceRecuperer);
             vue.setListeCommerce(listeCommerce);
