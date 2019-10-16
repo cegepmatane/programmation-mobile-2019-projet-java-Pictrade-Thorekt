@@ -15,6 +15,8 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 import ca.qc.cgmatane.pictrade.vue.VueAfficherCommerce;
 
 public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
+    static final public int ACTIVITE_MODIFIER_COMMERCE = 1;
+
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
     private Commerce commerce;
@@ -50,7 +52,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     private void lancerTacheRecupererCommerce(){
         recupererCommerce.execute(parametresPost);
-        return;
     }
 
 
@@ -72,7 +73,12 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     @Override
     public void onActivityResult(int activite) {
-
+        switch(activite)
+        {
+            case ACTIVITE_MODIFIER_COMMERCE:
+                lancerTacheRecupererCommerce();
+                break;
+        }
     }
 
     public void actionNaviguerModifierCommerce() {

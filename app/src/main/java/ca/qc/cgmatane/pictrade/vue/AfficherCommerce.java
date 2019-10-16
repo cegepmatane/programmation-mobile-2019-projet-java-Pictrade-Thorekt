@@ -101,7 +101,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void naviguerModifierCommerce(Commerce commerce) {
         intentionModifierCommerce = new Intent(AfficherCommerce.this, ModifierCommerce.class);
         intentionModifierCommerce.putExtra(CLE_COMMERCE, commerce.obtenirCommerceHashMap());
-        startActivity(intentionModifierCommerce);
+        startActivityForResult(intentionModifierCommerce,controleurAfficherCommerce.ACTIVITE_MODIFIER_COMMERCE);
     }
 }
 
