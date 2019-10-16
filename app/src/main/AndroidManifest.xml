@@ -16,28 +16,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".vue.ModifierCommerce" />
         <activity android:name=".vue.AfficherCommerce" /> <!-- this is the searchable activity; it performs searches -->
-
-        <activity android:name=".vue.Galerie"></activity>
-        <activity android:name=".helper.SearchableActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
-        <!--
- this activity enables the search dialog to initiate searches
-         in the SearchableActivity
-        -->
-        <activity android:name=".vue.Recherche">
-
-            <!-- enable the search dialog to send searches to SearchableActivity -->
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
-        </activity>
+        <activity android:name=".vue.Recherche"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

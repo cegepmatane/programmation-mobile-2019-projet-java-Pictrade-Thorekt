@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,8 +27,12 @@ public class Recherche extends AppCompatActivity implements
 
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
+    protected List<Commerce> listeCommerce;
+    protected ArrayList<String> nomCommerce;
+
+
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
-    private List<Commerce> listeCommerce;
+
     private Intent intentionNaviguerAfficherCommerce;
 
     @Override
@@ -35,13 +40,13 @@ public class Recherche extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_recherche);
 
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);;
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);
 
         controleurRecherche.onCreate(getApplicationContext());
+
+
+
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -59,6 +64,10 @@ public class Recherche extends AppCompatActivity implements
                 new int[]{android.R.id.text1, android.R.id.text2});
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
+
+        for(int i = 0; i < listeCommerce.size(); i++){
+            nomCommerce.add(listeCommerce.get(i).nom);
+        }
 
         vueListeCommerces.setOnItemClickListener(
                 new AdapterView.OnItemClickListener(){
