@@ -87,7 +87,7 @@ public class Carte extends FragmentActivity implements
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
 
-        if (this.etatPermission == false) {
+        if (this.etatPermission) {
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
             mMap.setMyLocationEnabled(true);
@@ -175,8 +175,9 @@ public class Carte extends FragmentActivity implements
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                    this.etatPermission = false;
+                    this.etatPermission = true;
                 } else {
+                    this.etatPermission = false;
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }

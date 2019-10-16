@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import ca.qc.cgmatane.pictrade.R;
@@ -15,7 +19,7 @@ import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire {
+public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire, GestureDetector.OnGestureListener{
     private Commerce commerce;
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
@@ -132,6 +136,58 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
         intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);
         startActivity(intentionPartagerCommerceFin);
+
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement, float velocityX, float velocityY) {
+        Log.d("onFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
+        float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
+        float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            //swipe droite ou gauche
+            if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
+                if (diffX > 0) {
+                    onSwipeRight();
+                } else {
+                    onSwipeLeft();
+                }
+            }
+        }
+        return true;
+    }
+
+    private void onSwipeLeft() {
+        Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+        controleurAfficherCommerce.actionNaviguerModifierCommerce();
+    }
+
+    private void onSwipeRight() {
 
     }
 }

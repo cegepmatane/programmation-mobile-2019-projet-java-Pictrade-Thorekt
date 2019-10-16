@@ -16,6 +16,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".vue.ModifierCommerce" />
         <activity android:name=".vue.AfficherCommerce" /> <!-- this is the searchable activity; it performs searches -->
+
+        <activity android:name=".vue.Galerie"></activity>
         <activity android:name=".helper.SearchableActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -58,5 +60,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
