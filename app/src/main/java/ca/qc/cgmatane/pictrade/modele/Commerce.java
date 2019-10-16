@@ -165,17 +165,26 @@ public class Commerce implements Dictionnaire {
 
         return commerceHashMap;
     }
+    public static Time formaterTemps(String tempsString){
 
-    public static Time formaterTemps(String string){
-        DateFormat formatTemps = new SimpleDateFormat("hh:mm a");
+        DateFormat formatTemps = new SimpleDateFormat("hh:mm:ss");
         Time temps;
         Date date = null;
-        try {
-            date = formatTemps.parse(string);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(tempsString!=""){
+            try {
+                date = formatTemps.parse(tempsString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                date = formatTemps.parse("00:00:00");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
-        temps = new Time(date != null ? date.getTime() : 0);
+        temps = new Time(date.getTime());
+
         return temps;
     }
 

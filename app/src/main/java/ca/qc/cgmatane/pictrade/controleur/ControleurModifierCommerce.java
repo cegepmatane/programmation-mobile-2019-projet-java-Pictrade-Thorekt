@@ -2,6 +2,7 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -65,6 +66,7 @@ public class ControleurModifierCommerce implements Controleur {
         @Override
         protected void onPostExecute(String resultat) {
             super.onPostExecute(resultat);
+            Log.d("onPostExecute: ", resultat);
             vue.naviguerCommerce();
         }
     }

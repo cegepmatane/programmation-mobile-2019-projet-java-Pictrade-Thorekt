@@ -68,14 +68,14 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
 
     @Override
     public void naviguerCommerce() {
-
+        this.finish();
     }
 
     private void enregisterModification(){
         commerceHashMap.put(CLE_ADRESSE_COMMERCE,vueModifierCommerceChampsAdresse.getText().toString());
         commerceHashMap.put(CLE_CONTACT_COMMERCE,vueModifierCommerceChampsContact.getText().toString());
         commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE,vueModifierCommerceChampsHoraireOuverture.getText().toString());
-        commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE,vueModifierCommerceChampsHoraireFermeture.getText().toString());
+        commerceHashMap.put(CLE_HORAIRE_FERMETURE_COMMERCE,vueModifierCommerceChampsHoraireFermeture.getText().toString());
         controleurModifierCommerce.validerModification();
     }
 

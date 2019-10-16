@@ -95,7 +95,7 @@ public class CommerceHandlerXML extends DefaultHandler implements Dictionnaire{
             commerce.setHoraireOuverture(Commerce.formaterTemps(donnee.toString()));
             isHoraireOuverture = false;
         } else if (isHoraireFermeture) {
-            commerce.setHoraireOuverture(Commerce.formaterTemps(donnee.toString()));
+            commerce.setHoraireFermeture(Commerce.formaterTemps(donnee.toString()));
             isHoraireFermeture = false;
         } else if (isAdresse) {
             commerce.setAdresse(donnee.toString());
