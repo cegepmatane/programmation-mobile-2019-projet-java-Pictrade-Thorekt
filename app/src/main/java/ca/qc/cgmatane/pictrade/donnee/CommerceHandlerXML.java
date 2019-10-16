@@ -13,7 +13,7 @@ import java.util.List;
 
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class CommerceHandlerXML extends DefaultHandler {
+public class CommerceHandlerXML extends DefaultHandler implements Dictionnaire{
 
 
     private List<Commerce> listeCommerce = null;
@@ -47,30 +47,30 @@ public class CommerceHandlerXML extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
-        if (qName.equalsIgnoreCase("commerce")) {
+        if (qName.equalsIgnoreCase(CLE_COMMERCE)) {
             // create a new Employee and put it in Map
-            String id = attributes.getValue("id");
+            String id = attributes.getValue(CLE_ID_COMMERCE);
             // initialize Employee object and set id attribute
             commerce = new Commerce();
             commerce.setId(Integer.parseInt(id));
             // initialize list
             if (listeCommerce == null)
                 listeCommerce = new ArrayList<>();
-        } else if (qName.equalsIgnoreCase("placeID")) {
+        } else if (qName.equalsIgnoreCase(CLE_PLACEID_COMMERCE)) {
             isPlaceID = true;
-        } else if (qName.equalsIgnoreCase("nom")) {
+        } else if (qName.equalsIgnoreCase(CLE_NOM_COMMERCE)) {
             isNom = true;
-        } else if (qName.equalsIgnoreCase("longitude")) {
+        } else if (qName.equalsIgnoreCase(CLE_LONGITUDE_COMMERCE)) {
             isLongitude = true;
-        } else if (qName.equalsIgnoreCase("latitude")) {
+        } else if (qName.equalsIgnoreCase(CLE_LATITUDE_COMMERCE)) {
             isLatitude = true;
-        } else if (qName.equalsIgnoreCase("horaire_ouverture")) {
+        } else if (qName.equalsIgnoreCase(CLE_HORAIRE_OUVERTURE_COMMERCE)) {
             isHoraireOuverture = true;
-        } else if (qName.equalsIgnoreCase("horaire_fermeture")) {
+        } else if (qName.equalsIgnoreCase(CLE_HORAIRE_FERMETURE_COMMERCE)) {
             isHoraireFermeture = true;
-        } else if (qName.equalsIgnoreCase("adresse")) {
+        } else if (qName.equalsIgnoreCase(CLE_ADRESSE_COMMERCE)) {
             isAdresse = true;
-        } else if (qName.equalsIgnoreCase("contact")) {
+        } else if (qName.equalsIgnoreCase(CLE_CONTACT_COMMERCE)) {
             isContact = true;
         }
 
@@ -104,7 +104,7 @@ public class CommerceHandlerXML extends DefaultHandler {
             commerce.setContact(donnee.toString());
             isContact = false;
         }
-        if (qName.equalsIgnoreCase("commerce")) {
+        if (qName.equalsIgnoreCase(CLE_COMMERCE)) {
             Log.d("endElement: ", commerce.toString());
             listeCommerce.add(commerce);
         }

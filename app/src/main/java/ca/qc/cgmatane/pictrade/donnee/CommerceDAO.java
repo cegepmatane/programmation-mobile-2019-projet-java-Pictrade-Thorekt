@@ -1,16 +1,10 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
-import android.database.Cursor;
-import android.os.Debug;
 import android.util.Log;
-import android.util.Xml;
-
-import com.google.android.gms.maps.model.PointOfInterest;
 
 import org.xml.sax.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,10 +18,8 @@ import javax.xml.parsers.SAXParserFactory;
 import ca.qc.cgmatane.pictrade.Trieurs.TriParNom;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class CommerceDAO {
-    private static final String LISTER_COMMERCE = "lister_commerce";
-    private static final String RECUPERER_COMMERCE = "recuperer_commerce";
-    private static final String MODIFIER_COMMERCE = "modifier_commerce";
+public class CommerceDAO implements Dictionnaire {
+
 
     private static CommerceDAO instance = null;
     private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
@@ -54,7 +46,7 @@ public class CommerceDAO {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            String xml = accesseurBaseDeDonneesServeur.recupererXML(RECUPERER_COMMERCE,parametresPost);
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_RECUPERER_COMMERCE,parametresPost);
 
             Log.d("recupererCommerce: ", xml);
 
@@ -72,7 +64,7 @@ public class CommerceDAO {
 
         String resultat = null;
         try {
-            resultat = accesseurBaseDeDonneesServeur.recupererXML(MODIFIER_COMMERCE,parametresPost);
+            resultat = accesseurBaseDeDonneesServeur.recupererXML(PAGE_MODIFIER_COMMERCE,parametresPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +78,7 @@ public class CommerceDAO {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            String xml = accesseurBaseDeDonneesServeur.recupererXML(LISTER_COMMERCE);
+            String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_LISTER_COMMERCE);
             Log.d("listerCommerce: ", xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
