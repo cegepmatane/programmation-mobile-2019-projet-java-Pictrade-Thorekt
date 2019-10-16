@@ -21,12 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="@+id/map"
-        app:layout_constraintTop_toTopOf="@id/map"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_fab_label=""
         app:menu_labels_position="right"
-        app:menu_openDirection="down"
+        app:menu_openDirection="up"
         app:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
