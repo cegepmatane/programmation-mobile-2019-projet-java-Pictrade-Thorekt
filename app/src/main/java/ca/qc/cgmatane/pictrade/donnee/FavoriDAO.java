@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,5 +58,11 @@ public class FavoriDAO {
         return listeFavoriPourAdapteur;
     }
 
-
+    public void ajouterFavori(Commerce favori){
+        SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
+        SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?,?)");
+        query.bindString(1, "" + favori.getId());
+        query.bindString(2, "" + 1);
+        query.execute();
+    }
 }
