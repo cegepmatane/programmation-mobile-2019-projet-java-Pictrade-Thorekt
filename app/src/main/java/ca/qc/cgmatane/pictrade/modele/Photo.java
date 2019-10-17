@@ -1,13 +1,13 @@
 package ca.qc.cgmatane.pictrade.modele;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 public class Photo {
     private int id;
     private int nom;
-    private Image image;
+    private Bitmap image;
 
-    public Photo(int id, int nom, Image image) {
+    public Photo(int id, int nom, Bitmap image) {
         this.id = id;
         this.nom = nom;
         this.image = image;
@@ -33,11 +33,11 @@ public class Photo {
         this.nom = nom;
     }
 
-    public Image getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 

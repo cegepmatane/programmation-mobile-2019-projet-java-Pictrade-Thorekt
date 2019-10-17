@@ -7,6 +7,7 @@
     tools:context=".vue.Galerie">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vue_galerie_liste_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
