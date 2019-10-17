@@ -20,6 +20,7 @@ import java.util.List;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+import ca.qc.cgmatane.pictrade.helper.ListViewAdapter;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements
@@ -28,7 +29,9 @@ public class Recherche extends AppCompatActivity implements
     protected ListView vueListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
     protected List<Commerce> listeCommerce;
-    protected ArrayList<String> nomCommerce;
+    protected ArrayList<Commerce> nomCommerce;
+
+    protected ListViewAdapter adapter;
 
 
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
@@ -55,19 +58,31 @@ public class Recherche extends AppCompatActivity implements
     }
 
     public void afficherListeCommerces() {
+
+
+        //On crée la liste de nom pour le filtre de la recherche
+        nomCommerce = new ArrayList<>();
+        for (int i = 0; i < listeCommerce.size(); i++) {
+            nomCommerce.add(listeCommerce.get(i));
+        }
+
+        //On localise la la liste dans notre vue
         vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
-        SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
+
+        //On passe le tout à notre adapter
+        adapter = new ListViewAdapter(this, nomCommerce);
+
+        vueListeCommerces.setAdapter(adapter);
+
+        /*SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
                 android.R.layout.two_line_list_item,
                 new String[]{CLE_NOM_COMMERCE, CLE_ADRESSE_COMMERCE},
                 new int[]{android.R.id.text1, android.R.id.text2});
 
-        vueListeCommerces.setAdapter(adapteurVueListeCommerce);
+        vueListeCommerces.setAdapter(adapteurVueListeCommerce);*/
 
-        nomCommerce = new ArrayList<>();
-        for (int i = 0; i < listeCommerce.size(); i++) {
-            nomCommerce.add(listeCommerce.get(i).getNom());
-        }
+
 
         vueListeCommerces.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -135,7 +150,7 @@ public class Recherche extends AppCompatActivity implements
     @Override
     public boolean onQueryTextChange(String newText) {
         String text = newText;
-        //adapter.filter(text);
+        adapter.filter(text);
         return false;
     }
 
