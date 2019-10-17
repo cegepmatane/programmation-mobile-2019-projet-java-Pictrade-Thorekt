@@ -65,4 +65,20 @@ public class FavoriDAO {
         query.bindString(2, "" + 1);
         query.execute();
     }
+
+    public Commerce chercherFavoriParId(int id_favori){
+        for(Commerce commerceRecherche : this.listeFavori){
+            if(commerceRecherche.getId() == id_favori) return commerceRecherche;
+        }
+        return null;
+    }
+
+    public void retirerFavori(Commerce fav){
+        SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
+        SQLiteStatement query = db.compileStatement("UPDATE favori SET isFavori = ? where id_commerce = ?");
+        query.bindString(1, String.valueOf(0));
+        query.bindString(3, String.valueOf(fav.getId());
+
+        query.execute();
+    }
 }
