@@ -36,7 +36,7 @@ public class Galerie extends AppCompatActivity implements VueGalerie{
     }
 
     @Override
-    public void afficherGalegie(){
+    public void afficherGalerie(){
         GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie,listePhoto);
         vueGalerieListePhoto.setAdapter(galerieAdapteur);
     }
