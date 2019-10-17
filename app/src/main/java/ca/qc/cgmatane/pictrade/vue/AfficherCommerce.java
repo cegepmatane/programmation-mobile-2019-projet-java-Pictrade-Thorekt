@@ -136,7 +136,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void naviguerPartagerCommerce(){
         intentionPartagerCommerceDebut = new Intent();
         intentionPartagerCommerceDebut.setAction(Intent.ACTION_SEND);
-        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseil vivement : ");
+        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseille vivement : ");
         intentionPartagerCommerceDebut.setType("text/plain");
 
         intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);
