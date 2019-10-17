@@ -42,43 +42,52 @@ public class CommerceDAO implements Dictionnaire {
     }
 
     public Commerce recupererCommerce( HashMap<String,String> parametresPost ){
+        Log.d("DEBUG", "in");
+        Log.d("DEBUG", "parametresPost: "+parametresPost.toString());
         Commerce commerce= new Commerce();
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_RECUPERER_COMMERCE,parametresPost);
+            Log.d("DEBUG", "xml: "+xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             commerce = commerceHandlerXML.getCommerce();
 
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
+        Log.d("DEBUG", "commerce: "+commerce.toString());
         return commerce;
     }
 
     public String modifierCommerce( HashMap<String,String> parametresPost ){
-
+        Log.d("DEBUG", "in");
+        Log.d("DEBUG", "parametresPost: "+parametresPost.toString());
         String resultat = null;
         try {
             resultat = accesseurBaseDeDonneesServeur.recupererXML(PAGE_MODIFIER_COMMERCE,parametresPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.d("DEBUG", resultat);
         return resultat;
     }
 
     public List<Commerce> listerCommerce() {
+
+        Log.d("DEBUG", "in");
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_LISTER_COMMERCE);
+            Log.d("DEBUG", "xml: "+xml);
             saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
             listeCommerces=commerceHandlerXML.getListeCommerce();
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
         Collections.sort(listeCommerces, new TriParNom());
+        Log.d("DEBUG", "listeCommerces: "+listeCommerces.toString());
         return listeCommerces;
     }
 
@@ -102,6 +111,13 @@ public class CommerceDAO implements Dictionnaire {
         else{
             return null;
         }
+    }
+
+
+
+
+    public List<Commerce> getListeCommerces() {
+        return listeCommerces;
     }
 
 
