@@ -32,6 +32,11 @@ public class Galerie extends AppCompatActivity implements VueGalerie{
         vueGalerieListePhoto.setLayoutManager(new LinearLayoutManager(this));
         vueGalerieListePhoto.setItemAnimator(new DefaultItemAnimator());
 
+
+    }
+
+    @Override
+    public void afficherGalegie(){
         GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie,listePhoto);
         vueGalerieListePhoto.setAdapter(galerieAdapteur);
     }
@@ -56,11 +61,19 @@ public class Galerie extends AppCompatActivity implements VueGalerie{
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(position).getImage());
+            int positionGauche = position*3;
+            int positionMilieu = position*3+1;
+            int positionDroite = position*3+2;
 
-            holder.vueLigneGaleriePhotoMilieu.setImageBitmap(listePhoto.get(position+1).getImage());
-
-            holder.vueLigneGaleriePhotoDroite.setImageBitmap(listePhoto.get(position+2).getImage());
+            if (positionGauche <= listePhoto.size()){
+                holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionGauche).getImage());
+            }
+            if (positionGauche <= listePhoto.size()){
+                holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionMilieu).getImage());
+            }
+            if (positionGauche <= listePhoto.size()){
+                holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionDroite).getImage());
+            }
         }
 
         @Override
