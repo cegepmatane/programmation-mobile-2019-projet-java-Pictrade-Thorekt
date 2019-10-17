@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
     private ControleurModifierCommerce controleurModifierCommerce
             = new ControleurModifierCommerce(this);
     private HashMap<String,String> commerceHashMap;
+    private TextView vueModifierCommerceNom;
     private EditText vueModifierCommerceChampsAdresse;
     private EditText vueModifierCommerceChampsContact;
     private EditText vueModifierCommerceChampsHoraireOuverture;
@@ -37,11 +39,16 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
 
     @Override
     public void preRemplirChamps(){
+
+        vueModifierCommerceNom = (TextView) findViewById(R.id.vue_modifier_commerce_nom);
+
         vueModifierCommerceChampsAdresse = (EditText) findViewById(R.id.vue_modifier_commerce_champs_addresse);
         vueModifierCommerceChampsContact = (EditText) findViewById(R.id.vue_modifier_commerce_champs_contact);
         vueModifierCommerceChampsHoraireOuverture = (EditText) findViewById(R.id.vue_modifier_commerce_champs_horaire_ouverture);
         vueModifierCommerceChampsHoraireFermeture = (EditText) findViewById(R.id.vue_modifier_commerce_champs_horaire_fermeture);
 
+
+        vueModifierCommerceNom.setText(commerceHashMap.get(CLE_NOM_COMMERCE));
         vueModifierCommerceChampsAdresse.setText(commerceHashMap.get(CLE_ADRESSE_COMMERCE));
         vueModifierCommerceChampsContact.setText(commerceHashMap.get(CLE_CONTACT_COMMERCE));
         vueModifierCommerceChampsHoraireOuverture.setText(commerceHashMap.get(CLE_HORAIRE_OUVERTURE_COMMERCE));
