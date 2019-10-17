@@ -64,6 +64,7 @@ public class BaseDeDonneesServeur implements Dictionnaire{
 
     public String recupererXML(String page, HashMap<String,String> parametresPost) throws IOException {
         URL url = new URL(SERVEUR_URL + page + ".php");
+        Log.d("DEBUG", "url: "+url.toString());
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
         urlConnection.setReadTimeout(15000);
