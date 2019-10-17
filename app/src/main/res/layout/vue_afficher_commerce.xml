@@ -57,11 +57,11 @@
 
     <CheckBox
         android:id="@+id/favoris_commerce"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text=""
+        android:text="Ajouter en favori"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vue_afficher_commerce_horaire_fermeture" />
 
