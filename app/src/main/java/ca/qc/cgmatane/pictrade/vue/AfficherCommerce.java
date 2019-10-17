@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire, GestureDetector.OnGestureListener{
@@ -38,11 +40,10 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private TextView vueAfficherHoraireFermetureCommerce;
     private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
     private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+    private CheckBox vueAfficherCommerceMettreEnFavori;
 
-
+    private boolean isFavori;
     protected GestureDetectorCompat mDetector;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,11 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     @Override
     public void setCommerce(Commerce commerce) {
         this.commerce = commerce;
+    }
+
+    @Override
+    public void setFavori(boolean isFav){
+        this.isFavori = isFav;
     }
 
 
@@ -118,6 +124,18 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     @Override
                     public void onClick(View v) {
                         controleurAfficherCommerce.actionNaviguerPartagerCommerce();
+                    }
+                }
+        );
+
+        vueAfficherCommerceMettreEnFavori = (CheckBox) findViewById(R.id.vue_afficher_commerce_mettre_favori);
+
+        vueAfficherCommerceMettreEnFavori.setChecked(isFavori);
+        vueAfficherCommerceMettreEnFavori.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        controleurAfficherCommerce.actionGererFavori(vueAfficherCommerceMettreEnFavori.isChecked());
                     }
                 }
         );
