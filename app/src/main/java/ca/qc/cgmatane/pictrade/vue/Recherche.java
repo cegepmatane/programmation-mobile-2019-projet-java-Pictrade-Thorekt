@@ -45,7 +45,6 @@ public class Recherche extends AppCompatActivity implements
         controleurRecherche.onCreate(getApplicationContext());
 
 
-
         searchView.setOnQueryTextListener(this);
     }
 
@@ -55,7 +54,7 @@ public class Recherche extends AppCompatActivity implements
         afficherListeCommercesFavoris();
     }
 
-    public void afficherListeCommerces(){
+    public void afficherListeCommerces() {
         vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
         SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
@@ -65,12 +64,12 @@ public class Recherche extends AppCompatActivity implements
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
 
-        for(int i = 0; i < listeCommerce.size(); i++){
-            nomCommerce.add(listeCommerce.get(i).nom);
+        for (int i = 0; i < listeCommerce.size(); i++) {
+            nomCommerce.add(listeCommerce.get(i).getNom());
         }
 
         vueListeCommerces.setOnItemClickListener(
-                new AdapterView.OnItemClickListener(){
+                new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent,
@@ -79,19 +78,19 @@ public class Recherche extends AppCompatActivity implements
                                             long positionItem) {
 
                         Log.d("Recherche", "onItemClick");
-                        ListView vueRechercheListeCommerceOnClick = (ListView)vue.getParent();
+                        ListView vueRechercheListeCommerceOnClick = (ListView) vue.getParent();
 
-                        HashMap<String,String> commerce =
+                        HashMap<String, String> commerce =
                                 (HashMap<String, String>)
-                                        vueRechercheListeCommerceOnClick.getItemAtPosition((int)positionItem);
-Log.d("HashMap",""+commerce.toString());
+                                        vueRechercheListeCommerceOnClick.getItemAtPosition((int) positionItem);
+                        Log.d("HashMap", "" + commerce.toString());
                         controleurRecherche.actionNaviguerAfficherCommerce(Integer.parseInt(commerce.get(Commerce.CLE_ID_COMMERCE)));
                     }
                 }
         );
     }
 
-    public void afficherListeCommercesFavoris(){
+    public void afficherListeCommercesFavoris() {
 
     }
 

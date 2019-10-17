@@ -114,4 +114,11 @@ public class CommerceDAO implements Dictionnaire {
     }
 
 
+
+
+    public List<Commerce> getListeCommerces() {
+        return listeCommerces;
+    }
+
+
 }
