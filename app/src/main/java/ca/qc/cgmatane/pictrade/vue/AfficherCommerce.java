@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private TextView vueAfficherHoraireFermetureCommerce;
     private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
     private Button vueAfficherCommerceActionNaviguerModifierCommerce;
-
+    protected GestureDetectorCompat mDetector;
 
 
 
@@ -46,6 +47,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_afficher_commerce);
 
+        mDetector = new GestureDetectorCompat(this, this);
         parametres = this.getIntent().getExtras();
         vueAfficherCommerceEnAttente =
                 (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
@@ -143,6 +145,14 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         startActivity(intentionPartagerCommerceFin);
 
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        if (this.mDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
 
     @Override
     public boolean onDown(MotionEvent motionEvent) {
@@ -178,21 +188,22 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             //swipe droite ou gauche
             if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
                 if (diffX > 0) {
-                    onSwipeRight();
+                    onSwipeDroite();
                 } else {
-                    onSwipeLeft();
+                    onSwipeGauche();
                 }
             }
         }
         return true;
     }
 
-    private void onSwipeLeft() {
-        Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+    private void onSwipeGauche() {
+        Toast.makeText(this, "Swip vers la droite pour modifier", Toast.LENGTH_SHORT).show();
         controleurAfficherCommerce.actionNaviguerModifierCommerce();
     }
 
-    private void onSwipeRight() {
+    private void onSwipeDroite() {
+        //Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
 
     }
 }
