@@ -87,13 +87,13 @@ public class Carte extends FragmentActivity implements
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
 
-        if (this.etatPermission) {
+        //if (this.etatPermission) {
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
             mMap.setMyLocationEnabled(true);
-        } else {
+      /*  } else {
             Toast.makeText(this, "permission refusée", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         // Add a marker in Sydney and move the camera
 //        LatLng matane = new LatLng(48.8526, -67.518);
 //        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
