@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.IDNA;
@@ -44,7 +46,6 @@ public class Carte extends FragmentActivity implements
     protected FloatingActionButton bouton_menu_recherche;
     protected Intent intentionAfficherCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
-    private boolean etatPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +88,9 @@ public class Carte extends FragmentActivity implements
         mMap = googleMap;
         mMap.setOnPoiClickListener(this);
 
-        if (this.etatPermission) {
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-            mMap.setMyLocationEnabled(true);
-        } else {
-            Toast.makeText(this, "permission refusée", Toast.LENGTH_SHORT).show();
-        }
+        mMap.setMyLocationEnabled(true);
         // Add a marker in Sydney and move the camera
 //        LatLng matane = new LatLng(48.8526, -67.518);
 //        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
@@ -150,43 +147,41 @@ public class Carte extends FragmentActivity implements
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Permission needed")
+                        .setMessage("This permission is needed because of this and that")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(Carte.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create().show();
+
             } else {
-                // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_LOCATION_REQUEST_CODE);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
             }
         }
     }
-
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case MY_LOCATION_REQUEST_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    this.etatPermission = true;
+    @Override
+        public void onRequestPermissionsResult ( int requestCode ,@NonNull String[] permissions, @NonNull int[] grantResults){
+            if (requestCode == MY_LOCATION_REQUEST_CODE) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
                 } else {
-                    this.etatPermission = false;
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
                 }
-                return;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request.
         }
     }
-}
+
 

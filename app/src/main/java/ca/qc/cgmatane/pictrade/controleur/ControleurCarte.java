@@ -11,7 +11,6 @@ import ca.qc.cgmatane.pictrade.vue.VueCarte;
 public class ControleurCarte implements Controleur {
 
     private VueCarte vue;
-    static final public int ACTIVITE_RECHERCHE = 1;
 
     public ControleurCarte(VueCarte vue) {
 
