@@ -38,6 +38,8 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private TextView vueAfficherHoraireFermetureCommerce;
     private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
     private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+
+
     protected GestureDetectorCompat mDetector;
 
 
@@ -119,6 +121,8 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
+
+
     }
 
 
