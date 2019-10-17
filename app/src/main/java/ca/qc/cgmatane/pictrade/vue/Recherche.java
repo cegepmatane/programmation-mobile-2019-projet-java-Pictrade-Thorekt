@@ -153,6 +153,9 @@ public class Recherche extends AppCompatActivity implements
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        if(newText == null){
+            newText = "";
+        }
         String text = newText;
         adapter.filter(text);
         return false;

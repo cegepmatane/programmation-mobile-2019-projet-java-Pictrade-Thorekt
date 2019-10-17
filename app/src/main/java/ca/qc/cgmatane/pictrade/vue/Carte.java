@@ -29,6 +29,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
+import ca.qc.cgmatane.pictrade.donnee.BaseDeDonneesClient;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 
 public class Carte extends FragmentActivity implements
@@ -51,6 +52,8 @@ public class Carte extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_carte);
+
+        BaseDeDonneesClient.getInstance(getApplicationContext());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
