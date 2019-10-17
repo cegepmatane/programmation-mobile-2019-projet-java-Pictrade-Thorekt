@@ -24,6 +24,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
 
+
     protected Intent intentionModifierCommerce;
     protected Intent intentionPartagerCommerceDebut;
     protected Intent intentionPartagerCommerceFin;
@@ -70,18 +71,23 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
         TextView vueAfficherNomCommerce;
         vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom);
-        TextView vueAfficherContactCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_contact);
-        TextView vueAfficherAdresseCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
-        TextView vueAfficherHoraireOuvertureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
-        TextView vueAfficherHoraireFermetureCommerce =
-                (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
+
+        TextView vueAfficherContactCommerce;
+        vueAfficherContactCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_contact);
+
+        TextView vueAfficherAdresseCommerce;
+        vueAfficherAdresseCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
+
+        TextView vueAfficherHoraireOuvertureCommerce;
+        vueAfficherHoraireOuvertureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
+
+        TextView vueAfficherHoraireFermetureCommerce;
+        vueAfficherHoraireFermetureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
 
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
         vueAfficherAdresseCommerce.setText(commerce.getAdresse());
+
         if (commerce.getHoraireOuverture() != null){
             vueAfficherHoraireOuvertureCommerce.setText(commerce.getHoraireOuverture().toString());
         }
