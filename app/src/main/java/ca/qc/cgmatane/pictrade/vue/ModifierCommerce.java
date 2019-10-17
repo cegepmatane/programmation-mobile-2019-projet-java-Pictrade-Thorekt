@@ -1,12 +1,18 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -14,16 +20,16 @@ import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurModifierCommerce;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 
-public class ModifierCommerce extends AppCompatActivity implements VueModifierCommerce, Dictionnaire {
+public class ModifierCommerce extends AppCompatActivity implements VueModifierCommerce, Dictionnaire, GestureDetector.OnGestureListener {
     private ControleurModifierCommerce controleurModifierCommerce
             = new ControleurModifierCommerce(this);
-    private HashMap<String,String> commerceHashMap;
+    private HashMap<String, String> commerceHashMap;
     private TextView vueModifierCommerceNom;
     private EditText vueModifierCommerceChampsAdresse;
     private EditText vueModifierCommerceChampsContact;
     private EditText vueModifierCommerceChampsHoraireOuverture;
     private EditText vueModifierCommerceChampsHoraireFermeture;
-
+    private GestureDetectorCompat mDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +37,14 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
         setContentView(R.layout.vue_modifier_commerce);
 
         Bundle parametres = this.getIntent().getExtras();
-        commerceHashMap = (HashMap<String,String>) parametres.get(CLE_COMMERCE);
+        commerceHashMap = (HashMap<String, String>) parametres.get(CLE_COMMERCE);
         controleurModifierCommerce.onCreate(this);
-
+        mDetector = new GestureDetectorCompat(this, this);
 
     }
 
     @Override
-    public void preRemplirChamps(){
+    public void preRemplirChamps() {
 
         vueModifierCommerceNom = (TextView) findViewById(R.id.vue_modifier_commerce_nom);
 
@@ -78,11 +84,11 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
         this.finish();
     }
 
-    private void enregisterModification(){
-        commerceHashMap.put(CLE_ADRESSE_COMMERCE,vueModifierCommerceChampsAdresse.getText().toString());
-        commerceHashMap.put(CLE_CONTACT_COMMERCE,vueModifierCommerceChampsContact.getText().toString());
-        commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE,vueModifierCommerceChampsHoraireOuverture.getText().toString());
-        commerceHashMap.put(CLE_HORAIRE_FERMETURE_COMMERCE,vueModifierCommerceChampsHoraireFermeture.getText().toString());
+    private void enregisterModification() {
+        commerceHashMap.put(CLE_ADRESSE_COMMERCE, vueModifierCommerceChampsAdresse.getText().toString());
+        commerceHashMap.put(CLE_CONTACT_COMMERCE, vueModifierCommerceChampsContact.getText().toString());
+        commerceHashMap.put(CLE_HORAIRE_OUVERTURE_COMMERCE, vueModifierCommerceChampsHoraireOuverture.getText().toString());
+        commerceHashMap.put(CLE_HORAIRE_FERMETURE_COMMERCE, vueModifierCommerceChampsHoraireFermeture.getText().toString());
         controleurModifierCommerce.validerModification();
     }
 
@@ -92,8 +98,68 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
     }
 
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (this.mDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement,
+                           float velocityX, float velocityY) {
+        Log.d("OnFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
+        float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
+        float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            //swipe droite ou gauche
+            if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
+                if (diffX > 0) {
+                    onSwipeRight();
+                } else {
+                    onSwipeLeft();
+                }
+            }
 
 
+        }
+        return true;
+    }
 
+    private void onSwipeLeft() {
+        //Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void onSwipeRight() {
+        Toast.makeText(this, "Swip vers gauche pour annuler", Toast.LENGTH_SHORT).show();
+        controleurModifierCommerce.annulerModification();
+    }
 
 }
