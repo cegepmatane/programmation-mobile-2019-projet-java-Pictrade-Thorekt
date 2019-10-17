@@ -9,37 +9,41 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    Context monContext;
-    LayoutInflater inflater;
-    private List<Commerce> commerceListe = null;
-    private ArrayList<Commerce> arrayList;
+    // Declare Variables
 
-    public ListViewAdapter(Context context, List<Commerce> commerceNomListe){
-        monContext = context;
-        this.commerceListe = commerceNomListe;
-        inflater = LayoutInflater.from(monContext);
-        this.arrayList = new ArrayList<Commerce>();
-        this.arrayList = addAll(commerceNomListe);
+    Context monContexte;
+    LayoutInflater inflater;
+    private List<Commerce> commerceNomListe = null;
+    private ArrayList<Commerce> arraylist;
+
+    public ListViewAdapter(Context context, List<Commerce> commerceNomListe) {
+        monContexte = context;
+        this.commerceNomListe = commerceNomListe;
+        inflater = LayoutInflater.from(monContexte);
+        this.arraylist = new ArrayList<Commerce>();
+        this.arraylist.addAll(commerceNomListe);
     }
 
     public class ViewHolder {
-        TextView name;
+        TextView nom;
+        TextView adresse;
     }
 
     @Override
-    public int getCount(){
-        return commerceListe.size();
+    public int getCount() {
+        return commerceNomListe.size();
     }
 
     @Override
-    public Commerce getItem(int position){
-        return commerceListe.get(position);
+    public Commerce getItem(int position) {
+        return commerceNomListe.get(position);
     }
 
     @Override
@@ -53,15 +57,31 @@ public class ListViewAdapter extends BaseAdapter {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.activity_list_view_items, null);
             // Locate the TextViews in listview_item.xml
-            holder.name = (TextView) view.findViewById(R.id.name);
+            holder.nom = (TextView) view.findViewById(R.id.nom);
+            holder.adresse = (TextView) view.findViewById(R.id.adresse);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.name.setText(animalNamesList.get(position).getAnimalName());
+        holder.nom.setText(commerceNomListe.get(position).getNom());
+        holder.adresse.setText(commerceNomListe.get(position).getAdresse());
         return view;
     }
 
-
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        commerceNomListe.clear();
+        if (charText.length() == 0) {
+            commerceNomListe.addAll(arraylist);
+        } else {
+            for (Commerce wp : arraylist) {
+                if (wp.getNom().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    commerceNomListe.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }

@@ -12,16 +12,15 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/nameLabel"
+            android:id="@+id/nom"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Animal : " />
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/adresse"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nameLabel"
+            android:layout_below="@+id/nom"
             android:layout_marginTop="2dp" />
 
     </RelativeLayout>
