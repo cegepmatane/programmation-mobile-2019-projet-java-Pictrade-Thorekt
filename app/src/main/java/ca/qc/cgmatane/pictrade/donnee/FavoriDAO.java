@@ -81,4 +81,12 @@ public class FavoriDAO {
 
         query.execute();
     }
+
+    public ArrayList<Commerce> matchFavori(ArrayList<Commerce> listeCommerce){
+        listerFavori();
+
+        listeCommerce.retainAll(listeFavori);
+
+        return listeCommerce;
+    }
 }
