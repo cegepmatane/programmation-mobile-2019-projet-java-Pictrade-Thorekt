@@ -77,7 +77,7 @@ public class FavoriDAO {
         SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
         SQLiteStatement query = db.compileStatement("UPDATE favori SET isFavori = ? where id_commerce = ?");
         query.bindString(1, String.valueOf(0));
-        query.bindString(3, String.valueOf(fav.getId());
+        query.bindString(3, String.valueOf(fav.getId()));
 
         query.execute();
     }
