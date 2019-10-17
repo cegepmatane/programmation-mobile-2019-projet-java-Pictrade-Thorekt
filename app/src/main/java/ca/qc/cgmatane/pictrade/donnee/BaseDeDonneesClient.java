@@ -28,7 +28,7 @@ public class BaseDeDonneesClient extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "create table favori(id_favori INTEGER PRIMARY KEY,id_commerce INTEGER, isFavori INTEGER)";
+        String CREATE_TABLE = "create table favori(id_favori INTEGER PRIMARY KEY, id_commerce INTEGER, isFavori INTEGER)";
         db.execSQL(CREATE_TABLE);
     }
 
