@@ -64,6 +64,7 @@ public class Recherche extends AppCompatActivity implements
 
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);
 
+        nomCommerce = new ArrayList<>();
         for (int i = 0; i < listeCommerce.size(); i++) {
             nomCommerce.add(listeCommerce.get(i).getNom());
         }
