@@ -83,7 +83,6 @@ public class Recherche extends AppCompatActivity implements
         vueListeCommerces.setAdapter(adapteurVueListeCommerce);*/
 
 
-
         vueListeCommerces.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
@@ -111,13 +110,11 @@ public class Recherche extends AppCompatActivity implements
     }
 
     public void afficherListeCommercesFavoris() {
-
     }
 
 
     @Override
     public void listeCommerceEnAttente() {
-
     }
 
     @Override
@@ -132,36 +129,26 @@ public class Recherche extends AppCompatActivity implements
 
     @Override
     public void naviguerAfficherCommerce(int id) {
-
         intentionNaviguerAfficherCommerce = new Intent(
                 Recherche.this,
                 AfficherCommerce.class
         );
         intentionNaviguerAfficherCommerce.putExtra(Commerce.CLE_ID_COMMERCE, id);
-
         startActivity(intentionNaviguerAfficherCommerce);
-
     }
-
-    // TODO : Faire ces méthodes correctement
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if(newText == null){
+        if (newText == null) {
             newText = "";
         }
         String text = newText;
         adapter.filter(text);
         return false;
-    }
-
-    public void chercher(Intent intentionRecherche) {
-        startActivity(intentionRecherche);
     }
 }
