@@ -209,5 +209,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         //Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
 
     }
+
 }
 
