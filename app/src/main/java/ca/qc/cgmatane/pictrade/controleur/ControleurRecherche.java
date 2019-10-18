@@ -2,6 +2,7 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +79,8 @@ public class ControleurRecherche implements Controleur {
         protected void onPostExecute(List<HashMap<String, String>> listeCommerceRecuperer) {
             super.onPostExecute(listeCommerceRecuperer);
             vue.setListeCommercePourAdapteur(listeCommerceRecuperer);
+            listeCommerce=accesseurCommerce.getListeCommerces();
+            Log.d("DEBUG", "onPostExecute listeCommerce: " + listeCommerce.toString());
             vue.setListeCommerce(listeCommerce);
             vue.afficherLesCommerces();
         }

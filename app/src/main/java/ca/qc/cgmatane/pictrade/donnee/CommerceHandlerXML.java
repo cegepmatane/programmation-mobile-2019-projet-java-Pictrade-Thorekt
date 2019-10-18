@@ -105,7 +105,6 @@ public class CommerceHandlerXML extends DefaultHandler implements Dictionnaire{
             isContact = false;
         }
         if (qName.equalsIgnoreCase(CLE_COMMERCE)) {
-            Log.d("endElement: ", commerce.toString());
             listeCommerce.add(commerce);
         }
     }

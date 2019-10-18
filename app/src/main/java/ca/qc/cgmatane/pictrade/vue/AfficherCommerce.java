@@ -24,13 +24,21 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private ControleurAfficherCommerce controleurAfficherCommerce
             = new ControleurAfficherCommerce(this);
 
-
     protected Intent intentionModifierCommerce;
     protected Intent intentionPartagerCommerceDebut;
     protected Intent intentionPartagerCommerceFin;
     private Bundle parametres;
 
     private ProgressBar vueAfficherCommerceEnAttente;
+    private TextView vueAfficherNomCommerce;
+    private TextView vueAfficherContactCommerce;
+    private TextView vueAfficherAdresseCommerce;
+    private TextView vueAfficherHoraireOuvertureCommerce;
+    private TextView vueAfficherHoraireFermetureCommerce;
+    private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
+    private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+
+
 
 
     @Override
@@ -63,31 +71,24 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void commerceEnAttente() {
 
         vueAfficherCommerceEnAttente.setVisibility(View.VISIBLE);
+        vueAfficherCommerceEnAttente.setTranslationZ(1);
     }
 
     @Override
     public void afficherCommerce() {
         vueAfficherCommerceEnAttente.setVisibility(View.INVISIBLE);
 
-        TextView vueAfficherNomCommerce;
         vueAfficherNomCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_nom);
-
-        TextView vueAfficherContactCommerce;
         vueAfficherContactCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_contact);
-
-        TextView vueAfficherAdresseCommerce;
         vueAfficherAdresseCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_adresse);
 
-        TextView vueAfficherHoraireOuvertureCommerce;
         vueAfficherHoraireOuvertureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_ouverture);
 
-        TextView vueAfficherHoraireFermetureCommerce;
         vueAfficherHoraireFermetureCommerce = (TextView) findViewById(R.id.vue_afficher_commerce_horaire_fermeture);
 
         vueAfficherNomCommerce.setText(commerce.getNom());
         vueAfficherContactCommerce.setText(commerce.getContact());
         vueAfficherAdresseCommerce.setText(commerce.getAdresse());
-
         if (commerce.getHoraireOuverture() != null){
             vueAfficherHoraireOuvertureCommerce.setText(commerce.getHoraireOuverture().toString());
         }
@@ -95,8 +96,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             vueAfficherHoraireFermetureCommerce.setText(commerce.getHoraireFermeture().toString());
         }
 
-        Button vueAfficherCommerceActionNaviguerModifierCommerce =
-                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
+        vueAfficherCommerceActionNaviguerModifierCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_modifier_commerce);
 
         vueAfficherCommerceActionNaviguerModifierCommerce.setOnClickListener(
                 new View.OnClickListener() {
@@ -107,8 +107,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                 }
         );
 
-        Button vueAfficherCommerceActionNaviguerPartagerCommerce =
-                (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_partager_commerce);
+        vueAfficherCommerceActionNaviguerPartagerCommerce = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_partager_commerce);
 
         vueAfficherCommerceActionNaviguerPartagerCommerce.setOnClickListener(
                 new View.OnClickListener() {
@@ -137,7 +136,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void naviguerPartagerCommerce(){
         intentionPartagerCommerceDebut = new Intent();
         intentionPartagerCommerceDebut.setAction(Intent.ACTION_SEND);
-        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseil vivement : ");
+        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseil vivement ");
         intentionPartagerCommerceDebut.setType("text/plain");
 
         intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);
