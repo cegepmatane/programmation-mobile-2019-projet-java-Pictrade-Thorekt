@@ -2,7 +2,10 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
+
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.model.PointOfInterest;
 
@@ -19,7 +22,7 @@ public class ControleurCarte implements Controleur {
 
     @Override
     public void onCreate(Context applicationContext) {
-
+        actionPermissionGeolocalisation();
     }
 
     @Override
@@ -50,6 +53,13 @@ public class ControleurCarte implements Controleur {
         vue.naviguerAfficherCommerce(pointDInteret);
     }
     public void actionPermissionGeolocalisation(){
+
         vue.permissionLocalisation();
+
+
+    }
+
+    public void actionAfficherCarte(){
+        vue.afficherCarte();
     }
 }
