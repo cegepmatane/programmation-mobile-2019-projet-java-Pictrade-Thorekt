@@ -41,7 +41,12 @@ public class Carte extends FragmentActivity implements
         Dictionnaire {
 
 
-    private static final int MY_LOCATION_REQUEST_CODE = 1;
+    private static final int REQUETE_ACCEPTER_LOCALISATION = 1;
+    private static final int REQUETE_ACCEPTER_CAMERA = 2;
+    private static final int REQUETE_ACCEPER_STOCKAGE = 3;
+    private static final int REQUETE_ACCEPER_LIRE_CONTACTS = 4;
+    private static final int REQUETE_ACCEPER_ENVOYER_SMS = 5;
+
     private GoogleMap mMap;
     protected FloatingActionMenu bouton_menu;
     protected FloatingActionButton bouton_menu_recherche;
@@ -84,11 +89,13 @@ public class Carte extends FragmentActivity implements
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
+
         } else {
 
             mMap.setMyLocationEnabled(false);
             // Show rationale and request permission.
         }
+
 
 
         // Add a marker in Sydney and move the camera
@@ -145,7 +152,10 @@ public class Carte extends FragmentActivity implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             ActivityCompat.requestPermissions(Carte.this,
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+                                    new String[]{
+                                            Manifest.permission.ACCESS_FINE_LOCATION,
+
+                                    }, REQUETE_ACCEPTER_LOCALISATION);
                         }
                     })
                     .setNegativeButton("Refuser", new DialogInterface.OnClickListener() {
@@ -158,9 +168,10 @@ public class Carte extends FragmentActivity implements
 
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUETE_ACCEPTER_LOCALISATION);
         }
     }
+
 
     @Override
     public void afficherCarte() {
@@ -185,7 +196,7 @@ public class Carte extends FragmentActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == MY_LOCATION_REQUEST_CODE) {
+        if (requestCode == REQUETE_ACCEPTER_LOCALISATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "PeRmIsSiOn OuI", Toast.LENGTH_SHORT).show();
                 controleurCarte.actionAfficherCarte();
