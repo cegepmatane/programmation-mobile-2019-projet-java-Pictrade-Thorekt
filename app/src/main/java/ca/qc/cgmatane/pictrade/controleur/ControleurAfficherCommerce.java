@@ -126,6 +126,7 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         else{
             accesseurFavori.retirerFavori(commerce);
         }
+        vue.toast(isFavori);
     }
 
     public boolean verifierSiFavori(int id_commerce){

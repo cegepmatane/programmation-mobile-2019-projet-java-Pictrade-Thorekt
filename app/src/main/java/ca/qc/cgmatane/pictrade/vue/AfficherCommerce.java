@@ -135,12 +135,17 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
+                        //Toast.makeText(AfficherCommerce.this, "On teste des choses", Toast.LENGTH_SHORT).show();
                         controleurAfficherCommerce.actionGererFavori(vueAfficherCommerceMettreEnFavori.isChecked());
                     }
                 }
         );
 
 
+    }
+
+    public void toast(boolean fav){
+        Toast.makeText(this, "" + fav, Toast.LENGTH_SHORT).show();
     }
 
 
