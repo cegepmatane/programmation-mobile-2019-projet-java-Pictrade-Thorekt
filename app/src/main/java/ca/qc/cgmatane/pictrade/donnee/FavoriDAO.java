@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,7 @@ public class FavoriDAO {
     }
 
     public boolean isFavoriByIdCommerce(int idCommerce){
+        listerFavori();
         if(isInDb(idCommerce)){
             for (int i = 0; i < listeFavori.size(); i++) {
                 if(listeFavori.get(i).getId_commerce() == idCommerce){
@@ -54,19 +57,43 @@ public class FavoriDAO {
         }
         return false;
     }
-
     public boolean isInDb(int idCommerce){
         return listeFavori.contains(new Favori(idCommerce));
     }
 
-    public boolean ajouterFavori(Favori fav){
-        if(isFavoriByIdCommerce(fav.getId_commerce())){
+    public void ajouterFavori(Favori fav){
+        if(isInDb(fav.getId_commerce()) && !isFavoriByIdCommerce(fav.getId_commerce())){
+            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
+            SQLiteStatement query = db.compileStatement("UPDATE favori SET isFavori = ? where id_commerce = ?");
 
+            int bool = 0;
+            if(fav.isFavori()){
+                bool = 1;
+            }
+
+            query.bindString(1, String.valueOf(bool));
+            query.bindString(2, String.valueOf(fav.getId_commerce()));
+
+            query.execute();
         }
+        else if(!isInDb(fav.getId_commerce())){
+            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
 
+            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?,?)");
 
-        return false;
+            int bool = 0;
+            if(fav.isFavori()){
+                bool = 1;
+            }
+
+            query.bindString(1, String.valueOf(fav.getId_commerce()));
+            query.bindString(2, String.valueOf(bool));
+
+            query.execute();
+        }
     }
-    //ajouter favori
+
+
+
     //retirer
 }
