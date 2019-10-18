@@ -21,7 +21,7 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nom"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"/>
 
     </RelativeLayout>
 

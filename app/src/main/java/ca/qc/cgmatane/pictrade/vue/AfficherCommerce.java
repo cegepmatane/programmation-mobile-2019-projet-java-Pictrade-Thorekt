@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire, GestureDetector.OnGestureListener{
@@ -37,15 +40,17 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private TextView vueAfficherHoraireFermetureCommerce;
     private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
     private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+    private CheckBox vueAfficherCommerceMettreEnFavori;
 
-
-
+    private boolean isFavori;
+    protected GestureDetectorCompat mDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_afficher_commerce);
 
+        mDetector = new GestureDetectorCompat(this, this);
         parametres = this.getIntent().getExtras();
         vueAfficherCommerceEnAttente =
                 (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
@@ -64,6 +69,11 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     @Override
     public void setCommerce(Commerce commerce) {
         this.commerce = commerce;
+    }
+
+    @Override
+    public void setFavori(boolean isFav){
+        this.isFavori = isFav;
     }
 
 
@@ -117,6 +127,25 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
+
+        vueAfficherCommerceMettreEnFavori = (CheckBox) findViewById(R.id.vue_afficher_commerce_mettre_favori);
+
+        vueAfficherCommerceMettreEnFavori.setChecked(isFavori);
+        vueAfficherCommerceMettreEnFavori.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        //Toast.makeText(AfficherCommerce.this, "On teste des choses", Toast.LENGTH_SHORT).show();
+                        controleurAfficherCommerce.actionGererFavori(vueAfficherCommerceMettreEnFavori.isChecked());
+                    }
+                }
+        );
+
+
+    }
+
+    public void toast(boolean fav){
+        Toast.makeText(this, "" + fav, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -136,13 +165,23 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void naviguerPartagerCommerce(){
         intentionPartagerCommerceDebut = new Intent();
         intentionPartagerCommerceDebut.setAction(Intent.ACTION_SEND);
-        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais a te partager ce lieu, je te le conseil vivement ");
+
+        intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais à te partager ce lieu, je te le conseille vivement : " + commerce.getNom());
+
         intentionPartagerCommerceDebut.setType("text/plain");
 
         intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);
         startActivity(intentionPartagerCommerceFin);
 
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        if (this.mDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
 
     @Override
     public boolean onDown(MotionEvent motionEvent) {
@@ -178,21 +217,22 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
             //swipe droite ou gauche
             if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
                 if (diffX > 0) {
-                    onSwipeRight();
+                    onSwipeDroite();
                 } else {
-                    onSwipeLeft();
+                    onSwipeGauche();
                 }
             }
         }
         return true;
     }
 
-    private void onSwipeLeft() {
-        Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+    private void onSwipeGauche() {
+        Toast.makeText(this, "Swip vers la droite pour modifier", Toast.LENGTH_SHORT).show();
         controleurAfficherCommerce.actionNaviguerModifierCommerce();
     }
 
-    private void onSwipeRight() {
+    private void onSwipeDroite() {
+        //Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
 
     }
 }

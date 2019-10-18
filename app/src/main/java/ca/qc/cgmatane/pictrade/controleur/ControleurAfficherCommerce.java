@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 import ca.qc.cgmatane.pictrade.vue.VueAfficherCommerce;
 
@@ -19,13 +20,16 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
+    private FavoriDAO accesseurFavori;
     private Commerce commerce;
+    private boolean isFavori;
 
     private HashMap<String,String> parametresPost;
 
     public ControleurAfficherCommerce(VueAfficherCommerce vue) {
         this.vue = vue;
         this.accesseurCommerce= CommerceDAO.getInstance();
+        this.accesseurFavori = FavoriDAO.getInstance();
     }
 
     @Override
@@ -47,7 +51,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         }
 
         lancerTacheRecupererCommerce();
-
     }
 
     private void lancerTacheRecupererCommerce(){
@@ -96,6 +99,7 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         @Override
         protected Commerce doInBackground(HashMap<String, String>... hashMaps) {
             Commerce commerce =  accesseurCommerce.recupererCommerce(hashMaps[0]);
+            isFavori = verifierSiFavori(commerce.getId());
            return commerce;
         }
 
@@ -110,8 +114,22 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
         protected void onPostExecute(Commerce commerceRecuperer) {
             commerce = commerceRecuperer;
             vue.setCommerce(commerce);
+            vue.setFavori(isFavori);
             vue.afficherCommerce();
             super.onPostExecute(commerceRecuperer);
         }
+    }
+
+    public void actionGererFavori(boolean isFavori){
+        this.isFavori = isFavori;
+        if(isFavori) accesseurFavori.ajouterFavori(commerce);
+        else{
+            accesseurFavori.retirerFavori(commerce);
+        }
+        vue.toast(isFavori);
+    }
+
+    public boolean verifierSiFavori(int id_commerce){
+        return accesseurFavori.chercherFavoriParIdCommerce(id_commerce) != null;
     }
 }
