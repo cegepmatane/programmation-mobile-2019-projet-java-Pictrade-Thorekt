@@ -79,21 +79,25 @@ public class FavoriDAO {
         else if(!isInDb(fav.getId_commerce())){
             SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
 
-            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?,?)");
-
-            int bool = 0;
-            if(fav.isFavori()){
-                bool = 1;
-            }
+            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?, 1)");
 
             query.bindString(1, String.valueOf(fav.getId_commerce()));
-            query.bindString(2, String.valueOf(bool));
 
             query.execute();
         }
     }
 
+    public void retirerFavori(Favori fav){
+        if(isInDb(fav.getId_commerce()) && isFavoriByIdCommerce(fav.getId_commerce())){
+            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
 
+            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?,0)");
+
+            query.bindString(1, String.valueOf(fav.getId_commerce()));
+
+            query.execute();
+        }
+    }
 
     //retirer
 }
