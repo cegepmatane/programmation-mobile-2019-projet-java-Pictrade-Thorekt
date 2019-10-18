@@ -20,4 +20,12 @@ public class FavoriDAO {
         accesseurBaseDeDonneesClient = BaseDeDonneesClient.getInstance();
         listeFavori = new ArrayList<>();
     }
+
+    public ArrayList<Favori> listerFavori(){
+
+
+
+
+        return listeFavori;
+    }
 }
