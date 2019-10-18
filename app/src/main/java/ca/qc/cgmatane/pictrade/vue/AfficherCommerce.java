@@ -71,15 +71,9 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         this.commerce = commerce;
     }
 
-    @Override
-    public void setFavori(boolean isFav){
-        this.isFavori = isFav;
-    }
-
 
     @Override
     public void commerceEnAttente() {
-
         vueAfficherCommerceEnAttente.setVisibility(View.VISIBLE);
         vueAfficherCommerceEnAttente.setTranslationZ(1);
     }
@@ -127,27 +121,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
-
-        vueAfficherCommerceMettreEnFavori = (CheckBox) findViewById(R.id.vue_afficher_commerce_mettre_favori);
-
-        vueAfficherCommerceMettreEnFavori.setChecked(isFavori);
-        vueAfficherCommerceMettreEnFavori.setOnClickListener(
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        //Toast.makeText(AfficherCommerce.this, "On teste des choses", Toast.LENGTH_SHORT).show();
-                        controleurAfficherCommerce.actionGererFavori(vueAfficherCommerceMettreEnFavori.isChecked());
-                    }
-                }
-        );
-
-
     }
-
-    public void toast(boolean fav){
-        Toast.makeText(this, "" + fav, Toast.LENGTH_SHORT).show();
-    }
-
 
     protected void onActivityResult(int activite, int resultat, Intent donnees) {
         super.onActivityResult(activite, resultat, donnees);
