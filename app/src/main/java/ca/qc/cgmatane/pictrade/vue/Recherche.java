@@ -2,8 +2,6 @@ package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,12 +23,14 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 public class Recherche extends AppCompatActivity implements
         VueRecherche, SearchView.OnQueryTextListener, Dictionnaire {
 
-    protected ListView vueListeCommerces;
+    protected ListView vueRechercheListeCommerces;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
     protected List<Commerce> listeCommerce;
     protected ArrayList<Commerce> nomCommerce;
 
     protected ListViewAdapter adapter;
+
+    protected  SearchView vueRechercheRechercher;
 
 
     protected ControleurRecherche controleurRecherche = new ControleurRecherche(this);
@@ -43,12 +42,12 @@ public class Recherche extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_recherche);
 
-        SearchView searchView = (SearchView) findViewById(R.id.vue_recherche_rechercher);
+        this.vueRechercheRechercher = (SearchView) findViewById(R.id.vue_recherche_rechercher);
 
         controleurRecherche.onCreate(getApplicationContext());
 
 
-        searchView.setOnQueryTextListener(this);
+
     }
 
     @Override
@@ -67,12 +66,12 @@ public class Recherche extends AppCompatActivity implements
         }
 
         //On localise la la liste dans notre vue
-        vueListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
+        vueRechercheListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
 
         //On passe le tout à notre adapter
         adapter = new ListViewAdapter(this, nomCommerce);
 
-        vueListeCommerces.setAdapter(adapter);
+        vueRechercheListeCommerces.setAdapter(adapter);
 
         /*SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
                 listeCommercePourAdaptateur,
@@ -80,10 +79,10 @@ public class Recherche extends AppCompatActivity implements
                 new String[]{CLE_NOM_COMMERCE, CLE_ADRESSE_COMMERCE},
                 new int[]{android.R.id.text1, android.R.id.text2});
 
-        vueListeCommerces.setAdapter(adapteurVueListeCommerce);*/
+        vueRechercheListeCommerces.setAdapter(adapteurVueListeCommerce);*/
 
 
-        vueListeCommerces.setOnItemClickListener(
+        vueRechercheListeCommerces.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -107,6 +106,8 @@ public class Recherche extends AppCompatActivity implements
                     }
                 }
         );
+
+        this.vueRechercheRechercher.setOnQueryTextListener(this);
     }
 
     public void afficherListeCommercesFavoris() {

@@ -12,4 +12,6 @@ public interface VueAfficherCommerce {
     public void setFavori(boolean isFavori);
     public void naviguerModifierCommerce(Commerce commerce);
     public void naviguerPartagerCommerce();
+
+    public void toast(boolean f);
 }

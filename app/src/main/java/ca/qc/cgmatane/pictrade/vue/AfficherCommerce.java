@@ -135,12 +135,17 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
+                        //Toast.makeText(AfficherCommerce.this, "On teste des choses", Toast.LENGTH_SHORT).show();
                         controleurAfficherCommerce.actionGererFavori(vueAfficherCommerceMettreEnFavori.isChecked());
                     }
                 }
         );
 
 
+    }
+
+    public void toast(boolean fav){
+        Toast.makeText(this, "" + fav, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -160,7 +165,9 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     public void naviguerPartagerCommerce(){
         intentionPartagerCommerceDebut = new Intent();
         intentionPartagerCommerceDebut.setAction(Intent.ACTION_SEND);
+
         intentionPartagerCommerceDebut.putExtra(Intent.EXTRA_TEXT, "Salut, je tenais à te partager ce lieu, je te le conseille vivement : " + commerce.getNom());
+
         intentionPartagerCommerceDebut.setType("text/plain");
 
         intentionPartagerCommerceFin = Intent.createChooser(intentionPartagerCommerceDebut, null);

@@ -66,6 +66,7 @@ public class FavoriDAO {
             query.bindString(1, "" + favori.getId());
             query.bindString(2, "" + 1);
             query.execute();
+            System.out.println("nique ta race");
         }
         else{
             SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
@@ -74,7 +75,10 @@ public class FavoriDAO {
             query.bindString(2, String.valueOf(favori.getId()));
 
             query.execute();
+            System.out.println("nique ta race bis");
         }
+
+        System.out.println("nique ta race ter");
     }
 
     public Commerce chercherFavoriParIdFavori(int id_favori){
