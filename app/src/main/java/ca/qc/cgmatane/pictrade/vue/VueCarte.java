@@ -6,4 +6,6 @@ public interface VueCarte {
     void naviguerAfficherCommerce(PointOfInterest pointDInteret);
     void naviguerRecherche();
     void permissionLocalisation();
+
+    void afficherCarte();
 }

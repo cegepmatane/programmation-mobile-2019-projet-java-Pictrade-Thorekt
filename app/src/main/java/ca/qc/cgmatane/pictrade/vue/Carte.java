@@ -48,33 +48,19 @@ public class Carte extends FragmentActivity implements
     protected Intent intentionAfficherCommerce;
     protected ControleurCarte controleurCarte = new ControleurCarte(this);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_carte);
 
-        BaseDeDonneesClient.getInstance(getApplicationContext());
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment;
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //appel par le controlleur pour demander l'autorisation de géolocalisation
-        controleurCarte.actionPermissionGeolocalisation();
-
-        // intanciation du bouton du menu et appel au controleur pour afficher la page recherche
-        bouton_menu = (FloatingActionMenu) findViewById(R.id.vue_carte_bouton_menu);
-        bouton_menu_recherche = (FloatingActionButton) findViewById(R.id.vue_carte_bouton_recherche);
-        bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
-                controleurCarte.actionNaviguerMenuRechercheCommerce();
-            }
-        });
-
-        controleurCarte.onCreate(getApplicationContext());
     }
-
 
     /**
      * Manipulates the map once available.
@@ -89,11 +75,22 @@ public class Carte extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+
+        controleurCarte.onCreate(getApplicationContext());
         mMap.setOnPoiClickListener(this);
 
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-        mMap.setMyLocationEnabled(true);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+
+            mMap.setMyLocationEnabled(false);
+            // Show rationale and request permission.
+        }
+
+
         // Add a marker in Sydney and move the camera
 //        LatLng matane = new LatLng(48.8526, -67.518);
 //        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
@@ -138,53 +135,68 @@ public class Carte extends FragmentActivity implements
     }
 
     public void permissionLocalisation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Test de Permission", "Permission acceptée ");
-            Toast.makeText(this, "Permission acceptée", Toast.LENGTH_SHORT).show();
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission nécessaire")
+                    .setMessage("Cette permission est requise pour accéder à votre position")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(Carte.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+                        }
+                    })
+                    .setNegativeButton("Refuser", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
 
         } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+        }
+    }
 
-            // Show rationale and request permission.
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+    @Override
+    public void afficherCarte() {
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
-                new AlertDialog.Builder(this)
-                        .setTitle("Permission needed")
-                        .setMessage("This permission is needed because of this and that")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(Carte.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
-                            }
-                        })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create().show();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
+
+
+        // intanciation du bouton du menu et appel au controleur pour afficher la page recherche
+        bouton_menu = (FloatingActionMenu) findViewById(R.id.vue_carte_bouton_menu);
+        bouton_menu_recherche = (FloatingActionButton) findViewById(R.id.vue_carte_bouton_recherche);
+        bouton_menu_recherche.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                Toast.makeText(Carte.this, "action pour le bouton recherche", Toast.LENGTH_SHORT).show();
+                controleurCarte.actionNaviguerMenuRechercheCommerce();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == MY_LOCATION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "PeRmIsSiOn OuI", Toast.LENGTH_SHORT).show();
+                controleurCarte.actionAfficherCarte();
 
             } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+
+                Toast.makeText(this, "PeRmIsSiOn NoN", Toast.LENGTH_SHORT).show();
+
+                controleurCarte.actionAfficherCarte();
+
             }
         }
     }
-    @Override
-        public void onRequestPermissionsResult ( int requestCode ,@NonNull String[] permissions, @NonNull int[] grantResults){
-            if (requestCode == MY_LOCATION_REQUEST_CODE) {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-
+}
