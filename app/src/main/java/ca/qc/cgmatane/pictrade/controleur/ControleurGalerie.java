@@ -1,18 +1,44 @@
 package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+
+import java.util.HashMap;
+import java.util.List;
 
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
+import ca.qc.cgmatane.pictrade.donnee.PhotoDAO;
+import ca.qc.cgmatane.pictrade.modele.Photo;
 import ca.qc.cgmatane.pictrade.vue.VueGalerie;
 
 public class ControleurGalerie implements Controleur, Dictionnaire {
+
+    static final public int ACTIVITE_PRENDRE_PHOTO = 1;
     private VueGalerie vue;
+    private PhotoDAO accesseurPhoto = PhotoDAO.getInstance();
+    private HashMap<String, String> parametresPost;
 
-
+    public ControleurGalerie(VueGalerie vue) {
+        this.vue = vue;
+    }
 
     @Override
     public void onCreate(Context applicationContext) {
+        Bundle parametres = vue.getParametres();
+        parametresPost = new HashMap<>();
+        int id = -1;
+        id = (Integer) parametres.get(CLE_ID_COMMERCE);
+        if(id != -1){
+            parametresPost.put(CLE_ID_COMMERCE, id+"");
+            lancerTacheRecupererListePhoto();
+        }
+    }
 
+    private void lancerTacheRecupererListePhoto(){
+        AsyncTask<HashMap<String,String>,String, List<Photo>> recupererListePhoto =
+                new RecupererListePhoto();
+        recupererListePhoto.execute(parametresPost);
     }
 
     @Override
@@ -32,6 +58,22 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
 
     @Override
     public void onActivityResult(int activite) {
+        lancerTacheRecupererListePhoto();
+    }
 
+    private class RecupererListePhoto extends AsyncTask<HashMap<String,String>,String, List<Photo>>{
+
+        @Override
+        protected List<Photo> doInBackground(HashMap<String, String>... hashMaps) {
+            List<Photo> listePhoto = accesseurPhoto.listerPhotoParIdCommerce(hashMaps[0]);
+            return  listePhoto;
+        }
+
+        @Override
+        protected void onPostExecute(List<Photo> listePhoto) {
+            super.onPostExecute(listePhoto);
+            vue.setListePhoto(listePhoto);
+            vue.afficherGalerie();
+        }
     }
 }

@@ -13,6 +13,7 @@ import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
+import ca.qc.cgmatane.pictrade.modele.Favori;
 import ca.qc.cgmatane.pictrade.vue.VueAfficherCommerce;
 
 public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
@@ -20,13 +21,17 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     private VueAfficherCommerce vue;
     private CommerceDAO accesseurCommerce;
+    private FavoriDAO accesseurFavori;
     private Commerce commerce;
+
+    private boolean isFavori;
 
     private HashMap<String,String> parametresPost;
 
     public ControleurAfficherCommerce(VueAfficherCommerce vue) {
         this.vue = vue;
         this.accesseurCommerce= CommerceDAO.getInstance();
+        this.accesseurFavori = FavoriDAO.getInstance();
     }
 
     @Override
@@ -73,6 +78,18 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     }
 
+    public boolean isFavori(){
+        isFavori = accesseurFavori.isFavoriByIdCommerce(commerce.getId());
+        return isFavori;
+    }
+
+    public void setFavori(boolean isFav){
+        accesseurFavori.setFavori(new Favori(commerce.getId(), isFav));
+
+        isFavori = isFav;
+        vue.afficherFavori(isFavori);
+    }
+
     @Override
     public void onActivityResult(int activite) {
         if (activite == ACTIVITE_MODIFIER_COMMERCE){
@@ -87,6 +104,9 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
     public void actionNaviguerPartagerCommerce() {
         vue.naviguerPartagerCommerce();
+    }
+
+    public void actionNaviguerGalerie() {vue.naviguerGalerie();
     }
 
 

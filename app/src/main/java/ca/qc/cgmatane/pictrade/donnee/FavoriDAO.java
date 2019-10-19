@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 
@@ -24,10 +26,11 @@ public class FavoriDAO {
     }
 
     public ArrayList<Favori> listerFavori(){
-        String LISTER_JEUX = "SELECT * FROM jeu";
-        Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_JEUX,
-                null);
         this.listeFavori.clear();
+        String LISTER_FAVORI = "SELECT * FROM favori";
+        Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_FAVORI,
+                null);
+
 
         int indexId_favori = curseur.getColumnIndex("id_favori");
         int indexId_commerce = curseur.getColumnIndex("id_commerce");
@@ -45,6 +48,7 @@ public class FavoriDAO {
     }
 
     public boolean isFavoriByIdCommerce(int idCommerce){
+        listerFavori();
         if(isInDb(idCommerce)){
             for (int i = 0; i < listeFavori.size(); i++) {
                 if(listeFavori.get(i).getId_commerce() == idCommerce){
@@ -54,19 +58,35 @@ public class FavoriDAO {
         }
         return false;
     }
-
     public boolean isInDb(int idCommerce){
+        listerFavori();
         return listeFavori.contains(new Favori(idCommerce));
     }
 
-    public boolean ajouterFavori(Favori fav){
-        if(isFavoriByIdCommerce(fav.getId_commerce())){
+    public void setFavori(Favori fav){
+        if(isInDb(fav.getId_commerce())){
+            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
+            SQLiteStatement query = db.compileStatement("UPDATE favori SET isFavori = ? where id_commerce = ?");
 
+            int bool = 0;
+            if(fav.isFavori()){
+                bool = 1;
+            }
+
+            query.bindString(1, String.valueOf(bool));
+            query.bindString(2, String.valueOf(fav.getId_commerce()));
+
+            query.execute();
         }
+        else if(!isInDb(fav.getId_commerce())){
+            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
 
+            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?, 1)");
 
-        return false;
+            query.bindString(1, String.valueOf(fav.getId_commerce()));
+
+            query.execute();
+        }
+        listerFavori();
     }
-    //ajouter favori
-    //retirer
 }
