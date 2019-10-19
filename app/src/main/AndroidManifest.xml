@@ -21,6 +21,7 @@
         <activity android:name=".vue.ModifierCommerce" />
         <activity android:name=".vue.AfficherCommerce" /> <!-- this is the searchable activity; it performs searches -->
         <activity android:name=".vue.Recherche"/>
+        <activity android:name=".vue.Galerie"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

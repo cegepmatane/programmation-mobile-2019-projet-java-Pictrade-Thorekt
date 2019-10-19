@@ -11,4 +11,5 @@ public interface VueAfficherCommerce {
     public void setCommerce(Commerce commerce);
     public void naviguerModifierCommerce(Commerce commerce);
     public void naviguerPartagerCommerce();
+    public void naviguerGalerie();
 }

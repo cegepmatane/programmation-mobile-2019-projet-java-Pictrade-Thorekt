@@ -30,6 +30,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     protected Intent intentionModifierCommerce;
     protected Intent intentionPartagerCommerceDebut;
     protected Intent intentionPartagerCommerceFin;
+    protected Intent intentionGalerie;
     private Bundle parametres;
 
     private ProgressBar vueAfficherCommerceEnAttente;
@@ -40,6 +41,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     private TextView vueAfficherHoraireFermetureCommerce;
     private Button vueAfficherCommerceActionNaviguerPartagerCommerce;
     private Button vueAfficherCommerceActionNaviguerModifierCommerce;
+    private Button vueAfficherCommerceActionNaviguerGalerie;
     private CheckBox vueAfficherCommerceMettreEnFavori;
 
     private boolean isFavori;
@@ -121,6 +123,17 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
+
+        vueAfficherCommerceActionNaviguerGalerie = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_galerie);
+
+        vueAfficherCommerceActionNaviguerGalerie.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        controleurAfficherCommerce.actionNaviguerGalerie();
+                    }
+                }
+        );
     }
 
     protected void onActivityResult(int activite, int resultat, Intent donnees) {
@@ -148,6 +161,14 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         startActivity(intentionPartagerCommerceFin);
 
     }
+
+    @Override
+    public void naviguerGalerie() {
+        intentionGalerie = new Intent(AfficherCommerce.this, Galerie.class);
+        intentionGalerie.putExtra(CLE_ID_COMMERCE, commerce.getId());
+        startActivity(intentionGalerie);
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         if (this.mDetector.onTouchEvent(event)) {

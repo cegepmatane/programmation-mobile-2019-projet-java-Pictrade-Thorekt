@@ -1,12 +1,15 @@
 package ca.qc.cgmatane.pictrade.vue;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,34 +18,63 @@ import android.widget.ImageView;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.R;
+import ca.qc.cgmatane.pictrade.controleur.ControleurGalerie;
 import ca.qc.cgmatane.pictrade.modele.Photo;
 
-public class Galerie extends AppCompatActivity implements VueGalerie{
+public class Galerie extends AppCompatActivity implements VueGalerie {
     private List<Photo> listePhoto;
     private RecyclerView vueGalerieListePhoto;
+    protected ControleurGalerie controleurGalerie = new ControleurGalerie(this);
+    private Bundle parametres;
+    Intent takePictureIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_galerie);
 
+        parametres = this.getIntent().getExtras();
 
 
         vueGalerieListePhoto = (RecyclerView) findViewById(R.id.vue_galerie_liste_photo);
         vueGalerieListePhoto.setLayoutManager(new LinearLayoutManager(this));
         vueGalerieListePhoto.setItemAnimator(new DefaultItemAnimator());
 
+        controleurGalerie.onCreate(getApplicationContext());
 
     }
 
     @Override
-    public void afficherGalerie(){
-        GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie,listePhoto);
+    public void afficherGalerie() {
+        GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie, listePhoto);
         vueGalerieListePhoto.setAdapter(galerieAdapteur);
     }
 
+    @Override
+    public void setListePhoto(List<Photo> listePhoto) {
+        this.listePhoto = listePhoto;
+    }
 
-    private class GalerieAdapteur extends RecyclerView.Adapter<GalerieAdapteur.ViewHolder>{
+    @Override
+    public void naviguerPrendrePhoto() {
+        takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, controleurGalerie.ACTIVITE_PRENDRE_PHOTO);
+        }
+    }
+
+    @Override
+    public Bundle getParametres() {
+        return parametres;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        controleurGalerie.onActivityResult(requestCode);
+    }
+
+    private class GalerieAdapteur extends RecyclerView.Adapter<GalerieAdapteur.ViewHolder> {
         private int vueLigneGalerieLayout;
         private List<Photo> listePhoto;
 
@@ -61,17 +93,17 @@ public class Galerie extends AppCompatActivity implements VueGalerie{
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            int positionGauche = position*3;
-            int positionMilieu = position*3+1;
-            int positionDroite = position*3+2;
+            int positionGauche = position * 3;
+            int positionMilieu = position * 3 + 1;
+            int positionDroite = position * 3 + 2;
 
-            if (positionGauche <= listePhoto.size()){
+            if (positionGauche <= listePhoto.size()) {
                 holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionGauche).getImage());
             }
-            if (positionGauche <= listePhoto.size()){
+            if (positionGauche <= listePhoto.size()) {
                 holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionMilieu).getImage());
             }
-            if (positionGauche <= listePhoto.size()){
+            if (positionGauche <= listePhoto.size()) {
                 holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionDroite).getImage());
             }
         }
@@ -89,9 +121,9 @@ public class Galerie extends AppCompatActivity implements VueGalerie{
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                vueLigneGaleriePhotoGauche =  (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_gauche);
-                vueLigneGaleriePhotoMilieu =  (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_milieu);
-                vueLigneGaleriePhotoDroite =  (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_droite);
+                vueLigneGaleriePhotoGauche = (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_gauche);
+                vueLigneGaleriePhotoMilieu = (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_milieu);
+                vueLigneGaleriePhotoDroite = (ImageView) itemView.findViewById(R.id.vue_ligne_galerie_photo_droite);
             }
 
             @Override
