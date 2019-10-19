@@ -26,10 +26,11 @@ public class FavoriDAO {
     }
 
     public ArrayList<Favori> listerFavori(){
+        this.listeFavori.clear();
         String LISTER_FAVORI = "SELECT * FROM favori";
         Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_FAVORI,
                 null);
-        this.listeFavori.clear();
+
 
         int indexId_favori = curseur.getColumnIndex("id_favori");
         int indexId_commerce = curseur.getColumnIndex("id_commerce");
@@ -58,11 +59,12 @@ public class FavoriDAO {
         return false;
     }
     public boolean isInDb(int idCommerce){
+        listerFavori();
         return listeFavori.contains(new Favori(idCommerce));
     }
 
-    public void ajouterFavori(Favori fav){
-        if(isInDb(fav.getId_commerce()) && !isFavoriByIdCommerce(fav.getId_commerce())){
+    public void setFavori(Favori fav){
+        if(isInDb(fav.getId_commerce())){
             SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
             SQLiteStatement query = db.compileStatement("UPDATE favori SET isFavori = ? where id_commerce = ?");
 
@@ -85,19 +87,6 @@ public class FavoriDAO {
 
             query.execute();
         }
+        listerFavori();
     }
-
-    public void retirerFavori(Favori fav){
-        if(isInDb(fav.getId_commerce()) && isFavoriByIdCommerce(fav.getId_commerce())){
-            SQLiteDatabase db = accesseurBaseDeDonneesClient.getWritableDatabase();
-
-            SQLiteStatement query = db.compileStatement("INSERT INTO favori(id_favori, id_commerce, isFavori) VALUES(null,?,0)");
-
-            query.bindString(1, String.valueOf(fav.getId_commerce()));
-
-            query.execute();
-        }
-    }
-
-    //retirer
 }

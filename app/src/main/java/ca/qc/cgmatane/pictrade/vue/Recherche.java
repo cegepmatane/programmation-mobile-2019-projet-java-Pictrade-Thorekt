@@ -98,10 +98,6 @@ public class Recherche extends AppCompatActivity implements
                                 (Commerce)
                                         vueRechercheListeCommerceOnClick.getItemAtPosition((int) positionItem);
                         HashMap<String, String> commerceNavigation = commerce.obtenirCommercePourAdapteur();
-                        /*HashMap<String, String> commerceHashMap =
-                                (HashMap<String, String>)
-                                        vueRechercheListeCommerceOnClick.getItemAtPosition((int) positionItem);*/
-                        Log.d("HashMap", "" + commerce.toString());
                         controleurRecherche.actionNaviguerAfficherCommerce(Integer.parseInt(commerceNavigation.get(Commerce.CLE_ID_COMMERCE)));
                     }
                 }

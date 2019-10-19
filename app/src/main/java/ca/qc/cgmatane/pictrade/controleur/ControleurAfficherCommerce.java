@@ -84,16 +84,10 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     }
 
     public void setFavori(boolean isFav){
-        if(isFav){
-            accesseurFavori.ajouterFavori(new Favori(commerce.getId()));
-        }
-        else{
-            accesseurFavori.retirerFavori(new Favori(commerce.getId()));
-        }
+        accesseurFavori.setFavori(new Favori(commerce.getId(), isFav));
 
         isFavori = isFav;
         vue.afficherFavori(isFavori);
-
     }
 
     @Override

@@ -19,6 +19,11 @@ public class Favori {
         this.id_commerce = id_commerce;
     }
 
+    public Favori(int id_commerce, boolean favori) {
+        this.id_commerce = id_commerce;
+        this.favori = favori;
+    }
+
     public int getId_favori() {
         return id_favori;
     }
