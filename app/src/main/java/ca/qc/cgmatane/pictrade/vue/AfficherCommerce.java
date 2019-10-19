@@ -57,9 +57,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         vueAfficherCommerceEnAttente =
                 (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
         controleurAfficherCommerce.onCreate(getApplicationContext());
-
-
-
     }
 
 
@@ -123,6 +120,34 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
+
+        vueAfficherCommerceMettreEnFavori = (CheckBox) findViewById(R.id.vue_afficher_commerce_mettre_favori);
+
+        vueAfficherCommerceMettreEnFavori.setChecked(controleurAfficherCommerce.isFavori());
+
+        vueAfficherCommerceMettreEnFavori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controleurAfficherCommerce.setFavori(vueAfficherCommerceMettreEnFavori.isChecked());
+            }
+        });
+
+        vueAfficherCommerceActionNaviguerGalerie = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_galerie);
+
+        vueAfficherCommerceActionNaviguerGalerie.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        controleurAfficherCommerce.actionNaviguerGalerie();
+                    }
+                }
+        );
+
+    }
+
+    @Override
+    public void afficherFavori(boolean bool){
+        vueAfficherCommerceMettreEnFavori.setChecked(bool);
 
         vueAfficherCommerceActionNaviguerGalerie = (Button) findViewById(R.id.vue_afficher_commerce_action_naviguer_galerie);
 
@@ -230,5 +255,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         //Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
 
     }
+
 }
 

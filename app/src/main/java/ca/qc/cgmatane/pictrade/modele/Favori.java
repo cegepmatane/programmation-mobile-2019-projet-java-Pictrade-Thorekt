@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.pictrade.modele;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Favori {
 
@@ -10,6 +11,15 @@ public class Favori {
 
     public Favori(int id_favori, int id_commerce, boolean favori) {
         this.id_favori = id_favori;
+        this.id_commerce = id_commerce;
+        this.favori = favori;
+    }
+
+    public Favori(int id_commerce) {
+        this.id_commerce = id_commerce;
+    }
+
+    public Favori(int id_commerce, boolean favori) {
         this.id_commerce = id_commerce;
         this.favori = favori;
     }
@@ -36,5 +46,18 @@ public class Favori {
 
     public void setFavori(boolean favori) {
         this.favori = favori;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Favori favori = (Favori) o;
+        return id_commerce == favori.id_commerce;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_favori);
     }
 }
