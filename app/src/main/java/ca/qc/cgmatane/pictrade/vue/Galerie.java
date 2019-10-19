@@ -87,8 +87,10 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        extras = data.getExtras();
-        controleurGalerie.onActivityResult(requestCode);
+        if (resultCode == RESULT_OK) {
+            extras = data.getExtras();
+            controleurGalerie.onActivityResult(requestCode);
+        }
     }
 
     private class GalerieAdapteur extends RecyclerView.Adapter<GalerieAdapteur.ViewHolder> {

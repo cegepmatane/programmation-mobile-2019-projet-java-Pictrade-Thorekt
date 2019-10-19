@@ -46,6 +46,7 @@ public class PhotoDAO implements Dictionnaire {
     public List<Photo> listerPhotoParIdCommerce(HashMap<String, String> parametresPost) {
 
         Log.d("DEBUG", "in");
+        Log.d("DEBUG", "parametresPost :"+ parametresPost );
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
