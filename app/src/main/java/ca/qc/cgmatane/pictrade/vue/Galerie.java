@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -26,7 +27,9 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
     private RecyclerView vueGalerieListePhoto;
     protected ControleurGalerie controleurGalerie = new ControleurGalerie(this);
     private Bundle parametres;
-    Intent takePictureIntent;
+    private Intent intentionPrendrePhoto;
+    private Bundle extras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,15 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
     public void afficherGalerie() {
         GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie, listePhoto);
         vueGalerieListePhoto.setAdapter(galerieAdapteur);
+
+        Button vueGalerieActionNaviguerPrendrePhoto = (Button) findViewById(R.id.vue_galerie_action_naviguer_prendre_photo);
+
+        vueGalerieActionNaviguerPrendrePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controleurGalerie.actionNaviguerPrendrePhoto();
+            }
+        });
     }
 
     @Override
@@ -57,9 +69,9 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
 
     @Override
     public void naviguerPrendrePhoto() {
-        takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, controleurGalerie.ACTIVITE_PRENDRE_PHOTO);
+        intentionPrendrePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intentionPrendrePhoto.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intentionPrendrePhoto, controleurGalerie.ACTIVITE_PRENDRE_PHOTO);
         }
     }
 
@@ -68,9 +80,14 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
         return parametres;
     }
 
+    public Bundle getExtras() {
+        return extras;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        extras = data.getExtras();
         controleurGalerie.onActivityResult(requestCode);
     }
 

@@ -11,4 +11,5 @@ public interface VueGalerie {
     public void setListePhoto(List<Photo> listePhoto);
     public void naviguerPrendrePhoto();
     public Bundle getParametres();
+    public Bundle getExtras();
 }

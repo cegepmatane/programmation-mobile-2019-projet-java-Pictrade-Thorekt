@@ -1,6 +1,7 @@
 package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -17,7 +18,7 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
     static final public int ACTIVITE_PRENDRE_PHOTO = 1;
     private VueGalerie vue;
     private PhotoDAO accesseurPhoto = PhotoDAO.getInstance();
-    private HashMap<String, String> parametresPost;
+    private int id_commerce;
 
     public ControleurGalerie(VueGalerie vue) {
         this.vue = vue;
@@ -26,19 +27,27 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
     @Override
     public void onCreate(Context applicationContext) {
         Bundle parametres = vue.getParametres();
+
+        HashMap<String, String> parametresPost;
         parametresPost = new HashMap<>();
-        int id = -1;
-        id = (Integer) parametres.get(CLE_ID_COMMERCE);
-        if(id != -1){
-            parametresPost.put(CLE_ID_COMMERCE, id+"");
-            lancerTacheRecupererListePhoto();
+        id_commerce = -1;
+        id_commerce = (Integer) parametres.get(CLE_ID_COMMERCE);
+        if (id_commerce != -1) {
+            parametresPost.put(CLE_ID_COMMERCE, id_commerce + "");
+            lancerTacheRecupererListePhoto(parametresPost);
         }
     }
 
-    private void lancerTacheRecupererListePhoto(){
-        AsyncTask<HashMap<String,String>,String, List<Photo>> recupererListePhoto =
+    private void lancerTacheRecupererListePhoto(HashMap<String, String> parametresPost) {
+        AsyncTask<HashMap<String, String>, String, List<Photo>> recupererListePhoto =
                 new RecupererListePhoto();
         recupererListePhoto.execute(parametresPost);
+    }
+
+    private void lancerTacheAjouterPhoto(HashMap<String, String> parametresPost) {
+        AsyncTask<HashMap<String, String>, String, String> ajouterPhoto =
+                new AjouterPhoto();
+        ajouterPhoto.execute(parametresPost);
     }
 
     @Override
@@ -58,15 +67,27 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
 
     @Override
     public void onActivityResult(int activite) {
-        lancerTacheRecupererListePhoto();
+        if (activite == ACTIVITE_PRENDRE_PHOTO) {
+            HashMap<String, String> parametresPost;
+            parametresPost = new HashMap<>();
+            Bundle extras = vue.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            parametresPost.put(CLE_ID_COMMERCE, id_commerce + "");
+            parametresPost.put(CLE_IMAGE_PHOTO, Photo.BitMapToString(imageBitmap));
+            lancerTacheAjouterPhoto(parametresPost);
+        }
     }
 
-    private class RecupererListePhoto extends AsyncTask<HashMap<String,String>,String, List<Photo>>{
+    public void actionNaviguerPrendrePhoto() {
+        vue.naviguerPrendrePhoto();
+    }
+
+    private class RecupererListePhoto extends AsyncTask<HashMap<String, String>, String, List<Photo>> {
 
         @Override
         protected List<Photo> doInBackground(HashMap<String, String>... hashMaps) {
             List<Photo> listePhoto = accesseurPhoto.listerPhotoParIdCommerce(hashMaps[0]);
-            return  listePhoto;
+            return listePhoto;
         }
 
         @Override
@@ -74,6 +95,30 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
             super.onPostExecute(listePhoto);
             vue.setListePhoto(listePhoto);
             vue.afficherGalerie();
+        }
+    }
+
+    private class AjouterPhoto extends AsyncTask<HashMap<String, String>, String, String> {
+
+
+        @Override
+        protected String doInBackground(HashMap<String, String>... hashMaps) {
+            String resultat = accesseurPhoto.ajouterCommerce(hashMaps[0]);
+            return resultat;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Bundle parametres = vue.getParametres();
+
+            HashMap<String, String> parametresPost;
+            parametresPost = new HashMap<>();
+
+            parametresPost.put(CLE_ID_COMMERCE, id_commerce + "");
+            lancerTacheRecupererListePhoto(parametresPost);
+
+            lancerTacheRecupererListePhoto(parametresPost);
         }
     }
 }
