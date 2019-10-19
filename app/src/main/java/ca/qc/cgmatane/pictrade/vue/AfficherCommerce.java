@@ -55,9 +55,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
         vueAfficherCommerceEnAttente =
                 (ProgressBar) findViewById(R.id.vue_afficher_commerce_en_attente);
         controleurAfficherCommerce.onCreate(getApplicationContext());
-
-
-
     }
 
 
@@ -121,6 +118,24 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
                     }
                 }
         );
+
+        vueAfficherCommerceMettreEnFavori = (CheckBox) findViewById(R.id.vue_afficher_commerce_mettre_favori);
+
+        vueAfficherCommerceMettreEnFavori.setChecked(controleurAfficherCommerce.isFavori());
+
+        vueAfficherCommerceMettreEnFavori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controleurAfficherCommerce.setFavori(vueAfficherCommerceMettreEnFavori.isChecked());
+            }
+        });
+
+
+    }
+
+    @Override
+    public void afficherFavori(boolean bool){
+        vueAfficherCommerceMettreEnFavori.setChecked(bool);
     }
 
     protected void onActivityResult(int activite, int resultat, Intent donnees) {

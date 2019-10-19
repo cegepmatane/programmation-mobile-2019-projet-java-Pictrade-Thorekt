@@ -26,8 +26,8 @@ public class FavoriDAO {
     }
 
     public ArrayList<Favori> listerFavori(){
-        String LISTER_JEUX = "SELECT * FROM jeu";
-        Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_JEUX,
+        String LISTER_FAVORI = "SELECT * FROM favori";
+        Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_FAVORI,
                 null);
         this.listeFavori.clear();
 
