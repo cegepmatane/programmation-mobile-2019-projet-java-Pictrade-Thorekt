@@ -96,7 +96,6 @@ public class CommerceDAO implements Dictionnaire {
         List<HashMap<String, String>> listeCommercePourAdapteur = new ArrayList<HashMap<String, String>>();
 
         listerCommerce();
-
         for (Commerce commerce : listeCommerces) {
             listeCommercePourAdapteur.add(commerce.obtenirCommercePourAdapteur());
         }
