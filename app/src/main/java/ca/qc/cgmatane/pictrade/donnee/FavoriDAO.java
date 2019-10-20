@@ -50,7 +50,7 @@ public class FavoriDAO {
     public ArrayList<Favori> listerUniquementFavori(){
         ArrayList<Favori> listeFav = new ArrayList<>();
 
-        String LISTER_FAVORI = "SELECT * FROM favori where isFavori=0";
+        String LISTER_FAVORI = "SELECT * FROM favori where isFavori=1";
         Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_FAVORI,
                 null);
 
