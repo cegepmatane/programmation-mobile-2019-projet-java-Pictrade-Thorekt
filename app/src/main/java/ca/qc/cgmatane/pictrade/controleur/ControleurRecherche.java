@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
+import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
+import ca.qc.cgmatane.pictrade.modele.Favori;
 import ca.qc.cgmatane.pictrade.vue.VueRecherche;
 
 public class ControleurRecherche implements Controleur {
@@ -16,6 +19,7 @@ public class ControleurRecherche implements Controleur {
     private List<Commerce> listeCommerce;
     private VueRecherche vue;
     private CommerceDAO accesseurCommerce;
+    private FavoriDAO accesseurFavori;
 
     public ControleurRecherche(VueRecherche vue) {
         this.vue = vue;
@@ -24,6 +28,7 @@ public class ControleurRecherche implements Controleur {
     @Override
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
+        accesseurFavori = FavoriDAO.getInstance();
         AsyncTask<String, String, List<HashMap<String, String>>> recupererListeCommerce = new RecupererListeCommerce();
         recupererListeCommerce.execute();
 
@@ -33,12 +38,8 @@ public class ControleurRecherche implements Controleur {
         vue.naviguerAfficherCommerce(id);
     }
 
-    public void suggererRecherche(String requete) {
-
-    }
-
     public void effectuerUneRecherche(String requete) {
-
+        vue.demarrerLeFiltrage(requete);
     }
 
     @Override
@@ -82,7 +83,27 @@ public class ControleurRecherche implements Controleur {
             listeCommerce=accesseurCommerce.getListeCommerces();
             Log.d("DEBUG", "onPostExecute listeCommerce: " + listeCommerce.toString());
             vue.setListeCommerce(listeCommerce);
+            listerNomCommerce();
+            listerFavori();
             vue.afficherLesCommerces();
         }
+    }
+
+    public void listerNomCommerce() {
+        ArrayList<Commerce> nomCommerce = new ArrayList<>();
+        for (int i = 0; i < listeCommerce.size(); i++) {
+            nomCommerce.add(listeCommerce.get(i));
+        }
+
+        vue.setNomCommerce(nomCommerce);
+    }
+
+    public void listerFavori(){
+        ArrayList<Favori> listeFav = accesseurFavori.listerUniquementFavori();
+        ArrayList<Commerce> listeFavori = new ArrayList<>();
+        listeFavori.addAll(listeCommerce);
+        listeFavori.retainAll(listeFav);
+
+        vue.setListeFavori(listeFavori);
     }
 }
