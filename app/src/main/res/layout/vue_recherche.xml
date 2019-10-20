@@ -8,35 +8,50 @@
 
     <ListView
         android:id="@+id/vue_recherche_liste_commerce"
-        android:layout_width="0dp"
+        android:layout_width="175dp"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/vue_recherche_liste_favoris"
         app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ListView
         android:id="@+id/vue_recherche_liste_favoris"
-        android:layout_width="206dp"
+        android:layout_width="175dp"
         android:layout_height="0dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher" />
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher"
+        app:layout_constraintVertical_bias="0.0" />
 
     <SearchView
         android:id="@+id/vue_recherche_rechercher"
         android:layout_width="409dp"
         android:layout_height="83dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Chercher un commerce (par son nom)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:iconifiedByDefault="false"
-        android:queryHint="Chercher un commerce (par son nom)"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="2dp"
+        android:layout_height="532dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="29dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vue_recherche_liste_commerce"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@+id/vue_recherche_liste_favoris"
+        app:layout_constraintTop_toBottomOf="@+id/vue_recherche_rechercher"
+        app:layout_constraintVertical_bias="0.385" />
 </androidx.constraintlayout.widget.ConstraintLayout>
