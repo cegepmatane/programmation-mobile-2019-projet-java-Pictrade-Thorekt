@@ -28,6 +28,7 @@ public class PhotoDAO implements Dictionnaire {
     private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
 
     private PhotoHandlerXML photoHandlerXML;
+    private List<Photo> listePhoto;
 
     public static PhotoDAO getInstance() {
         if (instance == null) {
@@ -39,10 +40,14 @@ public class PhotoDAO implements Dictionnaire {
     private PhotoDAO() {
         accesseurBaseDeDonneesServeur = BaseDeDonneesServeur.getInstance();
         photoHandlerXML = new PhotoHandlerXML();
+        listePhoto = new ArrayList<>();
     }
 
     public List<Photo> listerPhotoParIdCommerce(HashMap<String, String> parametresPost) {
-        List<Photo> listePhoto = new ArrayList<>();
+
+        if (listePhoto != null ){
+            listePhoto.clear();
+        }
 
         Log.d("DEBUG", "in");
         Log.d("DEBUG", "parametresPost :"+ parametresPost );
@@ -59,7 +64,7 @@ public class PhotoDAO implements Dictionnaire {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-        //Log.d("DEBUG", "listeCommerces: " + listePhoto.toString());
+
         return listePhoto;
     }
 
