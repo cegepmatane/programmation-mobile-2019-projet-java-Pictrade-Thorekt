@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,9 +99,6 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
         @Override
         protected void onPostExecute(List<Photo> listePhoto) {
             super.onPostExecute(listePhoto);
-            if (listePhoto != null ){
-                Log.d("DEBUG",listePhoto.toString());
-            }
             vue.setListePhoto(listePhoto);
             vue.afficherGalerie();
         }

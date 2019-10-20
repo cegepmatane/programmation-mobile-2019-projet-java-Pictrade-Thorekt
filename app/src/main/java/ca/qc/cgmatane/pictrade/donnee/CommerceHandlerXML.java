@@ -1,13 +1,11 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
-import android.util.Log;
+
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -5,7 +5,6 @@ import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
@@ -228,7 +226,6 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
     @Override
     public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement, float velocityX, float velocityY) {
-        Log.d("onFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
         float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
         float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
         if (Math.abs(diffX) > Math.abs(diffY)) {

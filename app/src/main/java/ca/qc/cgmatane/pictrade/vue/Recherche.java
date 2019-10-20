@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -76,7 +75,6 @@ public class Recherche extends AppCompatActivity implements
                                             int positionDansAdapteur,
                                             long positionItem) {
 
-                        Log.d("Recherche", "onItemClick");
                         ListView vueRechercheListeCommerceOnClick = (ListView) vue.getParent();
 
                         Commerce commerce =
@@ -107,7 +105,6 @@ public class Recherche extends AppCompatActivity implements
                                             int positionDansAdapteur,
                                             long positionItem) {
 
-                        Log.d("Recherche", "onItemClick");
                         ListView vueRechercheListeFavoriOnClick = (ListView) vue.getParent();
 
                         Commerce commerce =

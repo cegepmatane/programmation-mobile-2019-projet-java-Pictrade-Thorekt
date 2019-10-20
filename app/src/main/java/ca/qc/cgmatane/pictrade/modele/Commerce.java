@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Objects;
 
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 

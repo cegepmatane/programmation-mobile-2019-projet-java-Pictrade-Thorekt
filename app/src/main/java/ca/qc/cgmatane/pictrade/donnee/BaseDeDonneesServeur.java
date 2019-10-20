@@ -1,26 +1,17 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
-
-import android.os.AsyncTask;
-import android.os.Debug;
-import android.util.Log;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class BaseDeDonneesServeur implements Dictionnaire{
     private static BaseDeDonneesServeur instance = null;
@@ -64,7 +55,6 @@ public class BaseDeDonneesServeur implements Dictionnaire{
 
     public String recupererXML(String page, HashMap<String,String> parametresPost) throws IOException {
         URL url = new URL(SERVEUR_URL + page + ".php");
-        Log.d("DEBUG", "url: "+url.toString());
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
         urlConnection.setReadTimeout(15000);

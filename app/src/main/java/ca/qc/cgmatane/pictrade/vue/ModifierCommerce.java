@@ -5,7 +5,6 @@ import androidx.core.view.GestureDetectorCompat;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -134,7 +133,6 @@ public class ModifierCommerce extends AppCompatActivity implements VueModifierCo
     @Override
     public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement,
                            float velocityX, float velocityY) {
-        Log.d("OnFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
         float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
         float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
         if (Math.abs(diffX) > Math.abs(diffY)) {

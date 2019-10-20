@@ -47,7 +47,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
             parametresPost.put(CLE_LATITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
         }else{
             int id = (Integer) parametres.get(CLE_ID_COMMERCE);
-            Log.d("HashMap", id+"");
             parametresPost.put(CLE_ID_COMMERCE,id+"");
         }
 
@@ -92,7 +91,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     @Override
     public void onActivityResult(int activite) {
         if (activite == ACTIVITE_MODIFIER_COMMERCE){
-                Log.d("Retour sur app: ", "ACTIVITE_MODIFIER_COMMERCE");
                 lancerTacheRecupererCommerce();
         }
     }

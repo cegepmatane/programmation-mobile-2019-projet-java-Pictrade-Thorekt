@@ -1,6 +1,5 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
-import android.util.Log;
 
 import org.xml.sax.*;
 
@@ -42,15 +41,12 @@ public class CommerceDAO implements Dictionnaire {
     }
 
     public Commerce recupererCommerce(HashMap<String, String> parametresPost) {
-        Log.d("DEBUG", "in");
-        Log.d("DEBUG", "parametresPost: " + parametresPost.toString());
         Commerce commerce = new Commerce();
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_RECUPERER_COMMERCE, parametresPost);
             if (xml != null) {
-                Log.d("DEBUG", "xml: " + xml);
                 saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
                 commerce = commerceHandlerXML.getCommerce();
 
@@ -59,32 +55,25 @@ public class CommerceDAO implements Dictionnaire {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG", "commerce: " + commerce.toString());
         return commerce;
     }
 
     public String modifierCommerce(HashMap<String, String> parametresPost) {
-        Log.d("DEBUG", "in");
-        Log.d("DEBUG", "parametresPost: " + parametresPost.toString());
         String resultat = null;
         try {
             resultat = accesseurBaseDeDonneesServeur.recupererXML(PAGE_MODIFIER_COMMERCE, parametresPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG", resultat);
         return resultat;
     }
 
     public List<Commerce> listerCommerce() {
-
-        Log.d("DEBUG", "in");
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             String xml = accesseurBaseDeDonneesServeur.recupererXML(PAGE_LISTER_COMMERCE);
             if (xml != null) {
-                Log.d("DEBUG", "xml: " + xml);
                 saxParser.parse(new InputSource(new StringReader(xml)), commerceHandlerXML);
                 listeCommerces = commerceHandlerXML.getListeCommerce();
 
@@ -93,7 +82,6 @@ public class CommerceDAO implements Dictionnaire {
             e.printStackTrace();
         }
         Collections.sort(listeCommerces, new TriParNom());
-        Log.d("DEBUG", "listeCommerces: " + listeCommerces.toString());
         return listeCommerces;
     }
 
@@ -109,13 +97,13 @@ public class CommerceDAO implements Dictionnaire {
         return listeCommercePourAdapteur;
     }
 
-    public Commerce chercherCommerceParId(int id_commerce) {
-        if (listeCommerces.contains(new Commerce(id_commerce))) {
-            return listeCommerces.get(listeCommerces.indexOf(new Commerce((id_commerce))));
-        } else {
-            return null;
-        }
-    }
+//    public Commerce chercherCommerceParId(int id_commerce) {
+//        if (listeCommerces.contains(new Commerce(id_commerce))) {
+//            return listeCommerces.get(listeCommerces.indexOf(new Commerce((id_commerce))));
+//        } else {
+//            return null;
+//        }
+//    }
 
 
     public List<Commerce> getListeCommerces() {

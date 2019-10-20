@@ -16,8 +16,6 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class ListeFavoriAddapter extends BaseAdapter {
 
-    // Declare Variables
-
     Context monContexte;
     LayoutInflater inflater;
     private List<Commerce> commerceNomListe = null;

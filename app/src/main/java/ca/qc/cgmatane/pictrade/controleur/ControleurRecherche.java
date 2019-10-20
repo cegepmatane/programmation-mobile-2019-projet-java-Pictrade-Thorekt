@@ -2,7 +2,6 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +85,6 @@ public class ControleurRecherche implements Controleur {
             super.onPostExecute(listeCommerceRecuperer);
             vue.setListeCommercePourAdapteur(listeCommerceRecuperer);
             listeCommerce=accesseurCommerce.getListeCommerces();
-            Log.d("DEBUG", "onPostExecute listeCommerce: " + listeCommerce.toString());
             vue.setListeCommerce(listeCommerce);
             listerNomCommerce();
             listerFavori();
@@ -102,7 +100,6 @@ public class ControleurRecherche implements Controleur {
 
     private void listerFavori(){
         ArrayList<Favori> listeFav = accesseurFavori.listerUniquementFavori();
-        System.out.println("liste des uniquement favori" + listeFav);
         ArrayList<Commerce> listeFavori = new ArrayList<>(listeCommerce);
 
         ArrayList<Commerce>listeCommerceFavori = new ArrayList<>();
@@ -112,7 +109,6 @@ public class ControleurRecherche implements Controleur {
         }
 
         listeFavori.retainAll(listeCommerceFavori);
-        System.out.println("liste des comemrce favoris" + listeFavori);
 
         vue.setListeFavori(listeFavori);
     }
