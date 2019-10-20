@@ -10,7 +10,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.IDNA;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -21,7 +20,7 @@ import com.google.android.gms.maps.model.PointOfInterest;
 
 import ca.qc.cgmatane.pictrade.R;
 
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,7 +28,6 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
 import ca.qc.cgmatane.pictrade.controleur.ControleurCarte;
-import ca.qc.cgmatane.pictrade.donnee.BaseDeDonneesClient;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
 
 public class Carte extends FragmentActivity implements
@@ -91,20 +89,6 @@ public class Carte extends FragmentActivity implements
             mMap.setMyLocationEnabled(false);
             // Show rationale and request permission.
         }
-
-
-
-        // Add a marker in Sydney and move the camera
-//        LatLng matane = new LatLng(48.8526, -67.518);
-//        mMap.addMarker(new MarkerOptions().position(matane).title("Matane"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(matane));
-//        mMap.setPadding(0, 0, 300, 0);
-//        Circle cercle = mMap.addCircle(new CircleOptions()
-//                .center(matane)
-//                .radius(2000.0)
-//                .strokeColor(Color.BLACK)
-//                .strokeWidth(1)
-//                .fillColor(0x4500ff00));
 
     }
 

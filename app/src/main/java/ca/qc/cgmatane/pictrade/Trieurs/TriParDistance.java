@@ -1,4 +1,4 @@
-package ca.qc.cgmatane.pictrade.Trieurs;
+package ca.qc.cgmatane.pictrade.trieurs;
 
 import java.util.Comparator;
 
