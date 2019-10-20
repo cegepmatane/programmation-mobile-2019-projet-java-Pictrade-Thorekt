@@ -225,7 +225,7 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
 
     @Override
     public void onLongPress(MotionEvent motionEvent) {
-
+        controleurAfficherCommerce.actionNaviguerPartagerCommerce();
     }
 
     @Override
@@ -252,8 +252,8 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     }
 
     private void onSwipeDroite() {
-        //Toast.makeText(this, "Swip à droite", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "Swip vers la gauche pour ouvrir la galerie", Toast.LENGTH_SHORT).show();
+        controleurAfficherCommerce.actionNaviguerGalerie();
     }
 
 }
