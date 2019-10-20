@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -83,16 +84,20 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
     }
 
     private class RecupererListePhoto extends AsyncTask<HashMap<String, String>, String, List<Photo>> {
-
+        List<Photo> listePhoto;
         @Override
         protected List<Photo> doInBackground(HashMap<String, String>... hashMaps) {
-            List<Photo> listePhoto = accesseurPhoto.listerPhotoParIdCommerce(hashMaps[0]);
+
+            listePhoto = accesseurPhoto.listerPhotoParIdCommerce(hashMaps[0]);
             return listePhoto;
         }
 
         @Override
         protected void onPostExecute(List<Photo> listePhoto) {
             super.onPostExecute(listePhoto);
+            if (listePhoto != null ){
+                Log.d("DEBUG",listePhoto.toString());
+            }
             vue.setListePhoto(listePhoto);
             vue.afficherGalerie();
         }
@@ -114,10 +119,7 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
 
             HashMap<String, String> parametresPost;
             parametresPost = new HashMap<>();
-
             parametresPost.put(CLE_ID_COMMERCE, id_commerce + "");
-            lancerTacheRecupererListePhoto(parametresPost);
-
             lancerTacheRecupererListePhoto(parametresPost);
         }
     }

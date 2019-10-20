@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,6 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
         parametres = this.getIntent().getExtras();
 
 
-        vueGalerieListePhoto = (RecyclerView) findViewById(R.id.vue_galerie_liste_photo);
-        vueGalerieListePhoto.setLayoutManager(new LinearLayoutManager(this));
-        vueGalerieListePhoto.setItemAnimator(new DefaultItemAnimator());
 
         controleurGalerie.onCreate(getApplicationContext());
 
@@ -49,6 +47,11 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
 
     @Override
     public void afficherGalerie() {
+
+        vueGalerieListePhoto = (RecyclerView) findViewById(R.id.vue_galerie_liste_photo);
+        vueGalerieListePhoto.setLayoutManager(new LinearLayoutManager(this));
+        vueGalerieListePhoto.setItemAnimator(new DefaultItemAnimator());
+
         GalerieAdapteur galerieAdapteur = new GalerieAdapteur(R.layout.vue_ligne_galerie, listePhoto);
         vueGalerieListePhoto.setAdapter(galerieAdapteur);
 
@@ -64,9 +67,8 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
 
     @Override
     public void setListePhoto(List<Photo> listePhoto) {
-        if (this.listePhoto != null ){
-            this.listePhoto.clear();
-        }
+  
+
 
         this.listePhoto = listePhoto;
     }
@@ -103,6 +105,9 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
 
         public GalerieAdapteur(int vueLigneGalerieLayout, List<Photo> listePhoto) {
             this.vueLigneGalerieLayout = vueLigneGalerieLayout;
+            if (this.listePhoto != null) {
+                this.listePhoto.clear();
+            }
             this.listePhoto = listePhoto;
         }
 

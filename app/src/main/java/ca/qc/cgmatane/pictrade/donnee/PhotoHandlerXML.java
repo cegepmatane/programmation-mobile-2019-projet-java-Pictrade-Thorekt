@@ -1,5 +1,7 @@
 package ca.qc.cgmatane.pictrade.donnee;
 
+import android.util.Log;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -17,6 +19,8 @@ public class PhotoHandlerXML extends DefaultHandler implements Dictionnaire{
     private StringBuilder donnee = null;
     private Photo photo = null;
     private int id_commerce;
+
+
 
 
     private boolean isImage;
