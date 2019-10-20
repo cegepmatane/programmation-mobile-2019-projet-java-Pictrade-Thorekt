@@ -114,7 +114,13 @@ public class ControleurRecherche implements Controleur {
         ArrayList<Commerce> listeFavori = new ArrayList<>();
         listeFavori.addAll(listeCommerce);
 
-        listeFavori.retainAll(listeFav);
+        ArrayList<Commerce>listeCommerceFavori = new ArrayList<>();
+
+        for (int i = 0; i < listeFav.size(); i++) {
+            listeCommerceFavori.add(new Commerce(listeFav.get(i).getId_commerce()));
+        }
+
+        listeFavori.retainAll(listeCommerceFavori);
         System.out.println("liste des comemrce favoris" + listeFavori);
 
         vue.setListeFavori(listeFavori);
