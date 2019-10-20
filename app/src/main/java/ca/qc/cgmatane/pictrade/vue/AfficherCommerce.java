@@ -247,12 +247,10 @@ public class AfficherCommerce extends AppCompatActivity implements VueAfficherCo
     }
 
     private void onSwipeGauche() {
-        Toast.makeText(this, "Swip vers la droite pour modifier", Toast.LENGTH_SHORT).show();
         controleurAfficherCommerce.actionNaviguerModifierCommerce();
     }
 
     private void onSwipeDroite() {
-        Toast.makeText(this, "Swip vers la gauche pour ouvrir la galerie", Toast.LENGTH_SHORT).show();
         controleurAfficherCommerce.actionNaviguerGalerie();
     }
 
