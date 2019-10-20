@@ -23,12 +23,15 @@ import ca.qc.cgmatane.pictrade.modele.Commerce;
 public class Recherche extends AppCompatActivity implements
         VueRecherche, SearchView.OnQueryTextListener, Dictionnaire {
 
-    protected ListView vueRechercheListeCommerces;
+    protected ListView vueRechercheListeCommerce;
+    protected ListView vueRechercheListeFavori;
     protected List<HashMap<String, String>> listeCommercePourAdaptateur;
+    protected ArrayList<Commerce> listeFavori;
     protected List<Commerce> listeCommerce;
     protected ArrayList<Commerce> nomCommerce;
 
-    protected ListViewAdapter adapter;
+    protected ListViewAdapter adapterCommerce;
+    protected ListViewAdapter adapterFavori;
 
     protected  SearchView vueRechercheRechercher;
 
@@ -41,48 +44,29 @@ public class Recherche extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_recherche);
-
-        this.vueRechercheRechercher = (SearchView) findViewById(R.id.vue_recherche_rechercher);
-
         controleurRecherche.onCreate(getApplicationContext());
-
-
-
     }
 
     @Override
     public void afficherLesCommerces() {
+        this.vueRechercheRechercher = (SearchView) findViewById(R.id.vue_recherche_rechercher);
+        this.vueRechercheRechercher.setOnQueryTextListener(this);
+
         afficherListeCommerces();
         afficherListeCommercesFavoris();
     }
 
+
     public void afficherListeCommerces() {
-
-
-        //On crée la liste de nom pour le filtre de la recherche
-        nomCommerce = new ArrayList<>();
-        for (int i = 0; i < listeCommerce.size(); i++) {
-            nomCommerce.add(listeCommerce.get(i));
-        }
-
         //On localise la la liste dans notre vue
-        vueRechercheListeCommerces = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
+        vueRechercheListeCommerce = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
 
-        //On passe le tout à notre adapter
-        adapter = new ListViewAdapter(this, nomCommerce);
+        //On passe le tout à notre adapterCommerce
+        adapterCommerce = new ListViewAdapter(this, listeCommerce);
 
-        vueRechercheListeCommerces.setAdapter(adapter);
+        vueRechercheListeCommerce.setAdapter(adapterCommerce);
 
-        /*SimpleAdapter adapteurVueListeCommerce = new SimpleAdapter(this,
-                listeCommercePourAdaptateur,
-                android.R.layout.two_line_list_item,
-                new String[]{CLE_NOM_COMMERCE, CLE_ADRESSE_COMMERCE},
-                new int[]{android.R.id.text1, android.R.id.text2});
-
-        vueRechercheListeCommerces.setAdapter(adapteurVueListeCommerce);*/
-
-
-        vueRechercheListeCommerces.setOnItemClickListener(
+        vueRechercheListeCommerce.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -102,26 +86,43 @@ public class Recherche extends AppCompatActivity implements
                     }
                 }
         );
-
-        this.vueRechercheRechercher.setOnQueryTextListener(this);
     }
 
     public void afficherListeCommercesFavoris() {
+        //On localise la la liste dans notre vue
+        vueRechercheListeFavori = (ListView) findViewById(R.id.vue_recherche_liste_favoris);
+
+        //On passe le tout à notre adapterCommerce
+        adapterFavori = new ListViewAdapter(this, listeFavori);
+
+        vueRechercheListeFavori.setAdapter(adapterFavori);
+
+        vueRechercheListeFavori.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent,
+                                            View vue,
+                                            int positionDansAdapteur,
+                                            long positionItem) {
+
+                        Log.d("Recherche", "onItemClick");
+                        ListView vueRechercheListeFavoriOnClick = (ListView) vue.getParent();
+
+                        Commerce commerce =
+                                (Commerce)
+                                        vueRechercheListeFavoriOnClick.getItemAtPosition((int) positionItem);
+                        HashMap<String, String> commerceNavigation = commerce.obtenirCommercePourAdapteur();
+                        controleurRecherche.actionNaviguerAfficherCommerce(Integer.parseInt(commerceNavigation.get(Commerce.CLE_ID_COMMERCE)));
+                    }
+                }
+        );
+
     }
 
 
     @Override
     public void listeCommerceEnAttente() {
-    }
-
-    @Override
-    public void setListeCommerce(List<Commerce> listeCommerce) {
-        this.listeCommerce = listeCommerce;
-    }
-
-    @Override
-    public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur) {
-        this.listeCommercePourAdaptateur = listeCommercePourAdapteur;
     }
 
     @Override
@@ -145,7 +146,40 @@ public class Recherche extends AppCompatActivity implements
             newText = " ";
         }
         String text = newText;
-        adapter.filter(text);
+        controleurRecherche.effectuerUneRecherche(text);
         return false;
+    }
+
+    public boolean demarrerLeFiltrage(String text){
+        adapterFavori.filter(text);
+        adapterCommerce.filter(text);
+
+        return false;
+    }
+
+    @Override
+    public void setListeCommerce(List<Commerce> listeCommerce) {
+        this.listeCommerce = listeCommerce;
+    }
+
+    @Override
+    public void setListeCommercePourAdapteur(List<HashMap<String, String>> listeCommercePourAdapteur) {
+        this.listeCommercePourAdaptateur = listeCommercePourAdapteur;
+    }
+
+    public ArrayList<Commerce> getNomCommerce() {
+        return nomCommerce;
+    }
+
+    public void setNomCommerce(ArrayList<Commerce> nomCommerce) {
+        this.nomCommerce = nomCommerce;
+    }
+
+    public ArrayList<Commerce> getListeFavori() {
+        return listeFavori;
+    }
+
+    public void setListeFavori(ArrayList<Commerce> listeFavori) {
+        this.listeFavori = listeFavori;
     }
 }

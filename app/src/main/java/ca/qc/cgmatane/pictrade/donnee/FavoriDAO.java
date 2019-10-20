@@ -47,6 +47,29 @@ public class FavoriDAO {
         return listeFavori;
     }
 
+    public ArrayList<Favori> listerUniquementFavori(){
+        ArrayList<Favori> listeFav = new ArrayList<>();
+
+        String LISTER_FAVORI = "SELECT * FROM favori where isFavori=0";
+        Cursor curseur = accesseurBaseDeDonneesClient.getReadableDatabase().rawQuery(LISTER_FAVORI,
+                null);
+
+
+        int indexId_favori = curseur.getColumnIndex("id_favori");
+        int indexId_commerce = curseur.getColumnIndex("id_commerce");
+        int indexIsFavori = curseur.getColumnIndex("isFavori");
+
+        for(curseur.moveToFirst(); !curseur.isAfterLast(); curseur.moveToNext()){
+
+            int id_favori = curseur.getInt(indexId_favori);
+            int id_commerce = curseur.getInt(indexId_commerce);
+            boolean isFavori = curseur.getInt(indexIsFavori) == 1;
+
+            listeFav.add(new Favori(id_favori, id_commerce, isFavori));
+        }
+        return listeFav;
+    }
+
     public boolean isFavoriByIdCommerce(int idCommerce){
         listerFavori();
         if(isInDb(idCommerce)){
