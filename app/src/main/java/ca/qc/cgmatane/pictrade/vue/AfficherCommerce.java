@@ -13,13 +13,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurAfficherCommerce;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
-import ca.qc.cgmatane.pictrade.donnee.FavoriDAO;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class AfficherCommerce extends AppCompatActivity implements VueAfficherCommerce, Dictionnaire, GestureDetector.OnGestureListener{

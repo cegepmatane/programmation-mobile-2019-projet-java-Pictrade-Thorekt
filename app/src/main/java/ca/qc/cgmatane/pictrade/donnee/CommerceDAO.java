@@ -15,7 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import ca.qc.cgmatane.pictrade.Trieurs.TriParNom;
+import ca.qc.cgmatane.pictrade.trieurs.TriParNom;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class CommerceDAO implements Dictionnaire {

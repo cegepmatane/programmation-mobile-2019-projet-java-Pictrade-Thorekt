@@ -173,16 +173,8 @@ public class Recherche extends AppCompatActivity implements
         this.listeCommercePourAdaptateur = listeCommercePourAdapteur;
     }
 
-    public ArrayList<Commerce> getNomCommerce() {
-        return nomCommerce;
-    }
-
     public void setNomCommerce(ArrayList<Commerce> nomCommerce) {
         this.nomCommerce = nomCommerce;
-    }
-
-    public ArrayList<Commerce> getListeFavori() {
-        return listeFavori;
     }
 
     public void setListeFavori(ArrayList<Commerce> listeFavori) {

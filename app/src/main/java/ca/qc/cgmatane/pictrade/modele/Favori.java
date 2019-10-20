@@ -1,6 +1,6 @@
 package ca.qc.cgmatane.pictrade.modele;
 
-import java.util.ArrayList;
+
 import java.util.Objects;
 
 public class Favori {
