@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -210,7 +208,6 @@ public class Galerie extends AppCompatActivity implements VueGalerie, GestureDet
     @Override
     public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement,
                            float velocityX, float velocityY) {
-        Log.d("OnFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
         float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
         float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
         if (Math.abs(diffX) > Math.abs(diffY)) {
