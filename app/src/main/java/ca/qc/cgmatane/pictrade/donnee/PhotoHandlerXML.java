@@ -48,8 +48,10 @@ public class PhotoHandlerXML extends DefaultHandler implements Dictionnaire{
             // create a new Employee and put it in Map
             id_commerce = Integer.parseInt(attributes.getValue(CLE_ID_COMMERCE));
             // initialize list
-            if (listePhoto == null)
+            if (listePhoto == null){
                 listePhoto = new ArrayList<>();
+            }
+
         } else if (qName.equalsIgnoreCase(CLE_PHOTO)) {
             // create a new Employee and put it in Map
             String id_photo = attributes.getValue(CLE_ID_PHOTO);

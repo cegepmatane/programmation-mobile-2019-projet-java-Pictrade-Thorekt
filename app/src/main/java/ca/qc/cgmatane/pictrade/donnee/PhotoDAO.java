@@ -27,7 +27,6 @@ public class PhotoDAO implements Dictionnaire {
     private static PhotoDAO instance = null;
     private BaseDeDonneesServeur accesseurBaseDeDonneesServeur;
 
-    protected List<Photo> listePhoto;
     private PhotoHandlerXML photoHandlerXML;
 
     public static PhotoDAO getInstance() {
@@ -39,11 +38,11 @@ public class PhotoDAO implements Dictionnaire {
 
     private PhotoDAO() {
         accesseurBaseDeDonneesServeur = BaseDeDonneesServeur.getInstance();
-        listePhoto = new ArrayList<>();
         photoHandlerXML = new PhotoHandlerXML();
     }
 
     public List<Photo> listerPhotoParIdCommerce(HashMap<String, String> parametresPost) {
+        List<Photo> listePhoto = new ArrayList<>();
 
         Log.d("DEBUG", "in");
         Log.d("DEBUG", "parametresPost :"+ parametresPost );

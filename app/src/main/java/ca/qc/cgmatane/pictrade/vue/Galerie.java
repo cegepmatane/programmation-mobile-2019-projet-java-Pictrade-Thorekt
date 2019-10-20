@@ -64,6 +64,10 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
 
     @Override
     public void setListePhoto(List<Photo> listePhoto) {
+        if (this.listePhoto != null ){
+            this.listePhoto.clear();
+        }
+
         this.listePhoto = listePhoto;
     }
 
