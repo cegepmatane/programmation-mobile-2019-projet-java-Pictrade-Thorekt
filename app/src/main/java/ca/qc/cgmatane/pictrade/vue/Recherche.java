@@ -18,7 +18,7 @@ import java.util.List;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurRecherche;
 import ca.qc.cgmatane.pictrade.donnee.Dictionnaire;
-import ca.qc.cgmatane.pictrade.helper.ListViewAdapter;
+import ca.qc.cgmatane.pictrade.helper.ListeFavoriAddapter;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
 public class Recherche extends AppCompatActivity implements
@@ -31,8 +31,8 @@ public class Recherche extends AppCompatActivity implements
     protected List<Commerce> listeCommerce;
     protected ArrayList<Commerce> nomCommerce;
 
-    protected ListViewAdapter adapterCommerce;
-    protected ListViewAdapter adapterFavori;
+    protected ListeFavoriAddapter adapterCommerce;
+    protected ListeFavoriAddapter adapterFavori;
 
     protected  SearchView vueRechercheRechercher;
 
@@ -63,7 +63,7 @@ public class Recherche extends AppCompatActivity implements
         vueRechercheListeCommerce = (ListView) findViewById(R.id.vue_recherche_liste_commerce);
 
         //On passe le tout à notre adapterCommerce
-        adapterCommerce = new ListViewAdapter(this, listeCommerce);
+        adapterCommerce = new ListeFavoriAddapter(this, listeCommerce);
 
         vueRechercheListeCommerce.setAdapter(adapterCommerce);
 
@@ -94,7 +94,7 @@ public class Recherche extends AppCompatActivity implements
         vueRechercheListeFavori = (ListView) findViewById(R.id.vue_recherche_liste_favoris);
 
         //On passe le tout à notre adapterCommerce
-        adapterFavori = new ListViewAdapter(this, listeFavori);
+        adapterFavori = new ListeFavoriAddapter(this, listeFavori);
 
         vueRechercheListeFavori.setAdapter(adapterFavori);
 

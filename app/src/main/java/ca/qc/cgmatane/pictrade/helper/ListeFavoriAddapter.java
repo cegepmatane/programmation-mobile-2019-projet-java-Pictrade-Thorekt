@@ -14,7 +14,7 @@ import java.util.Locale;
 import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.modele.Commerce;
 
-public class ListViewAdapter extends BaseAdapter {
+public class ListeFavoriAddapter extends BaseAdapter {
 
     // Declare Variables
 
@@ -23,7 +23,7 @@ public class ListViewAdapter extends BaseAdapter {
     private List<Commerce> commerceNomListe = null;
     private ArrayList<Commerce> arraylist;
 
-    public ListViewAdapter(Context context, List<Commerce> commerceNomListe) {
+    public ListeFavoriAddapter(Context context, List<Commerce> commerceNomListe) {
         monContexte = context;
         this.commerceNomListe = commerceNomListe;
         inflater = LayoutInflater.from(monContexte);
@@ -55,7 +55,7 @@ public class ListViewAdapter extends BaseAdapter {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.activity_list_view_items, null);
+            view = inflater.inflate(R.layout.vue_ligne_liste_favori, null);
             // Locate the TextViews in listview_item.xml
             holder.nom = (TextView) view.findViewById(R.id.nom);
             holder.adresse = (TextView) view.findViewById(R.id.adresse);
