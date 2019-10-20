@@ -12,4 +12,5 @@ public interface VueGalerie {
     public void naviguerPrendrePhoto();
     public Bundle getParametres();
     public Bundle getExtras();
+    public void naviguerCommerce();
 }

@@ -3,6 +3,7 @@ package ca.qc.cgmatane.pictrade.vue;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,11 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,13 +27,15 @@ import ca.qc.cgmatane.pictrade.R;
 import ca.qc.cgmatane.pictrade.controleur.ControleurGalerie;
 import ca.qc.cgmatane.pictrade.modele.Photo;
 
-public class Galerie extends AppCompatActivity implements VueGalerie {
+public class Galerie extends AppCompatActivity implements VueGalerie, GestureDetector.OnGestureListener {
     private List<Photo> listePhoto;
     private RecyclerView vueGalerieListePhoto;
     protected ControleurGalerie controleurGalerie = new ControleurGalerie(this);
     private Bundle parametres;
     private Intent intentionPrendrePhoto;
     private Bundle extras;
+
+    private GestureDetectorCompat mDetector;
 
 
     @Override
@@ -40,8 +46,10 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
         parametres = this.getIntent().getExtras();
 
 
-
         controleurGalerie.onCreate(getApplicationContext());
+
+
+        mDetector = new GestureDetectorCompat(this, this);
 
     }
 
@@ -66,8 +74,12 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
     }
 
     @Override
-    public void setListePhoto(List<Photo> listePhoto) {
+    public void naviguerCommerce() {
+        this.finish();
+    }
 
+    @Override
+    public void setListePhoto(List<Photo> listePhoto) {
 
 
         this.listePhoto = listePhoto;
@@ -160,4 +172,68 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
             }
         }
     }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (this.mDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent movementDeDepart, MotionEvent MovementDeplacement,
+                           float velocityX, float velocityY) {
+        Log.d("OnFling", "onFling: " + movementDeDepart.toString() + MovementDeplacement.toString());
+        float diffY = MovementDeplacement.getY() - movementDeDepart.getY();
+        float diffX = MovementDeplacement.getX() - movementDeDepart.getX();
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            //swipe droite ou gauche
+            if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
+                if (diffX > 0) {
+                    onSwipeRight();
+                } else {
+                    onSwipeLeft();
+                }
+            }
+
+
+        }
+        return true;
+    }
+
+    private void onSwipeLeft() {
+        //Toast.makeText(this, "SwipLeft", Toast.LENGTH_SHORT).show();
+        controleurGalerie.annulerModification();
+    }
+
+    private void onSwipeRight() {
+    }
+
 }

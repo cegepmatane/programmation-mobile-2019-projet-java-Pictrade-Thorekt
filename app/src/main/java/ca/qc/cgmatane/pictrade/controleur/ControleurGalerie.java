@@ -51,6 +51,10 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
         ajouterPhoto.execute(parametresPost);
     }
 
+    public void annulerModification() {
+        vue.naviguerCommerce();
+    }
+
     @Override
     public void onPause() {
 
