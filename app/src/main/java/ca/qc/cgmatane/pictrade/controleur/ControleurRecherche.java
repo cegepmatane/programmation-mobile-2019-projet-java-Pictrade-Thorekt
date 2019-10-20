@@ -18,7 +18,7 @@ public class ControleurRecherche implements Controleur {
 
     static final public int ACTIVITE_AFFICHER_COMMERCE = 1;
     private List<Commerce> listeCommerce;
-    private VueRecherche vue;
+    private final VueRecherche vue;
     private CommerceDAO accesseurCommerce;
     private FavoriDAO accesseurFavori;
 
@@ -82,11 +82,6 @@ public class ControleurRecherche implements Controleur {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
         protected void onPostExecute(List<HashMap<String, String>> listeCommerceRecuperer) {
             super.onPostExecute(listeCommerceRecuperer);
             vue.setListeCommercePourAdapteur(listeCommerceRecuperer);
@@ -99,20 +94,16 @@ public class ControleurRecherche implements Controleur {
         }
     }
 
-    public void listerNomCommerce() {
-        ArrayList<Commerce> nomCommerce = new ArrayList<>();
-        for (int i = 0; i < listeCommerce.size(); i++) {
-            nomCommerce.add(listeCommerce.get(i));
-        }
+    private void listerNomCommerce() {
+        ArrayList<Commerce> nomCommerce = new ArrayList<>(listeCommerce);
 
         vue.setNomCommerce(nomCommerce);
     }
 
-    public void listerFavori(){
+    private void listerFavori(){
         ArrayList<Favori> listeFav = accesseurFavori.listerUniquementFavori();
         System.out.println("liste des uniquement favori" + listeFav);
-        ArrayList<Commerce> listeFavori = new ArrayList<>();
-        listeFavori.addAll(listeCommerce);
+        ArrayList<Commerce> listeFavori = new ArrayList<>(listeCommerce);
 
         ArrayList<Commerce>listeCommerceFavori = new ArrayList<>();
 

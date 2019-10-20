@@ -3,17 +3,15 @@ package ca.qc.cgmatane.pictrade.controleur;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
 import ca.qc.cgmatane.pictrade.donnee.CommerceDAO;
-import ca.qc.cgmatane.pictrade.modele.Commerce;
 import ca.qc.cgmatane.pictrade.vue.VueModifierCommerce;
 
 public class ControleurModifierCommerce implements Controleur {
-    private VueModifierCommerce vue;
-    private CommerceDAO accesseurCommerce;
+    private final VueModifierCommerce vue;
+    private final CommerceDAO accesseurCommerce;
 
     public ControleurModifierCommerce(VueModifierCommerce vue) {
         this.vue = vue;
@@ -59,8 +57,7 @@ public class ControleurModifierCommerce implements Controleur {
 
         @Override
         protected String doInBackground(HashMap<String, String>... hashMaps) {
-            String resultat = accesseurCommerce.modifierCommerce(hashMaps[0]);
-            return resultat;
+            return accesseurCommerce.modifierCommerce(hashMaps[0]);
         }
 
         @Override

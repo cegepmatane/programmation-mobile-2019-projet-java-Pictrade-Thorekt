@@ -2,7 +2,7 @@ package ca.qc.cgmatane.pictrade.controleur;
 
 import android.content.Context;
 
-public interface Controleur {
+interface Controleur {
     void onCreate(Context applicationContext);
     void onPause();
     void onResume();
