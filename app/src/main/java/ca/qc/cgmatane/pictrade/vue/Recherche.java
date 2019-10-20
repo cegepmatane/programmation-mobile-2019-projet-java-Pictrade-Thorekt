@@ -1,5 +1,6 @@
 package ca.qc.cgmatane.pictrade.vue;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -120,6 +121,11 @@ public class Recherche extends AppCompatActivity implements
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        controleurRecherche.onActivityResult(requestCode);
+    }
 
     @Override
     public void listeCommerceEnAttente() {
@@ -132,7 +138,7 @@ public class Recherche extends AppCompatActivity implements
                 AfficherCommerce.class
         );
         intentionNaviguerAfficherCommerce.putExtra(Commerce.CLE_ID_COMMERCE, id);
-        startActivity(intentionNaviguerAfficherCommerce);
+        startActivityForResult(intentionNaviguerAfficherCommerce,controleurRecherche.ACTIVITE_AFFICHER_COMMERCE);
     }
 
     @Override

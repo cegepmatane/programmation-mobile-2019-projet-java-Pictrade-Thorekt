@@ -16,6 +16,7 @@ import ca.qc.cgmatane.pictrade.vue.VueRecherche;
 
 public class ControleurRecherche implements Controleur {
 
+    static final public int ACTIVITE_AFFICHER_COMMERCE = 1;
     private List<Commerce> listeCommerce;
     private VueRecherche vue;
     private CommerceDAO accesseurCommerce;
@@ -29,8 +30,7 @@ public class ControleurRecherche implements Controleur {
     public void onCreate(Context applicationContext) {
         accesseurCommerce = CommerceDAO.getInstance();
         accesseurFavori = FavoriDAO.getInstance();
-        AsyncTask<String, String, List<HashMap<String, String>>> recupererListeCommerce = new RecupererListeCommerce();
-        recupererListeCommerce.execute();
+        lancerTacheRecupererListeCommerce();
 
     }
 
@@ -59,6 +59,16 @@ public class ControleurRecherche implements Controleur {
 
     @Override
     public void onActivityResult(int activite) {
+        if (activite == ACTIVITE_AFFICHER_COMMERCE)
+        {
+            lancerTacheRecupererListeCommerce();
+        }
+    }
+
+    private void lancerTacheRecupererListeCommerce() {
+
+        AsyncTask<String, String, List<HashMap<String, String>>> recupererListeCommerce = new RecupererListeCommerce();
+        recupererListeCommerce.execute();
     }
 
     private class RecupererListeCommerce extends AsyncTask<String, String, List<HashMap<String, String>>> {
