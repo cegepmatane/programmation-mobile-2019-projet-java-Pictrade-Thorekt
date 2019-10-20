@@ -157,7 +157,7 @@ public class Recherche extends AppCompatActivity implements
     }
 
     public boolean demarrerLeFiltrage(String text){
-        //adapterFavori.filter(text);
+        adapterFavori.filter(text);
         adapterCommerce.filter(text);
 
         return false;
