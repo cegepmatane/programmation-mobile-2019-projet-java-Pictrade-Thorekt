@@ -120,10 +120,10 @@ public class Galerie extends AppCompatActivity implements VueGalerie {
                 holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionGauche).getImage());
             }
             if (positionMilieu < listePhoto.size()) {
-                holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionMilieu).getImage());
+                holder.vueLigneGaleriePhotoMilieu.setImageBitmap(listePhoto.get(positionMilieu).getImage());
             }
             if (positionDroite < listePhoto.size()) {
-                holder.vueLigneGaleriePhotoGauche.setImageBitmap(listePhoto.get(positionDroite).getImage());
+                holder.vueLigneGaleriePhotoDroite.setImageBitmap(listePhoto.get(positionDroite).getImage());
             }
         }
 
