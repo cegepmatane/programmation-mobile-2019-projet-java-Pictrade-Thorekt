@@ -19,9 +19,9 @@ import ca.qc.cgmatane.pictrade.vue.VueAfficherCommerce;
 public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
     static final public int ACTIVITE_MODIFIER_COMMERCE = 1;
 
-    private VueAfficherCommerce vue;
-    private CommerceDAO accesseurCommerce;
-    private FavoriDAO accesseurFavori;
+    private final VueAfficherCommerce vue;
+    private final CommerceDAO accesseurCommerce;
+    private final FavoriDAO accesseurFavori;
     private Commerce commerce;
 
     private boolean isFavori;
@@ -46,7 +46,6 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
             parametresPost.put(CLE_LONGITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
             parametresPost.put(CLE_LATITUDE_COMMERCE,pointDInteret.latLng.longitude+"");
         }else{
-
             int id = (Integer) parametres.get(CLE_ID_COMMERCE);
             Log.d("HashMap", id+"");
             parametresPost.put(CLE_ID_COMMERCE,id+"");
@@ -115,8 +114,7 @@ public class ControleurAfficherCommerce implements Controleur, Dictionnaire {
 
         @Override
         protected Commerce doInBackground(HashMap<String, String>... hashMaps) {
-            Commerce commerce =  accesseurCommerce.recupererCommerce(hashMaps[0]);
-           return commerce;
+            return accesseurCommerce.recupererCommerce(hashMaps[0]);
         }
 
         @Override

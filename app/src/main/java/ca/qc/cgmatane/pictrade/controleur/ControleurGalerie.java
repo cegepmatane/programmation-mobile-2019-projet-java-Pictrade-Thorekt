@@ -17,8 +17,8 @@ import ca.qc.cgmatane.pictrade.vue.VueGalerie;
 public class ControleurGalerie implements Controleur, Dictionnaire {
 
     static final public int ACTIVITE_PRENDRE_PHOTO = 1;
-    private VueGalerie vue;
-    private PhotoDAO accesseurPhoto = PhotoDAO.getInstance();
+    private final VueGalerie vue;
+    private final PhotoDAO accesseurPhoto = PhotoDAO.getInstance();
     private int id_commerce;
 
     public ControleurGalerie(VueGalerie vue) {
@@ -74,6 +74,7 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
             Bundle extras = vue.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             parametresPost.put(CLE_ID_COMMERCE, id_commerce + "");
+            assert imageBitmap != null;
             parametresPost.put(CLE_IMAGE_PHOTO, Photo.BitMapToString(imageBitmap));
             lancerTacheAjouterPhoto(parametresPost);
         }
@@ -108,14 +109,12 @@ public class ControleurGalerie implements Controleur, Dictionnaire {
 
         @Override
         protected String doInBackground(HashMap<String, String>... hashMaps) {
-            String resultat = accesseurPhoto.ajouterCommerce(hashMaps[0]);
-            return resultat;
+            return accesseurPhoto.ajouterCommerce(hashMaps[0]);
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Bundle parametres = vue.getParametres();
 
             HashMap<String, String> parametresPost;
             parametresPost = new HashMap<>();
