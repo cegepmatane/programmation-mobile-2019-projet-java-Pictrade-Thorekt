@@ -60,4 +60,14 @@ public class Favori {
     public int hashCode() {
         return Objects.hash(id_favori);
     }
+
+
+    @Override
+    public String toString() {
+        return "Favori{" +
+                "id_favori=" + id_favori +
+                ", id_commerce=" + id_commerce +
+                ", favori=" + favori +
+                '}';
+    }
 }

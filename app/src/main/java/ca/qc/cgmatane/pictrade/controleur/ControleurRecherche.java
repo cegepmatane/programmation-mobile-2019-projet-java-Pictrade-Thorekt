@@ -100,9 +100,12 @@ public class ControleurRecherche implements Controleur {
 
     public void listerFavori(){
         ArrayList<Favori> listeFav = accesseurFavori.listerUniquementFavori();
+        System.out.println("liste des uniquement favori" + listeFav);
         ArrayList<Commerce> listeFavori = new ArrayList<>();
         listeFavori.addAll(listeCommerce);
+
         listeFavori.retainAll(listeFav);
+        System.out.println("liste des comemrce favoris" + listeFavori);
 
         vue.setListeFavori(listeFavori);
     }

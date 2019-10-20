@@ -28,22 +28,14 @@ public class BaseDeDonneesClient extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "create table favori(id_favori INTEGER PRIMARY KEY, id_commerce INTEGER, isFavori INTEGER)";
-        db.execSQL(CREATE_TABLE);
+        /*String CREATE_TABLE = "create table favori(id_favori INTEGER PRIMARY KEY, id_commerce INTEGER, isFavori INTEGER)";
+        db.execSQL(CREATE_TABLE);*/
     }
 
     @Override
     public void onOpen(SQLiteDatabase db) {
-        /*String DELETE = "delete from jeu where 1 = 1";
+        String DELETE = "delete from favori where 1 = 1";
         db.execSQL(DELETE);
-
-        String INSERT_1 = "insert into jeu(id_jeu, titre, plateforme, alarmeActivee) VALUES('1','Dofus', 'PC', 0)";
-        String INSERT_2 = "insert into jeu(id_jeu, titre, plateforme, alarmeActivee) VALUES('2','Halo', 'XBox', 0)";
-        String INSERT_3 = "insert into jeu(id_jeu, titre, plateforme, alarmeActivee) VALUES('3','Detroit Become Human', 'PS4', 0)";
-
-        db.execSQL(INSERT_1);
-        db.execSQL(INSERT_2);
-        db.execSQL(INSERT_3);*/
     }
 
     @Override
