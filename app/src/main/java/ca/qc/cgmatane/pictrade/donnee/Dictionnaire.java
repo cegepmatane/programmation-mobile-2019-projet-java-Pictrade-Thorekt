@@ -22,6 +22,6 @@ public interface Dictionnaire {
     String CLE_ID_PHOTO = "id_photo";
     String CLE_IMAGE_PHOTO = "image";
     String POINT_D_INTERET = "pointDInteret";
-    String SERVEUR_URL = "http://51.91.96.142/";
+    String SERVEUR_URL = "http://51.91.96.142/PicTrade";
 
 }
